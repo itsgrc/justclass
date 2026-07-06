@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  JUSTCLASS — design tokens                                          */
+/*  Palette "Ivory & Bronze": fondi caldi, accenti metallici scuri,    */
+/*  molto white space. Niente colori saturi, niente ombre pesanti.     */
+/* ------------------------------------------------------------------ */
+
+@theme {
+  /* Superfici */
+  --color-ivory: #f6f1e7;
+  --color-parchment: #ece4d4;
+  --color-espresso: #14100b;
+  --color-umber: #1f1912;
+
+  /* Inchiostri */
+  --color-ink: #211b13;
+  --color-taupe: #756a58;
+  --color-sand: #b3a78f;
+
+  /* Metalli */
+  --color-bronze: #96703b;
+  --color-champagne: #c9a96a;
+
+  /* Tipografia */
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Jost Variable", "Jost", "Century Gothic", sans-serif;
+
+  /* Ritmo */
+  --tracking-luxe: 0.32em;
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ivory font-sans font-light text-ink antialiased;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-bronze);
+    color: var(--color-ivory);
+  }
+}
+
+@layer components {
+  /* Gabbia editoriale: più stretta di un container SaaS, margini ampi */
+  .container-luxe {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 82rem;
+    padding-inline: clamp(1.5rem, 5vw, 4.5rem);
+  }
+
+  /* Etichetta maiuscola con tracking largo — l'unico "badge" ammesso */
+  .eyebrow {
+    @apply font-sans text-[0.6875rem] font-normal uppercase;
+    letter-spacing: var(--tracking-luxe);
+  }
+
+  /* Filetto orizzontale sottile */
+  .rule {
+    height: 1px;
+    background-color: color-mix(in srgb, var(--color-ink) 14%, transparent);
+  }
+
+  .rule-dark {
+    height: 1px;
+    background-color: color-mix(in srgb, var(--color-ivory) 14%, transparent);
+  }
+
+  /* Grana fotografica: si sovrappone alle "lastre" immagine */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+
+  /* Link testuale con sottolineatura animata (origine destra → sinistra) */
+  .link-luxe {
+    position: relative;
+    display: inline-block;
+  }
+
+  .link-luxe::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.35em;
+    height: 1px;
+    width: 100%;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s var(--ease-luxe);
+  }
+
+  .link-luxe:hover::after,
+  .link-luxe:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Variante sempre sottolineata, che si ritira al passaggio */
+  .link-luxe-lined::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .link-luxe-lined:hover::after,
+  .link-luxe-lined:focus-visible::after {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
