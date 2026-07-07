@@ -148,6 +148,34 @@ export const offices: Office[] = [
   },
 ];
 
+export interface Affiliation {
+  name: string;
+  detail: string;
+}
+
+/*
+ * Nel lusso le certificazioni di categoria pesano più di qualunque
+ * testimonial: sono i codici che la clientela informata riconosce.
+ */
+export const affiliations: Affiliation[] = [
+  {
+    name: "MYBA",
+    detail: "Broker membro della Worldwide Yachting Association: ogni charter su contratto standard.",
+  },
+  {
+    name: "EASA / FAA",
+    detail: "Solo operatori certificati, con audit indipendenti ARGUS e Wyvern sui log di manutenzione.",
+  },
+  {
+    name: "Les Clefs d'Or",
+    detail: "Il nostro chef concierge porta le chiavi incrociate — e i suoi standard valgono per tutto il desk.",
+  },
+  {
+    name: "Lloyd's of London",
+    detail: "Coperture assicurative sottoscritte sul mercato di Londra, per ogni asset e ogni viaggio.",
+  },
+];
+
 export const desks = [
   { label: "Charter nautico", email: "charter@justclass.com" },
   { label: "Aviazione privata", email: "aviation@justclass.com" },

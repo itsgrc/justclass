@@ -36,7 +36,26 @@ export interface FleetAsset {
   /** Per i filtri contestuali */
   lengthMeters?: number;
   rangeNm?: number;
+  /** Nota di calendario, mostrata solo quando c'è qualcosa da dire */
+  availability?: string;
 }
+
+export interface EmptyLeg {
+  route: string;
+  date: string;
+  aircraft: string;
+}
+
+/*
+ * Tratte di riposizionamento in vendita: il segnale d'insider del
+ * mercato jet. Si liberano con poco preavviso — la lettera mensile
+ * le anticipa ai membri.
+ */
+export const emptyLegs: EmptyLeg[] = [
+  { route: "Nizza → Londra Farnborough", date: "14 luglio", aircraft: "Falcon 8X" },
+  { route: "Milano Linate → Ibiza", date: "19 luglio", aircraft: "Global 7500" },
+  { route: "Ginevra → Olbia", date: "26 luglio", aircraft: "G650ER" },
+];
 
 export const categoryLabels: Record<FleetCategory, string> = {
   yacht: "Yacht",
@@ -78,6 +97,7 @@ export const fleet: FleetAsset[] = [
     base: "Porto Cervo",
     price: "Da €115.000",
     priceUnit: "a settimana, più APA",
+    availability: "Agosto: ultime due settimane",
     tone: "sea",
     gallery: [
       { tone: "sea", caption: "All'ancora, Golfo di Marinella" },
@@ -118,6 +138,7 @@ export const fleet: FleetAsset[] = [
     base: "Monaco",
     price: "Da €260.000",
     priceUnit: "a settimana, più APA",
+    availability: "Agosto completo — settembre aperto",
     tone: "dusk",
     gallery: [
       { tone: "dusk", caption: "Rada di Monaco, ora blu" },
@@ -158,6 +179,7 @@ export const fleet: FleetAsset[] = [
     base: "Portofino",
     price: "Da €95.000",
     priceUnit: "a settimana, più APA",
+    availability: "Disponibile da fine luglio",
     tone: "riviera",
     gallery: [
       { tone: "riviera", caption: "Portofino, molo Umberto I" },
@@ -199,6 +221,7 @@ export const fleet: FleetAsset[] = [
     base: "Palma di Maiorca",
     price: "Da €210.000",
     priceUnit: "a settimana, più APA",
+    availability: "Egeo: finestre in agosto e settembre",
     tone: "sail",
     gallery: [
       { tone: "sail", caption: "Al lasco, canale di Minorca" },
@@ -241,6 +264,7 @@ export const fleet: FleetAsset[] = [
     base: "Farnborough / Nizza",
     price: "Da €14.500",
     priceUnit: "per ora di volo",
+    availability: "Di base a Nizza fino a settembre",
     tone: "sky",
     gallery: [
       { tone: "sky", caption: "FL510, Atlantico del nord" },
@@ -400,6 +424,7 @@ export const fleet: FleetAsset[] = [
     base: "Milano",
     price: "Da €2.400",
     priceUnit: "al giorno",
+    availability: "Weekend di luglio quasi completi",
     tone: "cognac",
     gallery: [
       { tone: "cognac", caption: "Rosso Fiorano, luce radente" },
@@ -476,6 +501,7 @@ export const fleet: FleetAsset[] = [
     base: "Londra",
     price: "Su richiesta",
     priceUnit: "per occasioni selezionate",
+    availability: "Tre date rimaste nel 2026",
     tone: "marble",
     gallery: [
       { tone: "marble", caption: "Silver Birch, luce di studio" },
