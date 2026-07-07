@@ -9,6 +9,7 @@ import MaskLines from "@/components/ui/MaskLines";
 import HairlineButton from "@/components/ui/HairlineButton";
 import { motion } from "framer-motion";
 import { EASE_LUXE } from "@/lib/motion";
+import { useSavedArticles } from "@/lib/useSavedArticles";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/journal/$slug")({
@@ -31,6 +32,7 @@ export const Route = createFileRoute("/journal/$slug")({
 const SERVICE_BY_CATEGORY: Record<string, string> = {
   Rotte: "yacht",
   Famiglia: "yacht",
+  Guide: "yacht",
   Altitudini: "jet",
   Collezioni: "auto",
   Rifugi: "concierge",
@@ -75,6 +77,8 @@ function Block({ block }: { block: ArticleBlock }) {
 function ArticlePage() {
   const article = Route.useLoaderData();
   const others = articles.filter((a) => a.slug !== article.slug).slice(0, 2);
+  const { isSaved, toggle } = useSavedArticles();
+  const saved = isSaved(article.slug);
 
   return (
     <>
@@ -114,6 +118,17 @@ function ArticlePage() {
             transition={{ duration: 0.9, ease: EASE_LUXE, delay: 0.65 }}
           >
             {article.author} · {article.readingMinutes} minuti di lettura
+            <span className="mx-4 text-taupe/40" aria-hidden>
+              —
+            </span>
+            <button
+              type="button"
+              onClick={() => toggle(article.slug)}
+              aria-pressed={saved}
+              className={`link-luxe eyebrow cursor-pointer ${saved ? "text-bronze" : "text-taupe hover:text-ink"}`}
+            >
+              {saved ? "Conservato" : "Conservate per dopo"}
+            </button>
           </motion.p>
         </div>
       </header>

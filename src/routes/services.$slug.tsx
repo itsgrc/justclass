@@ -247,7 +247,7 @@ function ServicePage() {
       </section>
 
       {/* CTA */}
-      <section className="grain relative overflow-hidden bg-umber text-ivory">
+      <section className="grain relative overflow-hidden bg-umber text-cream">
         <div className="container-luxe relative py-28 text-center lg:py-36">
           <Reveal className="mx-auto max-w-2xl">
             <p className="eyebrow text-champagne">{service.label}</p>

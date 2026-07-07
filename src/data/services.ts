@@ -65,7 +65,7 @@ export const services: Service[] = [
       "Charter nautico su misura: motoryacht e velieri da 24 a 90 metri, equipaggi dedicati, itinerari privati nel Mediterraneo, in Egeo e ai Caraibi.",
     narrative: [
       "Il charter, per come lo intendiamo, non comincia dalla barca. Comincia da come volete che suoni la vostra estate: quante persone, quanto silenzio, quali coste, a che ora il primo caffè in coperta. Solo dopo scegliamo lo scafo — dalla nostra flotta o, quando serve, fuori da qualunque catalogo.",
-      "Ogni contratto è in standard MYBA, ogni equipaggio è selezionato di persona, ogni itinerario prevede ciò che le mappe non mostrano: la baia che si svuota alle sei, il tavolo sul porto che non prende prenotazioni, l'ormeggio confermato ad agosto. È il lavoro invisibile che rende il mare un luogo semplice.",
+      "Ogni contratto è in standard MYBA, ogni equipaggio è selezionato di persona, ogni itinerario prevede ciò che le mappe non mostrano: la baia che si svuota alle sei, il tavolo sul porto che non prende prenotazioni, l'ormeggio confermato ad agosto. È il lavoro invisibile che rende il mare un luogo semplice. E gli equipaggi li trattiamo bene, per convinzione e per calcolo: la serenità di bordo è la prima cosa che gli ospiti sentono.",
     ],
     process: [
       {
@@ -96,6 +96,7 @@ export const services: Service[] = [
       "Tender, toys e sport acquatici",
       "Transfer da e per l'aeroporto o l'eliporto",
       "Desk raggiungibile 24/7 durante la crociera",
+      "Ancoraggi rispettosi dei fondali: mai sulla posidonia",
     ],
     fleetCategory: "yacht",
     faq: [
@@ -110,6 +111,10 @@ export const services: Service[] = [
       {
         q: "I bambini sono benvenuti a bordo?",
         a: "Sì, e l'equipaggio giusto fa la differenza: reti di sicurezza, toys adatti, una cambusa che segue i loro orari. Diteci le età — sceglieremo scafo ed equipaggio di conseguenza.",
+      },
+      {
+        q: "Un ospite con mobilità ridotta?",
+        a: "Diteci di chi si tratta e di cosa ha bisogno: in flotta ci sono scafi con ascensore e passerelle piane, e gli equipaggi si preparano prima. Le nonne in coperta sono tra i nostri ospiti preferiti.",
       },
       {
         q: "Possiamo portare il cane?",
@@ -175,6 +180,7 @@ export const services: Service[] = [
       "Coordinamento auto ed elicottero a terra",
       "Assistenza bagagli fuori formato e pet friendly",
       "Empty legs riservati ai membri",
+      "SAF e compensazione carbonica, proposte di default",
     ],
     fleetCategory: "jet",
     faq: [
@@ -189,6 +195,10 @@ export const services: Service[] = [
       {
         q: "Gli animali viaggiano in cabina?",
         a: "Sì, e nella maggior parte dei casi senza trasportino. Servono i documenti giusti per la destinazione: li verifichiamo noi, prima che diventino un problema in rampa.",
+      },
+      {
+        q: "Esigenze mediche a bordo?",
+        a: "Ossigeno terapeutico, catene del freddo per farmaci, assistenza alla mobilità in rampa: si organizzano, con discrezione, se ce lo dite per tempo. Per i casi complessi lavoriamo con provider di volo sanitario.",
       },
       {
         q: "E se il volo salta?",
@@ -313,7 +323,7 @@ export const services: Service[] = [
       {
         title: "Ritratto",
         detail:
-          "Preferenze, allergie, abitudini, persone care: un profilo che cresce nel tempo e non esce mai dalla maison.",
+          "Preferenze, allergie, abitudini, persone care — e sì, anche il vostro cane ha il suo ritratto. Un profilo che cresce nel tempo e non esce mai dalla maison.",
       },
       {
         title: "Richieste",

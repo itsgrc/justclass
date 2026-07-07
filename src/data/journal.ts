@@ -270,6 +270,44 @@ export const articles: Article[] = [
     ],
   },
   {
+    slug: "lapa-spiegata-bene",
+    category: "Guide",
+    title: "L'APA, spiegata da chi la rendiconta",
+    standfirst:
+      "La voce più fraintesa di ogni contratto di charter, raccontata senza reticenze: cosa copre, quanto pesa, come si legge il rendiconto. Sapere regalato — anche a chi non prenoterà con noi.",
+    author: "Chiara Sanfelice",
+    date: "2026-03-05",
+    readingMinutes: 4,
+    tone: "harbor",
+    caption: "Il quaderno del comandante, fine crociera",
+    body: [
+      {
+        type: "paragraph",
+        text: "L'APA — Advance Provisioning Allowance — è il motivo per cui la prima fattura di un charter sorprende chi non è stato avvertito. È anche, se spiegata bene, la voce più onesta dell'intero contratto. Proviamo a spiegarla bene: questo articolo è il discorso che facciamo a ogni nuovo cliente, messo per iscritto e regalato a tutti.",
+      },
+      {
+        type: "paragraph",
+        text: "Il principio è semplice: la tariffa settimanale copre la barca e l'equipaggio. Tutto ciò che consumate voi — carburante, ormeggi, cambusa, cantina, gli extra a terra organizzati dal bordo — passa da un fondo cassa anticipato, l'APA appunto, di norma il 25–30% della tariffa. Il comandante lo amministra durante la crociera e lo rendiconta a fine charter, voce per voce, scontrini alla mano. Quello che non è stato speso, torna indietro.",
+      },
+      {
+        type: "quote",
+        text: "L'APA non è un sovrapprezzo: è la vostra cassa di bordo, amministrata alla luce del sole.",
+      },
+      {
+        type: "paragraph",
+        text: "Tre cose che i rendiconti ci hanno insegnato. Primo: il carburante dipende dallo stile di crociera più che dalla barca — dodici nodi costano un terzo di ventidue, e la rada costa meno del porto. Secondo: gli ormeggi d'agosto nelle piazze celebri possono superare i duemila euro a notte; è lì che un itinerario disegnato bene fa risparmiare più di qualunque negoziato. Terzo: la cambusa è la voce dove la qualità si vede — un comandante che compra al mercato di Cetara invece che al supermercato del porto spende uguale e serve meglio.",
+      },
+      {
+        type: "paragraph",
+        text: "Come si legge un rendiconto? Chiedete tre cose: le ricevute allegate (devono esserci), il saldo progressivo (dev'essere aggiornato, non ricostruito a memoria), e la distinzione tra spese vostre e spese di bordo — la manutenzione non passa mai dall'APA, e se la trovate lì c'è un problema. Un buon comandante vi propone il punto cassa a metà settimana senza che lo chiediate.",
+      },
+      {
+        type: "paragraph",
+        text: "Un'ultima franchezza. Se un broker vi presenta una tariffa 'tutto incluso' sensibilmente più bassa del mercato, la domanda giusta è: chi sta pagando la cambusa? Nel charter, come altrove, ciò che non si vede in fattura si vede a tavola. L'APA è nata proprio per evitare quel gioco: tenere la barca al suo prezzo e la vostra vita di bordo al vostro — trasparente, rendicontata, restituita se non spesa.",
+      },
+    ],
+  },
+  {
     slug: "monte-carlo-alle-sette",
     category: "Città",
     title: "Monte-Carlo alle sette del mattino",

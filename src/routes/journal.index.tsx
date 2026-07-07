@@ -4,6 +4,7 @@ import Plate from "@/components/ui/Plate";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
+import { useSavedArticles } from "@/lib/useSavedArticles";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/journal/")({
@@ -19,6 +20,10 @@ export const Route = createFileRoute("/journal/")({
 function JournalPage() {
   const sorted = [...articles].sort((a, b) => b.date.localeCompare(a.date));
   const [featured, ...rest] = sorted;
+  const { saved, toggle } = useSavedArticles();
+  const savedArticles = saved
+    .map((slug) => articles.find((a) => a.slug === slug))
+    .filter((a) => a !== undefined);
 
   return (
     <>
@@ -30,6 +35,34 @@ function JournalPage() {
 
       <section className="container-luxe pb-28 lg:pb-36">
         <RuleReveal />
+
+        {/* Il segnalibro: gli articoli conservati, senza account */}
+        {savedArticles.length > 0 && (
+          <div className="mt-10 border border-ink/15 px-8 py-6">
+            <p className="eyebrow text-bronze">Da leggere, quando volete</p>
+            <ul className="mt-4">
+              {savedArticles.map((a) => (
+                <li key={a.slug} className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-2">
+                  <Link
+                    to="/journal/$slug"
+                    params={{ slug: a.slug }}
+                    className="link-luxe font-display text-xl font-light"
+                  >
+                    {a.title}
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => toggle(a.slug)}
+                    className="link-luxe eyebrow cursor-pointer text-taupe/70 hover:text-ink"
+                    aria-label={`Togliete dal segnalibro: ${a.title}`}
+                  >
+                    Togliete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/* In evidenza */}
         <Reveal className="pt-14">

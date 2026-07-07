@@ -128,6 +128,25 @@ function AssetPage() {
                 Richiedete {asset.name}
               </HairlineButton>
             </div>
+
+            {/* La scheda che si porta via: per chi decide, o per chi inoltra */}
+            <div className="no-print mt-8 flex flex-wrap gap-x-8 gap-y-3">
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="link-luxe eyebrow cursor-pointer text-taupe hover:text-ink"
+              >
+                Stampate la scheda
+              </button>
+              <a
+                href={`mailto:?subject=${encodeURIComponent(`${asset.name} — ${asset.marque}`)}&body=${encodeURIComponent(
+                  `${asset.summary}\n\nLa scheda completa: https://www.justclass.com/fleet/${asset.id}\n\nJUSTCLASS — private@justclass.com`,
+                )}`}
+                className="link-luxe eyebrow text-taupe hover:text-ink"
+              >
+                Inviatela al vostro assistente
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>
