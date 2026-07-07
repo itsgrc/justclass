@@ -4,6 +4,7 @@ import MobileMenu from "@/components/layout/MobileMenu";
 
 const NAV = [
   { label: "Flotta", to: "/fleet" },
+  { label: "Calendario", to: "/calendar" },
   { label: "Journal", to: "/journal" },
   { label: "La maison", to: "/about" },
   { label: "Contatti", to: "/contact" },

@@ -8,6 +8,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
 import HairlineButton from "@/components/ui/HairlineButton";
+import FaqList from "@/components/ui/FaqList";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/services/$slug")({
@@ -59,6 +60,22 @@ function ServicePage() {
             <Plate tone={service.detailTone} caption={service.detailCaption} ratio="4 / 5" />
           </Reveal>
         </div>
+      </section>
+
+      {/* La voce di chi ci mette la faccia */}
+      <section className="container-luxe pb-20 lg:pb-28">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <RuleReveal className="mx-auto w-14" />
+          <blockquote className="mt-10">
+            <p className="font-display text-3xl leading-snug font-light italic lg:text-4xl">
+              “{service.expertNote.quote}”
+            </p>
+            <footer className="mt-8">
+              <p className="font-display text-lg text-bronze">{service.expertNote.name}</p>
+              <p className="eyebrow mt-2 text-taupe">{service.expertNote.role}</p>
+            </footer>
+          </blockquote>
+        </Reveal>
       </section>
 
       {/* Come funziona — sequenza reale, quindi numerata */}
@@ -207,6 +224,27 @@ function ServicePage() {
           </div>
         </section>
       )}
+
+      {/* Domande franche, risposte franche */}
+      <section className="container-luxe pb-28 lg:pb-36">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <Reveal className="lg:col-span-4">
+            <p className="eyebrow text-bronze">Prima di chiedere</p>
+            <h2 className="mt-8 font-display text-4xl leading-tight font-light">
+              Domande dirette,
+              <br />
+              <em className="font-normal">risposte dirette.</em>
+            </h2>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-taupe">
+              Le cose che i clienti chiedono davvero, con le risposte che
+              diamo a voce. Se ne manca una, il desk esiste per questo.
+            </p>
+          </Reveal>
+          <div className="lg:col-span-7 lg:col-start-6">
+            <FaqList items={service.faq} />
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="grain relative overflow-hidden bg-umber text-ivory">

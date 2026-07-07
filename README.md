@@ -30,6 +30,7 @@ npm run preview  # anteprima della build
 | `/services/:slug` | Dettaglio servizio: narrativa, processo, inclusioni, selezione |
 | `/fleet` | Catalogo con filtri (tipo + lunghezza/autonomia) via search params |
 | `/fleet/:id` | Scheda asset: galleria con lightbox, catalogo, specifiche, CTA |
+| `/calendar` | Il calendario della maison: finestre di prenotazione, mese per mese |
 | `/about` | La maison: numeri, storia, princìpi, persone, membri |
 | `/journal` | Indice editoriale: in evidenza + archivio |
 | `/journal/:slug` | Articolo: corpo serif a blocchi, citazioni, lastre |

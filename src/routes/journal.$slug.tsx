@@ -30,10 +30,12 @@ export const Route = createFileRoute("/journal/$slug")({
 /* Ogni filone editoriale porta al servizio che lo rende possibile. */
 const SERVICE_BY_CATEGORY: Record<string, string> = {
   Rotte: "yacht",
+  Famiglia: "yacht",
   Altitudini: "jet",
   Collezioni: "auto",
   Rifugi: "concierge",
   Città: "concierge",
+  Maison: "concierge",
 };
 
 /* Il corpo dell'articolo è serif, misura da rivista, interlinea generosa. */

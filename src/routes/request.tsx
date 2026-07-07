@@ -7,6 +7,8 @@ import PageHeader from "@/components/ui/PageHeader";
 import HairlineButton from "@/components/ui/HairlineButton";
 import RuleReveal from "@/components/ui/RuleReveal";
 import { SelectField, TextAreaField, TextField } from "@/components/ui/Field";
+import FaqList from "@/components/ui/FaqList";
+import { requestFaq } from "@/data/faq";
 import { EASE_LUXE } from "@/lib/motion";
 import { pageHead } from "@/lib/seo";
 
@@ -414,6 +416,14 @@ function RequestPage() {
           </a>{" "}
           — oppure passate da una delle <Link to="/contact" className="link-luxe-lined link-luxe text-bronze">nostre sedi</Link>.
         </p>
+
+        {/* Le domande che precedono ogni richiesta: soldi, dati, impegno */}
+        <div className="mt-24 max-w-2xl">
+          <p className="eyebrow text-bronze">Prima di scrivere</p>
+          <div className="mt-8">
+            <FaqList items={requestFaq} />
+          </div>
+        </div>
       </section>
     </>
   );

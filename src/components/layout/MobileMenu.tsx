@@ -12,6 +12,7 @@ interface MobileMenuProps {
 const PRIMARY = [
   { label: "Home", to: "/" },
   { label: "Flotta", to: "/fleet" },
+  { label: "Calendario", to: "/calendar" },
   { label: "Journal", to: "/journal" },
   { label: "La maison", to: "/about" },
   { label: "Contatti", to: "/contact" },
