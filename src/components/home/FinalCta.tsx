@@ -24,8 +24,8 @@ export default function FinalCta() {
             Raccontateci dove volete essere. Al resto pensiamo noi.
           </p>
           <div className="mt-14 flex flex-col items-center gap-8">
-            <HairlineButton href="mailto:private@justclass.com" onDark>
-              Richiedi l'accesso
+            <HairlineButton to="/request" onDark>
+              Richiedete un preventivo
             </HairlineButton>
             <a
               href="mailto:private@justclass.com"

@@ -1,5 +1,7 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { fadeRise, stagger } from "@/lib/motion";
+import MaskLines from "@/components/ui/MaskLines";
 import HairlineButton from "@/components/ui/HairlineButton";
 import Plate from "@/components/ui/Plate";
 
@@ -17,14 +19,12 @@ export default function Hero() {
             Charter &middot; Aviazione &middot; Concierge
           </motion.p>
 
-          <motion.h1
-            variants={fadeRise}
-            className="mt-10 font-display text-[clamp(3.5rem,9vw,8rem)] leading-[0.95] font-light tracking-[-0.01em]"
-          >
-            Il mondo,
-            <br />
-            <em className="font-normal">su misura.</em>
-          </motion.h1>
+          <h1 className="mt-10 font-display text-[clamp(3.5rem,9vw,8rem)] leading-[0.95] font-light tracking-[-0.01em]">
+            <MaskLines
+              delay={0.15}
+              lines={["Il mondo,", <em key="1" className="font-normal">su misura.</em>]}
+            />
+          </h1>
 
           <motion.p
             variants={fadeRise}
@@ -38,10 +38,10 @@ export default function Hero() {
             variants={fadeRise}
             className="mt-14 flex flex-wrap items-center gap-10"
           >
-            <HairlineButton href="#contatti">Richiedi l'accesso</HairlineButton>
-            <a href="#servizi" className="link-luxe eyebrow text-ink">
-              I servizi
-            </a>
+            <HairlineButton to="/request">Richiedete un preventivo</HairlineButton>
+            <Link to="/fleet" className="link-luxe eyebrow text-ink">
+              La flotta
+            </Link>
           </motion.div>
         </motion.div>
 
@@ -63,7 +63,7 @@ export default function Hero() {
       >
         <div className="rule" />
         <p className="eyebrow mt-6 text-taupe">
-          Monaco — Milano — Dubai — St. Barth
+          Londra — Monte-Carlo — Milano
         </p>
       </motion.div>
     </section>

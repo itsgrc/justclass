@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { Service } from "@/data/services";
 import Plate from "@/components/ui/Plate";
 import Reveal from "@/components/ui/Reveal";
@@ -49,9 +50,14 @@ export default function ServiceSection({ service, flip }: ServiceSectionProps) {
           ))}
         </dl>
 
-        <a href="#contatti" className="link-luxe eyebrow mt-12 inline-block text-bronze">
-          Componi la richiesta
-        </a>
+        <Link
+          to="/services/$slug"
+          params={{ slug: service.id }}
+          preload="intent"
+          className="link-luxe eyebrow mt-12 inline-block text-bronze"
+        >
+          Scoprite il servizio
+        </Link>
       </Reveal>
 
       <Reveal
@@ -60,7 +66,9 @@ export default function ServiceSection({ service, flip }: ServiceSectionProps) {
           flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"
         }`}
       >
-        <Plate tone={service.tone} caption={service.caption} ratio="5 / 4" />
+        <Link to="/services/$slug" params={{ slug: service.id }} aria-label={service.label}>
+          <Plate tone={service.tone} caption={service.caption} ratio="5 / 4" />
+        </Link>
       </Reveal>
     </article>
   );

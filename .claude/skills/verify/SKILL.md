@@ -22,6 +22,26 @@ dir) against the pre-installed browser:
 chromium.launch({ executablePath: "/opt/pw-browsers/chromium-1194/chrome-linux/chrome", args: ["--no-sandbox"] })
 ```
 
+## Rotte da coprire
+
+Tutte: `/`, `/services/{yacht,jet,auto,concierge}`, `/fleet` (+ filtri
+`?category=&size=`), `/fleet/{id}`, `/about`, `/journal`,
+`/journal/{slug}`, `/request` (+ prefill `?service=&asset=`), `/contact`,
+una rotta inesistente (404 brandizzata).
+
+## Interazioni da esercitare
+
+- Filtri flotta (categoria + taglia contestuale), inclusi param spazzatura
+  in URL (devono normalizzarsi senza crash).
+- Lightbox galleria asset: apertura, frecce tastiera, contatore, Esc.
+- Form /request: validazione per step (vuoto, date invertite, email
+  malformata), invio e stato "Ricevuta" con codice pratica.
+- Newsletter footer: email non valida → errore; valida → "Benvenuti."
+- Menu mobile: apertura, voce → navigazione → chiusura.
+- whileInView dentro overflow-hidden: i titoli MaskLines devono essere
+  visibili nella PRIMA viewport senza scroll (regressione nota: observer
+  su elemento ritagliato non scatta mai).
+
 ## Flows worth driving
 
 - Hero desktop 1440px e mobile 390px: attendere `document.fonts.ready`
