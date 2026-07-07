@@ -99,6 +99,14 @@ function AssetPage() {
                   <dd className="text-right font-display text-lg italic">{spec.detail}</dd>
                 </div>
               ))}
+              {asset.availability && (
+                <div className="flex items-baseline justify-between gap-6 border-b border-ink/10 py-4">
+                  <dt className="eyebrow text-taupe">Calendario</dt>
+                  <dd className="text-right font-display text-lg text-bronze italic">
+                    {asset.availability}
+                  </dd>
+                </div>
+              )}
               <div className="flex items-baseline justify-between gap-6 py-5">
                 <dt className="eyebrow text-taupe">Tariffa</dt>
                 <dd className="text-right">
@@ -108,7 +116,7 @@ function AssetPage() {
               </div>
             </dl>
             <p className="mt-4 text-xs leading-relaxed text-taupe/80">
-              Tariffa indicativa di partenza. Ogni quotazione è personale,
+              Tariffa indicativa di partenza. Ogni proposta è personale,
               riservata e senza impegno.
             </p>
             <div className="mt-8">

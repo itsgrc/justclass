@@ -132,6 +132,13 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.9, ease: EASE_LUXE, delay: 0.7 }}
               >
+                <Link
+                  to="/request"
+                  onClick={onClose}
+                  className="eyebrow mb-14 inline-block border border-champagne/50 px-10 py-4.5 text-center text-champagne transition-colors duration-500 hover:bg-champagne hover:text-espresso"
+                >
+                  Richiedete una proposta
+                </Link>
                 <p className="eyebrow text-champagne/70">Il desk</p>
                 <a
                   href="mailto:private@justclass.com"

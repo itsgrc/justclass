@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getService } from "@/data/services";
-import { fleetByCategory } from "@/data/fleet";
+import { emptyLegs, fleetByCategory } from "@/data/fleet";
 import { articles } from "@/data/journal";
 import { formatArticleDate } from "@/data/journal";
 import Plate from "@/components/ui/Plate";
@@ -109,6 +109,46 @@ function ServicePage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Empty legs — solo per l'aviazione: il segnale d'insider del settore */}
+      {service.id === "jet" && (
+        <section className="container-luxe pb-24 lg:pb-32">
+          <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
+            <h2 className="font-display text-4xl leading-tight font-light">
+              Empty legs, <em className="font-normal">in vendita ora.</em>
+            </h2>
+            <p className="eyebrow text-taupe">Riposizionamenti — tariffe fuori listino</p>
+          </Reveal>
+          <RuleReveal className="mt-8" />
+          <div className="mt-4">
+            {emptyLegs.map((leg) => (
+              <Reveal key={leg.route}>
+                <Link
+                  to="/request"
+                  search={{ service: "jet" }}
+                  className="group grid gap-x-8 gap-y-1 border-b border-ink/10 py-6 sm:grid-cols-12 sm:items-baseline"
+                >
+                  <span className="font-display text-2xl font-light transition-colors duration-500 group-hover:text-bronze sm:col-span-5">
+                    {leg.route}
+                  </span>
+                  <span className="eyebrow text-taupe sm:col-span-2">{leg.date}</span>
+                  <span className="eyebrow text-taupe sm:col-span-3">{leg.aircraft}</span>
+                  <span className="link-luxe eyebrow whitespace-nowrap text-bronze sm:col-span-2 sm:text-right">
+                    Su richiesta
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-8">
+            <p className="max-w-xl text-sm leading-relaxed text-taupe">
+              Le tratte di riposizionamento si liberano con poche ore di
+              preavviso e non restano mai in vendita a lungo. La lettera
+              mensile le anticipa ai membri, prima che compaiano qui.
+            </p>
+          </Reveal>
+        </section>
+      )}
 
       {/* Selezione dalla flotta o dal journal */}
       {related.length > 0 && (

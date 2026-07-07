@@ -101,6 +101,16 @@ function ContactPage() {
               <a href="mailto:private@justclass.com" className="link-luxe-lined link-luxe text-bronze">
                 private@justclass.com
               </a>
+              {" "}— i membri hanno il desk anche su{" "}
+              <a
+                href="https://wa.me/37799000000"
+                target="_blank"
+                rel="noreferrer"
+                className="link-luxe-lined link-luxe text-bronze"
+              >
+                WhatsApp
+              </a>
+              , prima risposta entro quindici minuti.
             </p>
           </Reveal>
         </div>

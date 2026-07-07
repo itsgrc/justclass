@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
 import MaskLines from "@/components/ui/MaskLines";
+import HairlineButton from "@/components/ui/HairlineButton";
 import { motion } from "framer-motion";
 import { EASE_LUXE } from "@/lib/motion";
 import { pageHead } from "@/lib/seo";
@@ -25,6 +26,15 @@ export const Route = createFileRoute("/journal/$slug")({
       : {},
   component: ArticlePage,
 });
+
+/* Ogni filone editoriale porta al servizio che lo rende possibile. */
+const SERVICE_BY_CATEGORY: Record<string, string> = {
+  Rotte: "yacht",
+  Altitudini: "jet",
+  Collezioni: "auto",
+  Rifugi: "concierge",
+  Città: "concierge",
+};
 
 /* Il corpo dell'articolo è serif, misura da rivista, interlinea generosa. */
 function Block({ block }: { block: ArticleBlock }) {
@@ -123,6 +133,19 @@ function ArticlePage() {
           <p className="eyebrow text-bronze">{article.author}</p>
           <div className="rule flex-1" />
         </div>
+
+        {/* Dal racconto alla richiesta: il servizio giusto per questa storia */}
+        <Reveal className="mx-auto mt-16 max-w-2xl text-center">
+          <p className="eyebrow text-taupe">Dal racconto al viaggio</p>
+          <p className="mt-5 font-display text-2xl leading-snug font-light italic">
+            Le pagine si leggono. Le rotte si vivono.
+          </p>
+          <div className="mt-8">
+            <HairlineButton to="/request" search={{ service: SERVICE_BY_CATEGORY[article.category] }}>
+              Componete la vostra
+            </HairlineButton>
+          </div>
+        </Reveal>
       </article>
 
       {/* Da leggere dopo */}

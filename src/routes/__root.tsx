@@ -40,8 +40,11 @@ function RootLayout() {
   return (
     <div className="flex min-h-screen flex-col">
       <HeadContent />
+      <a href="#contenuto" className="skip-link eyebrow">
+        Saltate al contenuto
+      </a>
       <Header />
-      <main ref={mainRef} tabIndex={-1} className="flex-1 focus:outline-none">
+      <main id="contenuto" ref={mainRef} tabIndex={-1} className="flex-1 focus:outline-none">
         <motion.div
           key={pathname}
           initial={reduced ? false : { opacity: 0, y: 14 }}

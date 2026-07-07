@@ -22,7 +22,7 @@ export const Route = createFileRoute("/request")({
   }),
   head: () =>
     pageHead(
-      "Richiedi un preventivo",
+      "Richiedete una proposta",
       "Tre passaggi, due minuti: servizio, dettagli, recapiti. Un membro del desk risponde entro quattro ore, con una proposta riservata.",
       { path: "/request" },
     ),
@@ -160,7 +160,7 @@ function RequestPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Richiesta di preventivo"
+        eyebrow="La vostra richiesta"
         titleLines={["Due minuti a voi.", <em key="1">Quattro ore a noi.</em>]}
         standfirst="Tre passaggi essenziali. Nessuna registrazione, nessuna chiamata non richiesta: solo una proposta riservata, entro quattro ore lavorative."
       />

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { numbers, team, timeline, values } from "@/data/maison";
+import { affiliations, numbers, team, timeline, values } from "@/data/maison";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
@@ -93,6 +93,19 @@ function AboutPage() {
               <RuleReveal delay={0.1 * i} />
               <h3 className="mt-7 font-display text-3xl font-normal">{value.title}</h3>
               <p className="mt-4 max-w-sm leading-relaxed text-taupe">{value.detail}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Affiliazioni: le certificazioni che la clientela informata riconosce */}
+      <section className="container-luxe pb-24 lg:pb-32">
+        <RuleReveal />
+        <div className="grid gap-x-12 gap-y-12 pt-14 sm:grid-cols-2 lg:grid-cols-4">
+          {affiliations.map((a, i) => (
+            <Reveal key={a.name} delay={0.08 * i}>
+              <p className="font-display text-2xl font-normal">{a.name}</p>
+              <p className="mt-3 text-sm leading-relaxed text-taupe">{a.detail}</p>
             </Reveal>
           ))}
         </div>

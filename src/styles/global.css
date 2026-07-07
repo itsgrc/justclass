@@ -131,6 +131,22 @@
     transform-origin: right;
   }
 
+  /* Salta al contenuto: invisibile finché non riceve il focus da tastiera */
+  .skip-link {
+    position: fixed;
+    top: -4rem;
+    left: 1.5rem;
+    z-index: 100;
+    background-color: var(--color-espresso);
+    color: var(--color-ivory);
+    padding: 0.875rem 1.5rem;
+    transition: top 0.3s var(--ease-luxe);
+  }
+
+  .skip-link:focus-visible {
+    top: 1rem;
+  }
+
   /* Campi form: nessuna scatola, solo un filetto che risponde */
   .field-input {
     @apply w-full bg-transparent font-sans text-base font-light text-ink;

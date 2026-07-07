@@ -38,7 +38,7 @@ export default function Hero() {
             variants={fadeRise}
             className="mt-14 flex flex-wrap items-center gap-10"
           >
-            <HairlineButton to="/request">Richiedete un preventivo</HairlineButton>
+            <HairlineButton to="/request">Richiedete una proposta</HairlineButton>
             <Link to="/fleet" className="link-luxe eyebrow text-ink">
               La flotta
             </Link>

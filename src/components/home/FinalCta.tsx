@@ -25,7 +25,7 @@ export default function FinalCta() {
           </p>
           <div className="mt-14 flex flex-col items-center gap-8">
             <HairlineButton to="/request" onDark>
-              Richiedete un preventivo
+              Iniziate la conversazione
             </HairlineButton>
             <a
               href="mailto:private@justclass.com"
@@ -34,6 +34,9 @@ export default function FinalCta() {
               private@justclass.com
             </a>
           </div>
+          <p className="eyebrow mt-16 text-sand/50">
+            MYBA &middot; Operatori EASA / FAA &middot; Les Clefs d'Or &middot; Lloyd's of London
+          </p>
         </Reveal>
       </div>
     </section>

@@ -149,7 +149,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/request" className="link-luxe text-sm hover:text-ivory">
-                  Richiedi un preventivo
+                  Richiedete una proposta
                 </Link>
               </li>
               <li>

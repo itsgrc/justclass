@@ -173,6 +173,9 @@ function FleetPage() {
                     {asset.name}
                   </p>
                   <p className="mt-3 max-w-md text-sm leading-relaxed text-taupe">{asset.summary}</p>
+                  {asset.availability && (
+                    <p className="eyebrow mt-4 text-bronze">{asset.availability}</p>
+                  )}
                   <div className="mt-5 flex items-baseline justify-between gap-6 border-t border-ink/10 pt-4">
                     <span className="text-sm text-taupe">
                       {asset.year}
@@ -192,9 +195,9 @@ function FleetPage() {
             <p className="max-w-xl text-sm leading-relaxed text-taupe">
               Le tariffe indicate sono di partenza, per stagione bassa, e non
               includono APA, carburante e imposte dove applicabili. Ogni
-              quotazione è personale e riservata.
+              proposta è personale e riservata.
             </p>
-            <HairlineButton to="/request">Richiedete una quotazione</HairlineButton>
+            <HairlineButton to="/request">Richiedete una proposta</HairlineButton>
           </div>
         </Reveal>
       </section>

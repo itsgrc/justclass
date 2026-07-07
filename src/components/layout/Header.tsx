@@ -58,7 +58,7 @@ export default function Header() {
               preload="intent"
               className="link-luxe-lined link-luxe eyebrow hidden text-bronze sm:inline-block"
             >
-              Richiedi un preventivo
+              Richiedete una proposta
             </Link>
             <button
               type="button"
