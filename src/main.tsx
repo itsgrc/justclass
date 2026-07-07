@@ -10,8 +10,14 @@ import "@fontsource-variable/jost/index.css";
 import "@/styles/global.css";
 
 import { routeTree } from "./routeTree.gen";
+import PendingRule from "@/components/ui/PendingRule";
 
-const router = createRouter({ routeTree, scrollRestoration: true });
+const router = createRouter({
+  routeTree,
+  scrollRestoration: true,
+  defaultPreload: "intent",
+  defaultPendingComponent: PendingRule,
+});
 
 declare module "@tanstack/react-router" {
   interface Register {

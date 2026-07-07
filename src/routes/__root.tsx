@@ -1,17 +1,55 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
+import {
+  createRootRoute,
+  HeadContent,
+  Outlet,
+  useRouterState,
+} from "@tanstack/react-router";
+import { motion, useReducedMotion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import NotFound from "@/components/layout/NotFound";
+import { EASE_LUXE } from "@/lib/motion";
+import { pageHead } from "@/lib/seo";
 
 export const Route = createRootRoute({
+  head: () =>
+    pageHead(
+      "JUSTCLASS",
+      "Charter nautico, aviazione privata, automobili d'eccezione e concierge dedicato. Su misura, su invito.",
+    ),
   component: RootLayout,
+  notFoundComponent: NotFound,
 });
 
 function RootLayout() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const reduced = useReducedMotion();
+  const mainRef = useRef<HTMLElement>(null);
+  const isFirstRender = useRef(true);
+
+  // Dopo ogni navigazione il focus riparte dal contenuto, non dal nulla.
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    mainRef.current?.focus({ preventScroll: true });
+  }, [pathname]);
+
   return (
     <div className="flex min-h-screen flex-col">
+      <HeadContent />
       <Header />
-      <main className="flex-1">
-        <Outlet />
+      <main ref={mainRef} tabIndex={-1} className="flex-1 focus:outline-none">
+        <motion.div
+          key={pathname}
+          initial={reduced ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: EASE_LUXE }}
+        >
+          <Outlet />
+        </motion.div>
       </main>
       <Footer />
     </div>
