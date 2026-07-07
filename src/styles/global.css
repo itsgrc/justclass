@@ -22,6 +22,9 @@
   --color-bronze: #96703b;
   --color-champagne: #c9a96a;
 
+  /* Stati — un solo colore d'errore, caldo e sommesso */
+  --color-error: #7d3b2a;
+
   /* Tipografia */
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-sans: "Jost Variable", "Jost", "Century Gothic", sans-serif;
@@ -45,6 +48,12 @@
   ::selection {
     background-color: var(--color-bronze);
     color: var(--color-ivory);
+  }
+
+  /* Focus visibile, discreto ma inequivocabile */
+  :focus-visible {
+    outline: 1px solid var(--color-bronze);
+    outline-offset: 4px;
   }
 }
 
@@ -120,5 +129,71 @@
   .link-luxe-lined:focus-visible::after {
     transform: scaleX(0);
     transform-origin: right;
+  }
+
+  /* Campi form: nessuna scatola, solo un filetto che risponde */
+  .field-input {
+    @apply w-full bg-transparent font-sans text-base font-light text-ink;
+    border: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent);
+    border-radius: 0;
+    padding-block: 0.75rem;
+    transition: border-color 0.5s var(--ease-luxe);
+  }
+
+  .field-input::placeholder {
+    color: color-mix(in srgb, var(--color-taupe) 62%, transparent);
+  }
+
+  .field-input:focus {
+    outline: none;
+    border-bottom-color: var(--color-bronze);
+  }
+
+  .field-input[aria-invalid="true"] {
+    border-bottom-color: var(--color-error);
+  }
+
+  /* Select senza cromo di sistema, gallone sottile inciso a destra */
+  select.field-input {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2396703B' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.25rem center;
+    padding-right: 1.75rem;
+  }
+
+  /* Loader: un filetto che si disegna e si ritira, in loop */
+  .rule-pending {
+    height: 1px;
+    background-color: var(--color-bronze);
+    animation: rule-draw 1.8s var(--ease-luxe) infinite;
+  }
+
+  @keyframes rule-draw {
+    0% {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    45% {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    55% {
+      transform: scaleX(1);
+      transform-origin: right;
+    }
+    100% {
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rule-pending {
+      animation: none;
+      transform: scaleX(1);
+      opacity: 0.4;
+    }
   }
 }
