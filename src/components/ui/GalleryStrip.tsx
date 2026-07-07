@@ -28,7 +28,7 @@ export default function GalleryStrip({ plates, label }: GalleryStripProps) {
           aria-label={`Apri la galleria di ${label}`}
         >
           <PlateSurface tone={main.tone} />
-          <span className="eyebrow absolute right-5 bottom-5 border border-ivory/20 bg-espresso/40 px-4 py-2 text-ivory/90 backdrop-blur-sm transition-colors duration-500 group-hover:bg-espresso/70">
+          <span className="eyebrow absolute right-5 bottom-5 border border-cream/20 bg-espresso/40 px-4 py-2 text-cream/90 backdrop-blur-sm transition-colors duration-500 group-hover:bg-espresso/70">
             1 / {plates.length} — Apri
           </span>
         </button>

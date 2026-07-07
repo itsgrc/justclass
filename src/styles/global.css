@@ -22,6 +22,9 @@
   --color-bronze: #96703b;
   --color-champagne: #c9a96a;
 
+  /* Costante: il chiaro delle sezioni scure, che non cambia col tema */
+  --color-cream: #f6f1e7;
+
   /* Stati — un solo colore d'errore, caldo e sommesso */
   --color-error: #7d3b2a;
 
@@ -32,6 +35,20 @@
   /* Ritmo */
   --tracking-luxe: 0.32em;
   --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+ * Modalità sera: la pagina si spegne sui toni della sera, i metalli
+ * salgono allo champagne. Le sezioni già scure usano --color-cream
+ * (costante) e non vengono toccate dal flip.
+ */
+[data-theme="sera"] {
+  --color-ivory: #17130f;
+  --color-parchment: #201a13;
+  --color-ink: #ece4d4;
+  --color-taupe: #a3967e;
+  --color-bronze: #c9a96a;
+  --color-error: #cf8f74;
 }
 
 @layer base {
@@ -80,7 +97,7 @@
 
   .rule-dark {
     height: 1px;
-    background-color: color-mix(in srgb, var(--color-ivory) 14%, transparent);
+    background-color: color-mix(in srgb, var(--color-cream) 14%, transparent);
   }
 
   /* Grana fotografica: si sovrappone alle "lastre" immagine */
@@ -138,7 +155,7 @@
     left: 1.5rem;
     z-index: 100;
     background-color: var(--color-espresso);
-    color: var(--color-ivory);
+    color: var(--color-cream);
     padding: 0.875rem 1.5rem;
     transition: top 0.3s var(--ease-luxe);
   }
@@ -211,5 +228,33 @@
       transform: scaleX(1);
       opacity: 0.4;
     }
+  }
+}
+
+/*
+ * Stampa: la scheda che si porta via. Via il cromo di navigazione,
+ * carta bianca, solo il contenuto — pensata per le schede asset che
+ * gli assistenti stampano o inoltrano.
+ */
+@media print {
+  header,
+  footer,
+  .skip-link,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: #211b13;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
   }
 }

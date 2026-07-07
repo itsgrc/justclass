@@ -15,7 +15,7 @@ export default function Monogram({ initials, tone = "salon", className = "" }: M
   return (
     <div className={`relative overflow-hidden ${className}`} style={{ aspectRatio: "3 / 4" }} aria-hidden>
       <PlateSurface tone={tone} still />
-      <span className="absolute inset-0 flex items-center justify-center font-display text-5xl font-light text-ivory/85 italic">
+      <span className="absolute inset-0 flex items-center justify-center font-display text-5xl font-light text-cream/85 italic">
         {initials}
       </span>
     </div>

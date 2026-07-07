@@ -9,6 +9,13 @@
     />
     <meta name="theme-color" content="#F6F1E7" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Modalità sera applicata prima del paint, per evitare il lampo chiaro.
+      try {
+        if (localStorage.getItem("jc-theme") === "sera")
+          document.documentElement.dataset.theme = "sera";
+      } catch (e) {}
+    </script>
     <title>JUSTCLASS — Charter, aviazione privata &amp; concierge</title>
   </head>
   <body>

@@ -49,14 +49,14 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Menu di navigazione"
-          className="fixed inset-0 z-[80] overflow-y-auto bg-espresso text-ivory"
+          className="fixed inset-0 z-[80] overflow-y-auto bg-espresso text-cream"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: EASE_LUXE }}
         >
           <div className="container-luxe flex h-20 items-center justify-between">
-            <span className="font-sans text-sm tracking-luxe text-ivory">JUSTCLASS</span>
+            <span className="font-sans text-sm tracking-luxe text-cream">JUSTCLASS</span>
             <button
               ref={closeRef}
               type="button"
@@ -85,8 +85,8 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                     <Link
                       to={item.to}
                       onClick={onClose}
-                      className="block border-b border-ivory/10 py-5 font-display text-4xl font-light transition-colors duration-500 hover:text-champagne"
-                      activeProps={{ className: "block border-b border-ivory/10 py-5 font-display text-4xl font-light text-champagne italic" }}
+                      className="block border-b border-cream/10 py-5 font-display text-4xl font-light transition-colors duration-500 hover:text-champagne"
+                      activeProps={{ className: "block border-b border-cream/10 py-5 font-display text-4xl font-light text-champagne italic" }}
                     >
                       {item.label}
                     </Link>
@@ -119,7 +119,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                         className="group flex items-baseline gap-5 py-3"
                       >
                         <span className="font-display text-sm text-bronze italic">{service.index}</span>
-                        <span className="link-luxe text-lg font-light text-sand transition-colors duration-500 group-hover:text-ivory">
+                        <span className="link-luxe text-lg font-light text-sand transition-colors duration-500 group-hover:text-cream">
                           {service.label}
                         </span>
                       </Link>
@@ -143,7 +143,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                 <p className="eyebrow text-champagne/70">Il desk</p>
                 <a
                   href="mailto:private@justclass.com"
-                  className="link-luxe mt-4 inline-block text-sand hover:text-ivory"
+                  className="link-luxe mt-4 inline-block text-sand hover:text-cream"
                 >
                   private@justclass.com
                 </a>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import MobileMenu from "@/components/layout/MobileMenu";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const NAV = [
   { label: "Flotta", to: "/fleet" },
@@ -53,7 +54,8 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-8">
+            <ThemeToggle />
             <Link
               to="/request"
               preload="intent"

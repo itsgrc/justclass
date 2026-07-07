@@ -3,7 +3,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function FinalCta() {
   return (
-    <section id="contatti" className="grain relative overflow-hidden bg-umber text-ivory">
+    <section id="contatti" className="grain relative overflow-hidden bg-umber text-cream">
       <div
         aria-hidden
         className="absolute inset-0"
@@ -29,7 +29,7 @@ export default function FinalCta() {
             </HairlineButton>
             <a
               href="mailto:private@justclass.com"
-              className="link-luxe-lined link-luxe text-sm text-sand hover:text-ivory"
+              className="link-luxe-lined link-luxe text-sm text-sand hover:text-cream"
             >
               private@justclass.com
             </a>

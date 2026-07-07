@@ -175,7 +175,7 @@ export function PlateSurface({ tone, still = false }: { tone: PlateTone; still?:
         transition={{ duration: 2.4, ease: EASE_LUXE }}
       />
       <TextureOverlay texture={TEXTURE_BY_TONE[tone]} />
-      <div className="pointer-events-none absolute inset-0 border border-ivory/10" />
+      <div className="pointer-events-none absolute inset-0 border border-cream/10" />
     </>
   );
 }

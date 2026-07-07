@@ -31,7 +31,7 @@ function Newsletter() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: EASE_LUXE }}
       >
-        <p className="font-display text-xl font-light text-ivory italic">Benvenuti.</p>
+        <p className="font-display text-xl font-light text-cream italic">Benvenuti.</p>
         <p className="mt-2 text-sm leading-relaxed text-sand/80">
           La prima lettera arriva con calma — una al mese, nessuna eccezione.
         </p>
@@ -61,7 +61,7 @@ function Newsletter() {
             placeholder="Il vostro indirizzo"
             aria-invalid={state === "error" || undefined}
             aria-describedby={state === "error" ? "newsletter-error" : undefined}
-            className="w-full border-0 border-b border-ivory/25 bg-transparent py-2.5 text-sm font-light text-ivory placeholder:text-sand/50 focus:border-champagne focus:outline-none"
+            className="w-full border-0 border-b border-cream/25 bg-transparent py-2.5 text-sm font-light text-cream placeholder:text-sand/50 focus:border-champagne focus:outline-none"
           />
         </div>
         <button
@@ -87,8 +87,8 @@ export default function Footer() {
       <div className="container-luxe pt-24 pb-12">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="font-sans text-sm tracking-luxe text-ivory">JUSTCLASS</p>
-            <p className="mt-6 max-w-xs font-display text-2xl leading-snug text-ivory/80 italic">
+            <p className="font-sans text-sm tracking-luxe text-cream">JUSTCLASS</p>
+            <p className="mt-6 max-w-xs font-display text-2xl leading-snug text-cream/80 italic">
               Charter nautico, aviazione privata, automobili e concierge — su
               misura, dal 2012.
             </p>
@@ -97,7 +97,7 @@ export default function Footer() {
                 href="https://www.instagram.com/justclass"
                 target="_blank"
                 rel="noreferrer"
-                className="link-luxe eyebrow text-sand/70 hover:text-ivory"
+                className="link-luxe eyebrow text-sand/70 hover:text-cream"
               >
                 Instagram
               </a>
@@ -105,7 +105,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/justclass"
                 target="_blank"
                 rel="noreferrer"
-                className="link-luxe eyebrow text-sand/70 hover:text-ivory"
+                className="link-luxe eyebrow text-sand/70 hover:text-cream"
               >
                 LinkedIn
               </a>
@@ -120,7 +120,7 @@ export default function Footer() {
                   <Link
                     to="/services/$slug"
                     params={{ slug: s.id }}
-                    className="link-luxe text-sm hover:text-ivory"
+                    className="link-luxe text-sm hover:text-cream"
                   >
                     {s.label}
                   </Link>
@@ -133,32 +133,32 @@ export default function Footer() {
             <p className="eyebrow text-champagne/70">La maison</p>
             <ul className="mt-6 space-y-3">
               <li>
-                <Link to="/fleet" className="link-luxe text-sm hover:text-ivory">
+                <Link to="/fleet" className="link-luxe text-sm hover:text-cream">
                   La flotta
                 </Link>
               </li>
               <li>
-                <Link to="/calendar" className="link-luxe text-sm hover:text-ivory">
+                <Link to="/calendar" className="link-luxe text-sm hover:text-cream">
                   Il calendario
                 </Link>
               </li>
               <li>
-                <Link to="/journal" className="link-luxe text-sm hover:text-ivory">
+                <Link to="/journal" className="link-luxe text-sm hover:text-cream">
                   Journal
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="link-luxe text-sm hover:text-ivory">
+                <Link to="/about" className="link-luxe text-sm hover:text-cream">
                   Storia e persone
                 </Link>
               </li>
               <li>
-                <Link to="/request" className="link-luxe text-sm hover:text-ivory">
+                <Link to="/request" className="link-luxe text-sm hover:text-cream">
                   Richiedete una proposta
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="link-luxe text-sm hover:text-ivory">
+                <Link to="/contact" className="link-luxe text-sm hover:text-cream">
                   Contatti
                 </Link>
               </li>
@@ -171,7 +171,7 @@ export default function Footer() {
             <ul className="mt-6 space-y-1.5 text-sm text-sand/70">
               {offices.map((office) => (
                 <li key={office.city}>
-                  <span className="text-ivory/80">{office.city}</span> — {office.address}
+                  <span className="text-cream/80">{office.city}</span> — {office.address}
                 </li>
               ))}
             </ul>
@@ -183,13 +183,13 @@ export default function Footer() {
         <div className="mt-8 flex flex-col gap-4 text-xs text-sand/60 sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; MMXXVI JUSTCLASS — Tutti i diritti riservati</p>
           <div className="flex gap-8">
-            <a href="mailto:private@justclass.com" className="link-luxe hover:text-ivory">
+            <a href="mailto:private@justclass.com" className="link-luxe hover:text-cream">
               private@justclass.com
             </a>
-            <a href="/" className="link-luxe hover:text-ivory">
+            <a href="/" className="link-luxe hover:text-cream">
               Privacy
             </a>
-            <a href="/" className="link-luxe hover:text-ivory">
+            <a href="/" className="link-luxe hover:text-cream">
               Cookie
             </a>
           </div>
