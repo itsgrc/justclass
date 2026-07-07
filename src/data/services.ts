@@ -10,6 +10,17 @@ export interface ServiceStep {
   detail: string;
 }
 
+export interface ServiceFaq {
+  q: string;
+  a: string;
+}
+
+export interface ExpertNote {
+  quote: string;
+  name: string;
+  role: string;
+}
+
 export interface Service {
   id: string;
   index: string;
@@ -25,6 +36,10 @@ export interface Service {
   narrative: string[];
   process: ServiceStep[];
   inclusions: string[];
+  /* Le domande che i clienti fanno davvero, con risposte franche */
+  faq: ServiceFaq[];
+  /* La persona della maison che ci mette la faccia */
+  expertNote: ExpertNote;
   fleetCategory?: "yacht" | "jet" | "auto";
   detailTone: PlateTone;
   detailCaption: string;
@@ -83,6 +98,30 @@ export const services: Service[] = [
       "Desk raggiungibile 24/7 durante la crociera",
     ],
     fleetCategory: "yacht",
+    faq: [
+      {
+        q: "Quanto costa davvero una settimana?",
+        a: "La tariffa copre scafo ed equipaggio. Carburante, ormeggi, cambusa ed extra passano dall'APA — di norma il 25–30% — rendicontata voce per voce dal comandante a fine crociera. È un principio contrattuale, non una cortesia.",
+      },
+      {
+        q: "E se il meteo cambia i piani?",
+        a: "Il comandante ha sempre una rotta di riserva già studiata: il Mediterraneo offre quasi sempre un lato sottovento. Nei casi estremi si ricollocano giorni o date — il contratto MYBA lo prevede, e noi lo applichiamo senza discutere.",
+      },
+      {
+        q: "I bambini sono benvenuti a bordo?",
+        a: "Sì, e l'equipaggio giusto fa la differenza: reti di sicurezza, toys adatti, una cambusa che segue i loro orari. Diteci le età — sceglieremo scafo ed equipaggio di conseguenza.",
+      },
+      {
+        q: "Possiamo portare il cane?",
+        a: "Su molti scafi sì, con qualche accortezza per teak e tappezzerie. Va dichiarato prima: alcune bandiere e alcuni armatori hanno regole precise, e le sorprese in banchina non piacciono a nessuno.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Rifiuto più barche di quante ne accolga. Non per snobismo: perché una settimana a bordo non perdona i compromessi che a terra durano una sera.",
+      name: "Chiara Sanfelice",
+      role: "Direttrice, Charter",
+    },
     detailTone: "harbor",
     detailCaption: "Porto Cervo, banchina nord — ore 06:40",
   },
@@ -138,6 +177,30 @@ export const services: Service[] = [
       "Empty legs riservati ai membri",
     ],
     fleetCategory: "jet",
+    faq: [
+      {
+        q: "Quattro ore dal sì al decollo: davvero?",
+        a: "Sulle tratte europee con equipaggio in base, sì. Le intercontinentali chiedono più margine per slot e permessi di sorvolo: di norma dodici ore. In ogni caso, il primo orario possibile ve lo diciamo subito, non dopo.",
+      },
+      {
+        q: "Cosa determina il prezzo di una tratta?",
+        a: "Ore di volo, posizionamento della macchina, tasse aeroportuali e handling. La proposta arriva tutto compreso: se una voce può variare — de-icing, slot notturni — ve lo scriviamo prima, non in fattura.",
+      },
+      {
+        q: "Gli animali viaggiano in cabina?",
+        a: "Sì, e nella maggior parte dei casi senza trasportino. Servono i documenti giusti per la destinazione: li verifichiamo noi, prima che diventino un problema in rampa.",
+      },
+      {
+        q: "E se il volo salta?",
+        a: "Se dipende da noi o dall'operatore, riproteggiamo su macchina equivalente o rimborsiamo per intero. Sta nel contratto, non nelle note a piè di pagina.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Leggo i log di manutenzione fino all'ultima riga, perché è lì che abita la sicurezza. L'aereo che non vi proponiamo è il nostro lavoro più importante.",
+      name: "Edward Whitmore",
+      role: "Direttore, Aviazione",
+    },
     detailTone: "tarmac",
     detailCaption: "Nice Côte d'Azur, piazzale privato — ore 07:15",
   },
@@ -193,6 +256,30 @@ export const services: Service[] = [
       "Accesso prioritario alle novità della collezione",
     ],
     fleetCategory: "auto",
+    faq: [
+      {
+        q: "Serve una patente particolare?",
+        a: "Patente da almeno tre anni e venticinque anni d'età per le fuoriserie; per le classiche chiediamo un breve briefing di guida. Lo chauffeur resta sempre un'alternativa elegante.",
+      },
+      {
+        q: "Come funziona l'assicurazione?",
+        a: "Kasko completa inclusa, franchigia ridotta riscattabile. Le classiche sono coperte a valore concordato, non di mercato: la differenza, su una DB5, non è un dettaglio.",
+      },
+      {
+        q: "I chilometri sono limitati?",
+        a: "Concordati in proposta e dimensionati sull'itinerario. Se la strada merita di più, si estende con una telefonata — non con una penale.",
+      },
+      {
+        q: "Consegnate anche fuori dall'Italia?",
+        a: "Ovunque in Europa, su bisarca coperta, con quarantotto ore di preavviso sulle destinazioni principali. Altrove: parliamone, di solito si può.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Ho aperto la collezione a Londra per una ragione semplice: un'automobile straordinaria ferma in garage è una tristezza che si può correggere.",
+      name: "Beatrice Lanzavecchia",
+      role: "Fondatrice e direttrice generale",
+    },
     detailTone: "cognac",
     detailCaption: "Lago di Como, SS340 — primo pomeriggio",
   },
@@ -247,6 +334,30 @@ export const services: Service[] = [
       "Gestione regali, ricorrenze e sorprese",
       "Priorità sull'intera flotta JUSTCLASS",
     ],
+    faq: [
+      {
+        q: "Come si diventa membri?",
+        a: "Su presentazione di un membro, o con un colloquio riservato. Non è una formalità commerciale: il servizio funziona solo se ci conosciamo davvero.",
+      },
+      {
+        q: "Quanto costa la membership?",
+        a: "Una quota annuale fissa, comunicata al colloquio. Nessuna percentuale nascosta sulle prenotazioni: chi vi offre un concierge \"gratis\" vive di commissioni — noi della quota, e la differenza si sente nei consigli.",
+      },
+      {
+        q: "Il mio referente cambierà nel tempo?",
+        a: "No, salvo vostra richiesta. La continuità è il prodotto: il vostro ritratto resta a lui e alla cassaforte della maison.",
+      },
+      {
+        q: "Cosa non fate?",
+        a: "Nulla d'illegale, nulla che danneggi terzi, nulla che vi esponga. Su tutto il resto: chiedete, e lasciateci il gusto di provarci.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non esistono richieste impossibili. Esistono preavvisi insufficienti — e anche lì, qualche volta, si può fare.",
+      name: "Laurent Mercier",
+      role: "Chef Concierge, Les Clefs d'Or",
+    },
     detailTone: "salon",
     detailCaption: "Hôtel de Paris, suite 407 — sera",
   },

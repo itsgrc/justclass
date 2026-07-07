@@ -189,6 +189,87 @@ export const articles: Article[] = [
     ],
   },
   {
+    slug: "tre-generazioni-una-barca",
+    category: "Famiglia",
+    title: "Tre generazioni, una barca",
+    standfirst:
+      "Il charter multigenerazionale è la richiesta che cresce più in fretta — e la più difficile da fare bene. Appunti di chi sceglie gli scafi, e gli equipaggi, per mestiere.",
+    author: "Chiara Sanfelice",
+    date: "2026-06-12",
+    readingMinutes: 5,
+    tone: "teak",
+    caption: "Coperta di poppa, ore 8:10 — tre colazioni diverse",
+    body: [
+      {
+        type: "paragraph",
+        text: "La telefonata tipo arriva a febbraio e comincia sempre allo stesso modo: saremo dodici, dai quattro agli ottantadue anni. Segue un silenzio che conosco bene — quello di chi ha già capito che la villa non basta più e la barca fa paura. Il charter multigenerazionale è la richiesta che cresce più in fretta nel nostro lavoro, ed è anche la più facile da sbagliare.",
+      },
+      {
+        type: "paragraph",
+        text: "La prima regola l'ho imparata a mie spese: non si sceglie la barca per la famiglia, si sceglie la barca per la convivenza. Dodici persone che si vogliono bene sono comunque dodici persone: servono tre zone giorno separate, così che il pisolino, le carte e i tuffi possano succedere insieme senza negoziati. È il motivo per cui sopra i dieci ospiti consiglio quasi sempre i quaranta metri: non per grandezza, per diplomazia.",
+      },
+      {
+        type: "quote",
+        text: "Non si sceglie la barca per la famiglia. Si sceglie la barca per la convivenza.",
+      },
+      {
+        type: "paragraph",
+        text: "La seconda regola riguarda l'equipaggio, e non è negoziabile: a bordo serve qualcuno che i bambini lo faccia di mestiere. Non uno steward gentile — una figura dedicata, che sappia trasformare il tender in un giocattolo e la cambusa in un alleato. I nonni, dal canto loro, chiedono poco: una poltrona all'ombra con vista sui nipoti e il caffè fatto nel modo giusto. Ma quel poco dev'essere perfetto.",
+      },
+      {
+        type: "plate",
+        tone: "sea",
+        caption: "Golfo di Napoli, il tender verso Procida",
+      },
+      {
+        type: "paragraph",
+        text: "L'itinerario, infine, si scrive attorno alla generazione di mezzo — quella che lavora anche in vacanza. Rade con campo buono per le call del mattino, porti veri ogni due giorni, e una regola d'oro: mai più di tre ore di navigazione consecutive. Il mal di mare non guarda l'età, ma la pazienza sì.",
+      },
+      {
+        type: "paragraph",
+        text: "Un'ultima cosa, la più importante. Le famiglie che tornano — e tornano quasi tutte — non ricordano la barca. Ricordano la sera in cui il comandante ha spento i motori davanti a Palmarola e nessuno ha guardato il telefono per tre ore. Il nostro lavoro, in fondo, è costruire le condizioni perché quella sera succeda. La barca è solo lo strumento.",
+      },
+    ],
+  },
+  {
+    slug: "il-protocollo-dellinvisibilita",
+    category: "Maison",
+    title: "Il protocollo dell'invisibilità",
+    standfirst:
+      "Come si protegge la privacy di chi non può permettersi di perderla: le regole operative della maison, raccontate per la prima volta.",
+    author: "Tommaso Ferri",
+    date: "2026-04-20",
+    readingMinutes: 5,
+    tone: "night",
+    caption: "Mayfair, la porta senza targa",
+    body: [
+      {
+        type: "paragraph",
+        text: "C'è una domanda che i nuovi membri fanno sempre, di solito alla fine del colloquio, di solito abbassando la voce: come faccio a sapere che tutto questo resta tra noi? È una domanda giusta, e merita una risposta più seria di 'si fidi'. Questa è la risposta — o almeno la parte che si può scrivere.",
+      },
+      {
+        type: "paragraph",
+        text: "Primo: i contratti. Ogni fornitore che tocca un viaggio della maison — equipaggi, chauffeur, handler, personale di villa — firma un accordo di riservatezza prima di conoscere anche solo l'iniziale del cliente. Non è burocrazia: è selezione. Chi esita a firmare ci sta dicendo qualcosa, e noi ascoltiamo.",
+      },
+      {
+        type: "quote",
+        text: "Chi esita a firmare un NDA ci sta dicendo qualcosa. E noi ascoltiamo.",
+      },
+      {
+        type: "paragraph",
+        text: "Secondo: i dati. Il ritratto di ogni membro — preferenze, allergie, abitudini, persone care — vive su un sistema cifrato che non lascia mai la maison, e il desk lavora per iniziali anche nelle comunicazioni interne. Le prenotazioni sensibili viaggiano sotto nome di cortesia: è per questo che certi tavoli risultano intestati a persone che non esistono.",
+      },
+      {
+        type: "paragraph",
+        text: "Terzo: le fotografie. Gli equipaggi della flotta hanno una regola sola, semplice da ricordare: a bordo non esistono telefoni con la fotocamera rivolta verso gli ospiti. I social del personale sono parte della due diligence, e un profilo troppo loquace vale una conversazione — o un cambio di equipaggio.",
+      },
+      {
+        type: "paragraph",
+        text: "L'ultima protezione è la più antica: la dimensione. Duecentoquattordici membri sono pochi per un motivo. La riservatezza è una catena che si spezza all'anello più debole, e ogni anello in più è un rischio in più. Cresceremo piano, per presentazione, come abbiamo sempre fatto. L'invisibilità, da noi, non è un servizio premium: è il prerequisito di tutti gli altri.",
+      },
+    ],
+  },
+  {
     slug: "monte-carlo-alle-sette",
     category: "Città",
     title: "Monte-Carlo alle sette del mattino",
