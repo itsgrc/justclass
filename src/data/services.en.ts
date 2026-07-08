@@ -311,4 +311,82 @@ export const servicesEn: Service[] = [
     detailTone: "salon",
     detailCaption: "Hôtel de Paris, suite 407 — evening",
   },
+  {
+    id: "villa",
+    index: "05",
+    label: "Villa & Residences",
+    title: "Home, wherever you are.",
+    description:
+      "Homes we've chosen in person — on the coast, in the mountains, in the Caribbean — with staff who know the house better than you do from day one. Not a verified listing: a property we've visited, lived in, and judged for ourselves.",
+    specs: [
+      { term: "Destinations", detail: "Coastline, the Alps, the Caribbean" },
+      { term: "Staff", detail: "Housekeeper, chef, driver" },
+      { term: "Minimum stay", detail: "3 nights, year-round" },
+    ],
+    tone: "marble",
+    caption: "Amalfi Coast, sea-view terrace — midday",
+    heroLine: "A villa isn't booked. It's inherited for a week.",
+    metaDescription:
+      "Luxury villas and residences chosen in person: homes with dedicated staff on the coast, in the mountains and in the Caribbean. One phone call for every stay.",
+    narrative: [
+      "A flawless listing and a house that actually works are two different things, and the difference shows up the first morning: the coffee maker no one can find, the boiler with a temper, the caretaker who doesn't answer. That's why we don't work from catalogues: every property in our portfolio has been visited by us, often slept in for a night or two, and chosen by the same standards we use for a hull or an aircraft.",
+      "Staff are vetted the same way: housekeepers who know the pantry before you arrive, chefs who've already read your allergies, drivers who know where the nearest doctor is. The house is waiting for you ready — beds made, the fridge stocked to your taste, the air conditioning already at the right temperature — because the first day of a holiday shouldn't be the day you spend organising it.",
+    ],
+    process: [
+      {
+        title: "Listening",
+        detail: "Destination, dates, who's travelling with you. And what, in a house, you simply won't do without.",
+      },
+      {
+        title: "Selection",
+        detail: "Two or three homes we've seen ourselves, with real photographs and flaws disclosed, never hidden.",
+      },
+      {
+        title: "Preparation",
+        detail: "Staff briefed, pantry and cellar stocked to your habits, the house ready before you land.",
+      },
+      {
+        title: "Stay",
+        detail: "One point of contact reachable throughout your stay, for anything the house doesn't cover.",
+      },
+    ],
+    inclusions: [
+      "Housekeeper, chef and driver on request",
+      "Pantry and cellar stocked before arrival",
+      "Private transfers from the airport or port",
+      "Maintenance and security checked before every stay",
+      "Coordination with the concierge for excursions and events",
+      "Daily housekeeping and linen change, discreetly done",
+    ],
+    faq: [
+      {
+        q: "How do you make sure the house really looks like the photos?",
+        a: "Because the photos are ours, or verified by a recent visit of ours. If something has changed — building work next door, a piece of furniture replaced — you know before you leave, not on arrival.",
+      },
+      {
+        q: "Does the staff stay with us the whole time?",
+        a: "Yes, unless you ask otherwise. Your housekeeper, and chef where one is arranged, are dedicated to your stay — they don't rotate between several properties in the same week.",
+      },
+      {
+        q: "What happens if something is damaged?",
+        a: "A security deposit, returned within a few days if there's nothing to dispute. We don't count glasses — we count what actually matters, and we talk it through honestly if it comes up.",
+      },
+      {
+        q: "Do you accept pets in the house?",
+        a: "In many properties, yes, if declared beforehand: some private owners have precise rules about rugs and gardens, and we'd rather you knew in advance than discover it on site.",
+      },
+      {
+        q: "How much notice do you need for a last-minute stay?",
+        a: "Even a few days, if the date is free — our job, in that case, is mostly getting the staff aligned in time. Tell us, and let's see what can be done.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I don't rent out houses. I lend, for a week, a way of living I've verified in person — and if I wouldn't sign off on it for my own family, I don't offer it to yours.",
+      name: "Isabella Conti",
+      role: "Director, Villa & Residences",
+    },
+    detailTone: "riviera",
+    detailCaption: "Clifftop villa, infinity pool — golden hour",
+  },
 ];

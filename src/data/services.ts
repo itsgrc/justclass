@@ -373,6 +373,84 @@ export const services: Service[] = [
     detailTone: "salon",
     detailCaption: "Hôtel de Paris, suite 407 — sera",
   },
+  {
+    id: "villa",
+    index: "05",
+    label: "Villa & Residenze",
+    title: "Casa, ovunque voi siate.",
+    description:
+      "Dimore selezionate di persona — in costiera, in montagna, ai Caraibi — con personale che conosce la casa meglio di voi dal primo giorno. Non un annuncio verificato: una proprietà che abbiamo visitato, vissuto, giudicato.",
+    specs: [
+      { term: "Destinazioni", detail: "Costiera, Alpi, Caraibi" },
+      { term: "Personale", detail: "Governante, chef, autista" },
+      { term: "Soggiorno minimo", detail: "3 notti, tutto l'anno" },
+    ],
+    tone: "marble",
+    caption: "Costiera Amalfitana, terrazza sul mare — mezzogiorno",
+    heroLine: "Una villa non si prenota. Si eredita per una settimana.",
+    metaDescription:
+      "Ville e residenze di lusso selezionate di persona: dimore con personale dedicato in costiera, in montagna e ai Caraibi. Un'unica chiamata per ogni soggiorno.",
+    narrative: [
+      "Un annuncio impeccabile e una casa che funziona davvero sono due cose diverse, e la differenza si vede il primo mattino: la caffettiera che non si trova, il boiler che fa i capricci, il custode che non risponde. Per questo non lavoriamo su cataloghi: ogni proprietà nel nostro portafoglio l'abbiamo visitata, spesso vissuta per qualche notte, e scelta con gli stessi criteri con cui scegliamo uno scafo o un aeromobile.",
+      "Il personale è verificato come il resto: governanti che conoscono la dispensa prima del vostro arrivo, chef che hanno già letto le vostre allergie, autisti che sanno dove si trova il medico più vicino. La casa vi aspetta pronta — letti fatti, frigorifero pieno secondo le vostre preferenze, aria condizionata già alla temperatura giusta — perché il primo giorno di vacanza non dovrebbe essere il giorno in cui si organizza la vacanza.",
+    ],
+    process: [
+      {
+        title: "Ascolto",
+        detail: "Destinazione, date, chi viaggia con voi. E che cosa, di una casa, per voi è irrinunciabile.",
+      },
+      {
+        title: "Selezione",
+        detail: "Due o tre dimore viste di persona da noi, con foto vere e difetti dichiarati, non nascosti.",
+      },
+      {
+        title: "Preparazione",
+        detail: "Personale allineato, dispensa secondo le vostre abitudini, casa pronta prima del vostro arrivo.",
+      },
+      {
+        title: "Soggiorno",
+        detail: "Un referente raggiungibile per tutta la permanenza, per qualunque cosa la casa non preveda.",
+      },
+    ],
+    inclusions: [
+      "Governante, chef e autista su richiesta",
+      "Dispensa e cantina allestite prima dell'arrivo",
+      "Trasferimenti privati da aeroporto o porto",
+      "Manutenzione e sicurezza verificate prima di ogni soggiorno",
+      "Coordinamento con il concierge per escursioni ed eventi",
+      "Cambio biancheria e pulizie quotidiane discrete",
+    ],
+    faq: [
+      {
+        q: "Come garantite che la casa sia davvero come nelle foto?",
+        a: "Perché le foto sono nostre, o verificate da un nostro sopralluogo recente. Se qualcosa è cambiato — un cantiere vicino, un mobile sostituito — lo sapete prima di partire, non all'arrivo.",
+      },
+      {
+        q: "Il personale resta con noi tutto il soggiorno?",
+        a: "Sì, salvo diversa richiesta. Governante e, se prevista, chef sono dedicati alla vostra permanenza: non ruotano tra più proprietà nella stessa settimana.",
+      },
+      {
+        q: "Cosa succede in caso di danni?",
+        a: "Un deposito cauzionale, restituito entro pochi giorni se non ci sono contestazioni. Non contiamo i bicchieri: contiamo ciò che conta davvero, e ne discutiamo con franchezza se capita.",
+      },
+      {
+        q: "Accettate animali in casa?",
+        a: "In molte proprietà sì, dichiarandolo prima: alcuni proprietari privati hanno regole precise su tappeti e giardini, e preferiamo saperlo con voi che scoprirlo in loco.",
+      },
+      {
+        q: "Quanto preavviso serve per un soggiorno dell'ultimo minuto?",
+        a: "Anche pochi giorni, se la data è libera: il nostro lavoro, in quel caso, è soprattutto allineare il personale in tempo. Ditecelo e vediamo cosa si può fare.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non affitto case. Presto per una settimana un modo di vivere che ho verificato di persona — e se non lo firmerei per la mia famiglia, non lo propongo alla vostra.",
+      name: "Isabella Conti",
+      role: "Direttrice, Villa & Residenze",
+    },
+    detailTone: "riviera",
+    detailCaption: "Villa sul promontorio, piscina a sfioro — ora dorata",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
