@@ -608,6 +608,84 @@ export const services: Service[] = [
     detailTone: "sail",
     detailCaption: "Biblioteca privata di un castello, Valle della Loira — mattina",
   },
+  {
+    id: "fractional",
+    index: "08",
+    label: "Fractional",
+    title: "Una quota. Nient'altro cambia.",
+    description:
+      "Comproprietà strutturata di yacht, jet e ville selezionate: una quota reale in una società dedicata, gestione professionale, nessuna multiproprietà. Per chi vuole possedere, non solo prenotare.",
+    specs: [
+      { term: "Quote disponibili", detail: "1/8, 1/6, 1/4" },
+      { term: "Asset", detail: "Yacht, jet, ville selezionate" },
+      { term: "Gestione", detail: "Manutenzione ed equipaggio inclusi" },
+    ],
+    tone: "teak",
+    caption: "Assemblea comproprietari, Ginevra — sala del consiglio",
+    heroLine: "Una quota. Tutto il resto è uguale.",
+    metaDescription:
+      "Comproprietà strutturata di yacht, jet e ville selezionate: una quota reale, gestione professionale, nessuna multiproprietà. Per chi vuole possedere, non solo prenotare.",
+    narrative: [
+      "La multiproprietà vende una settimana e un catalogo patinato. Ciò che strutturiamo è diverso: una quota reale di un asset specifico e periziato, detenuta tramite una società dedicata, con bilancio certificato e una clausola di uscita scritta — la stessa serietà che pretendereste da qualunque altro investimento, perché è esattamente ciò che questo è. I comproprietari si riuniscono una volta l'anno, un po' come un piccolo consiglio, per rivedere i costi e confermare il calendario.",
+      "Nel quotidiano funziona come dovrebbe funzionare la proprietà: prenotate le vostre settimane su un calendario condiviso, sullo stesso asset e spesso lo stesso equipaggio ogni volta — non un sistema a punti che vi smista su ciò che resta libero. Un gestore professionista si occupa di equipaggio, manutenzione e assicurazione, con una perizia annuale che tiene il valore dell'asset sotto controllo invece di lasciarlo scivolare in silenzio. Quando volete uscire, vendete a valore di mercato, non a quanto decide di offrirvi un desk di rivendita.",
+    ],
+    process: [
+      {
+        title: "Analisi",
+        detail: "Quale asset, quale quota, quante settimane l'anno userete davvero — con numeri reali, non proiezioni ottimistiche.",
+      },
+      {
+        title: "Struttura legale",
+        detail: "Una società dedicata, una quota registrata, un contratto di comproprietà con gli altri titolari, un'uscita disciplinata.",
+      },
+      {
+        title: "Gestione",
+        detail: "Un gestore professionista si occupa di equipaggio, manutenzione, assicurazione e calendario.",
+      },
+      {
+        title: "Utilizzo",
+        detail: "Le vostre settimane, confermate con largo anticipo, sull'asset che conoscete — non su uno equivalente.",
+      },
+    ],
+    inclusions: [
+      "Quota reale in una società dedicata all'asset, non un contratto di multiproprietà",
+      "Equipaggio, manutenzione e assicurazione gestiti dal gestore",
+      "Calendario delle settimane concordato annualmente tra comproprietari",
+      "Bilancio annuale certificato e piena trasparenza sui costi",
+      "Assistenza alla rivendita della quota a valore di mercato",
+      "Accesso al resto della flotta JUSTCLASS nelle settimane non utilizzate",
+    ],
+    faq: [
+      {
+        q: "In cosa è diverso dalla multiproprietà?",
+        a: "La multiproprietà vende un diritto di utilizzo su un pool generico, spesso rivendibile a pochi centesimi. Qui possedete una quota reale di un asset specifico, in una società con bilancio proprio, e potete rivenderla a valore di mercato.",
+      },
+      {
+        q: "Chi si occupa della manutenzione?",
+        a: "Un gestore professionista, remunerato dalla comproprietà, non da voi individualmente: il suo interesse è che l'asset mantenga valore, non che si spenda il minimo indispensabile.",
+      },
+      {
+        q: "Posso vendere la mia quota quando voglio?",
+        a: "Con il preavviso concordato nel contratto e un diritto di prelazione per gli altri comproprietari. La valutazione è indipendente, non discrezionale.",
+      },
+      {
+        q: "Cosa succede se un comproprietario non paga la sua parte di spese?",
+        a: "Il contratto prevede un meccanismo di richiamo e, in caso di inadempienza prolungata, la cessione forzata della quota agli altri titolari a valore periziato. Non è mai successo, ma il contratto lo prevede per tutti — non a parole.",
+      },
+      {
+        q: "Quante settimane posso usare l'asset?",
+        a: "Dipende dalla quota: un ottavo corrisponde a circa sei settimane l'anno, calendarizzate con un sistema di priorità che ruota tra i comproprietari.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non vendo sogni divisi in ottavi. Struttura una comproprietà come si fa con qualunque altro asset serio: bilancio, gestore, uscita chiara. Il resto — il mare, il cielo — viene da sé.",
+      name: "Alessandro Ferretti",
+      role: "Direttore, Fractional",
+    },
+    detailTone: "cognac",
+    detailCaption: "Sala del consiglio, Ginevra — bilancio annuale",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);

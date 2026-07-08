@@ -546,4 +546,82 @@ export const servicesEn: Service[] = [
     detailTone: "sail",
     detailCaption: "A château's private library, Loire Valley — morning",
   },
+  {
+    id: "fractional",
+    index: "08",
+    label: "Fractional",
+    title: "One share. Nothing else changes.",
+    description:
+      "Structured co-ownership of selected yachts, jets and villas: a real share in a dedicated company, professional management, no timeshare. For those who want to own, not just book.",
+    specs: [
+      { term: "Shares available", detail: "1/8, 1/6, 1/4" },
+      { term: "Assets", detail: "Yacht, jet, selected villas" },
+      { term: "Management", detail: "Maintenance and crew included" },
+    ],
+    tone: "teak",
+    caption: "Co-owners' meeting, Geneva — boardroom",
+    heroLine: "One share. Everything else stays the same.",
+    metaDescription:
+      "Structured co-ownership of selected yachts, jets and villas: a real share, professional management, no timeshare. For those who want to own, not just book.",
+    narrative: [
+      "Timeshare sells a week and a glossy brochure. What we structure is different: a real share of a specific, appraised asset, held through a dedicated company, with certified accounts and a written exit clause — the same seriousness you'd expect from any other investment, because that's exactly what this is. Co-owners meet once a year, much like a small board, to review costs and confirm the calendar.",
+      "Day to day, it works the way ownership should: you book your weeks on a shared calendar, on the same asset and often the same crew every time — not a points system that shuffles you onto whatever's left. A professional manager handles crew, maintenance and insurance, with an annual appraisal that keeps the asset's value in check instead of letting it quietly slip. When you want out, you sell at fair market value, not at whatever a resale desk decides to offer.",
+    ],
+    process: [
+      {
+        title: "Analysis",
+        detail: "Which asset, which share, how many weeks a year you'd genuinely use — with real numbers, not optimistic projections.",
+      },
+      {
+        title: "Legal structure",
+        detail: "A dedicated company, a registered share, a co-ownership agreement with the other holders, a disciplined exit.",
+      },
+      {
+        title: "Management",
+        detail: "A professional manager handles crew, maintenance, insurance and the calendar.",
+      },
+      {
+        title: "Use",
+        detail: "Your weeks, confirmed well in advance, on the asset you know — not an equivalent one.",
+      },
+    ],
+    inclusions: [
+      "A real share in a company dedicated to the asset, not a timeshare contract",
+      "Crew, maintenance and insurance handled by the manager",
+      "A weekly calendar agreed annually among co-owners",
+      "Certified annual accounts and full cost transparency",
+      "Assistance reselling your share at fair market value",
+      "Access to the rest of the JUSTCLASS fleet in weeks you don't use",
+    ],
+    faq: [
+      {
+        q: "How is this different from timeshare?",
+        a: "Timeshare sells a usage right over a generic pool, often resold for pennies on the pound. Here you hold a real share of a specific asset, in a company with its own accounts, and you can sell it at fair market value.",
+      },
+      {
+        q: "Who handles the maintenance?",
+        a: "A professional manager, paid by the co-ownership, not by you individually: their interest is the asset holding its value, not spending as little as possible on it.",
+      },
+      {
+        q: "Can I sell my share whenever I want?",
+        a: "With the notice agreed in the contract, and a right of first refusal for the other co-owners. The valuation is independent, not discretionary.",
+      },
+      {
+        q: "What happens if a co-owner doesn't pay their share of costs?",
+        a: "The contract sets out a call mechanism and, after prolonged default, a forced transfer of their share to the other holders at appraised value. It has never happened, but the contract covers it for everyone — not just as words on paper.",
+      },
+      {
+        q: "How many weeks can I actually use the asset?",
+        a: "It depends on the share: an eighth is roughly six weeks a year, scheduled through a priority system that rotates among co-owners.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I don't sell dreams cut into eighths. I structure a co-ownership the way you would any serious asset: accounts, a manager, a clear exit. The rest — the sea, the sky — takes care of itself.",
+      name: "Alessandro Ferretti",
+      role: "Director, Fractional",
+    },
+    detailTone: "cognac",
+    detailCaption: "Boardroom, Geneva — annual accounts",
+  },
 ];
