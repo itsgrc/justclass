@@ -45,6 +45,7 @@ interface FormData {
   gift: boolean;
   forWhom: "me" | "other";
   travelerName: string;
+  travelerEmail: string;
   name: string;
   email: string;
   phone: string;
@@ -69,6 +70,7 @@ const EMPTY_FORM: FormData = {
   gift: false,
   forWhom: "me",
   travelerName: "",
+  travelerEmail: "",
   name: "",
   email: "",
   phone: "",
@@ -513,16 +515,24 @@ function RequestPage() {
                       ))}
                     </div>
                     {form.forWhom === "other" && (
-                      <div className="mt-8">
+                      <div className="mt-8 grid gap-8 sm:grid-cols-2">
                         <TextField
-                          label="Chi viaggia — nome o iniziali, come preferite"
+                          label="Chi viaggia — nome o iniziali"
                           placeholder="Basta un riferimento: la discrezione la mettiamo noi"
                           value={form.travelerName}
                           onChange={(e) => set("travelerName", e.target.value)}
                         />
-                        <p className="mt-3 text-xs leading-relaxed text-taupe/80">
-                          Gentilezza pratica: il riepilogo arriverà a voi, e la
-                          proposta sarà scritta per essere inoltrata così com'è.
+                        <TextField
+                          label="Email di chi viaggia — facoltativa"
+                          type="email"
+                          placeholder="Solo se gradita"
+                          value={form.travelerEmail}
+                          onChange={(e) => set("travelerEmail", e.target.value)}
+                        />
+                        <p className="text-xs leading-relaxed text-taupe/80 sm:col-span-2">
+                          Il riepilogo arriverà a entrambi, se ci lasciate il
+                          secondo indirizzo; la proposta è comunque scritta per
+                          essere inoltrata così com'è.
                         </p>
                       </div>
                     )}
@@ -656,7 +666,11 @@ function RequestPage() {
                           : form.name,
                         2,
                       ],
-                      ["Recapiti", `${form.email}${form.phone ? ` · ${form.phone}` : ""}`, 2],
+                      [
+                        "Recapiti",
+                        `${form.email}${form.phone ? ` · ${form.phone}` : ""}${form.forWhom === "other" && form.travelerEmail ? ` · riepilogo anche a ${form.travelerEmail}` : ""}`,
+                        2,
+                      ],
                       [
                         "Contatto",
                         `${CHANNEL_LABELS[form.channel]} · ${WINDOW_LABELS[form.contactWindow]?.toLowerCase()} · ${TIMEZONE_LABELS[form.timezone]}`,
@@ -683,6 +697,21 @@ function RequestPage() {
                     </div>
                   ))}
                 </dl>
+
+                {/* Cosa riceverete: l'anteprima della risposta del desk */}
+                <div className="mt-10 border border-ink/15 px-7 py-6">
+                  <p className="eyebrow text-bronze">Cosa riceverete</p>
+                  <p className="mt-4 font-display text-lg leading-snug font-light italic">
+                    "{form.name ? form.name.split(" ")[0] : "Gentile ospite"}, grazie
+                    della richiesta. Qui sotto due proposte per{" "}
+                    {form.destination || "la vostra destinazione"}, con i numeri già
+                    chiari e una nostra preferenza, motivata. — Il desk"
+                  </p>
+                  <p className="mt-4 text-xs leading-relaxed text-taupe/80">
+                    Così comincerà la prima email: firmata da una persona, entro
+                    quattro ore lavorative, nel rispetto delle fasce orarie indicate.
+                  </p>
+                </div>
 
                 <div className="mt-12 flex flex-wrap items-center gap-8">
                   <HairlineButton type="button" onClick={submit} disabled={sending}>
