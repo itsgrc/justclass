@@ -389,4 +389,83 @@ export const servicesEn: Service[] = [
     detailTone: "riviera",
     detailCaption: "Clifftop villa, infinity pool — golden hour",
   },
+  {
+    id: "medical",
+    index: "06",
+    label: "Medical & Wellness",
+    title: "Health, without the wait.",
+    description:
+      "Direct access to specialists and private clinics in Switzerland, Germany and the UK, second opinions within 48 hours, bespoke check-ups and prevention programmes. A confidential medical service, not a list of phone numbers.",
+    specs: [
+      { term: "Access", detail: "Specialists, private clinics" },
+      { term: "Response", detail: "Second opinion within 48 hours" },
+      { term: "Confidentiality", detail: "Encrypted files, clinical NDA" },
+    ],
+    tone: "alps",
+    caption: "Private clinic, Zurich — first light",
+    heroLine: "When health can't wait, neither do we.",
+    metaDescription:
+      "Private access to specialists, clinics and international second opinions, bespoke check-ups and wellness programmes. A confidential medical service for members and their families.",
+    narrative: [
+      "Members rarely call about their health in the same tone they call about a yacht or a jet — steadier, quieter, with an urgency you can hear underneath the words. It's for that tone that we've spent years building a network of specialists and private clinics across Europe and Switzerland: so a diagnosis, a second opinion or surgery abroad can move within hours, through the same point of contact you already trust for everything else.",
+      "Confidentiality here is more literal than elsewhere: encrypted records, an NDA with every clinician involved, a family medical history that stays in your file, not in a database. For members who'd rather stay ahead of a problem than react to one, we also arrange annual check-ups and longevity programmes at clinics we've vetted in person — and, when the situation calls for it, medical flights coordinated by the same desk that handles the rest of your travel.",
+    ],
+    process: [
+      {
+        title: "Listening",
+        detail: "A confidential call about the concern — no forms, a real doctor or the medical desk answering in person.",
+      },
+      {
+        title: "Network",
+        detail: "Access to the right specialist within our vetted network; a second opinion arranged within 48 hours.",
+      },
+      {
+        title: "Coordination",
+        detail: "Travel, accommodation, interpreters and family arrangements, run in parallel with the aviation, villa and concierge desks.",
+      },
+      {
+        title: "Follow-up",
+        detail: "Post-treatment follow-up, physiotherapy, a recovery stay — confidentiality maintained to the end.",
+      },
+    ],
+    inclusions: [
+      "Second opinions and diagnoses from international specialists within 48 hours",
+      "Coordination with private clinics in Switzerland, Germany and the UK",
+      "Annual check-ups and bespoke prevention programmes",
+      "Medical interpreters and document assistance",
+      "Medical transport and air ambulance coordination on request",
+      "Wellness retreats and post-treatment recovery stays",
+      "Encrypted medical records, accessible only to your designated contact",
+    ],
+    faq: [
+      {
+        q: "Will you replace my own doctor?",
+        a: "No: we work alongside them, not instead of them, adding the access you wouldn't otherwise have — to a specialist, a clinic, a second opinion, on a timeline that wouldn't otherwise exist.",
+      },
+      {
+        q: "How do you protect the confidentiality of medical data?",
+        a: "Encryption, restricted access, an NDA with every clinician involved. Your file never travels further than a case genuinely requires.",
+      },
+      {
+        q: "Do you cover emergencies abroad?",
+        a: "Yes: coordination with local hospitals and, if needed, medical transport or an air ambulance — the same desk that handles the rest of our aviation.",
+      },
+      {
+        q: "Does the service cover family members too?",
+        a: "Yes, a membership profile can extend to your immediate family, with the same confidentiality.",
+      },
+      {
+        q: "What happens if we need an urgent second opinion?",
+        a: "We mobilise the network within 48 hours, often less, with documentation already translated and ready for the specialist.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "The people who call us aren't looking for comfort. They're looking for an answer before fear gets there first. Our job is to arrive before it does.",
+      name: "Dr. Werner Huber",
+      role: "Medical Director",
+    },
+    detailTone: "marble",
+    detailCaption: "Private clinic, Zurich — consultation room",
+  },
 ];

@@ -451,6 +451,85 @@ export const services: Service[] = [
     detailTone: "riviera",
     detailCaption: "Villa sul promontorio, piscina a sfioro — ora dorata",
   },
+  {
+    id: "medical",
+    index: "06",
+    label: "Medical & Wellness",
+    title: "La salute, senza attese.",
+    description:
+      "Accesso diretto a specialisti e cliniche private in Svizzera, Germania e Regno Unito, second opinion entro 48 ore, check-up e programmi di prevenzione su misura. Un servizio sanitario riservato, non un elenco di numeri di telefono.",
+    specs: [
+      { term: "Accesso", detail: "Specialisti, cliniche private" },
+      { term: "Risposta", detail: "Second opinion entro 48 ore" },
+      { term: "Riservatezza", detail: "Cartelle cifrate, NDA clinico" },
+    ],
+    tone: "alps",
+    caption: "Clinica privata, Zurigo — prima luce",
+    heroLine: "Quando la salute non aspetta, nemmeno noi aspettiamo.",
+    metaDescription:
+      "Accesso privato a specialisti, cliniche e second opinion internazionali, check-up e percorsi di benessere su misura. Un servizio sanitario riservato per i membri e le loro famiglie.",
+    narrative: [
+      "I membri chiamano raramente per la salute con lo stesso tono con cui chiamano per uno yacht o un jet — più basso, più composto, con un'urgenza che si sente sotto le parole. Per quel tono abbiamo costruito, negli anni, una rete di specialisti e cliniche private in Europa e in Svizzera: perché una diagnosi, una second opinion o un intervento all'estero possano muoversi in poche ore, con lo stesso referente di cui già vi fidate per tutto il resto.",
+      "Qui la riservatezza è più letterale che altrove: cartelle cifrate, un NDA con ogni clinico coinvolto, un'anamnesi familiare che resta nel vostro fascicolo, non in un database. Per chi preferisce prevenire piuttosto che reagire, organizziamo anche check-up annuali e programmi di longevità in cliniche verificate di persona — e, quando la situazione lo richiede, voli medicalizzati coordinati dallo stesso desk che gestisce il resto dei vostri spostamenti.",
+    ],
+    process: [
+      {
+        title: "Ascolto",
+        detail: "Una chiamata riservata sul problema — nessun modulo, un medico vero o il desk sanitario che risponde di persona.",
+      },
+      {
+        title: "Rete",
+        detail: "Accesso allo specialista giusto nella nostra rete verificata; second opinion organizzata entro 48 ore.",
+      },
+      {
+        title: "Coordinamento",
+        detail: "Viaggio, alloggio, interpreti e organizzazione familiare, in parallelo con i desk aviazione, ville e concierge.",
+      },
+      {
+        title: "Seguito",
+        detail: "Follow-up post-trattamento, fisioterapia, un soggiorno di recupero — riservatezza mantenuta fino alla fine.",
+      },
+    ],
+    inclusions: [
+      "Second opinion e diagnosi da specialisti internazionali entro 48 ore",
+      "Coordinamento con cliniche private in Svizzera, Germania e Regno Unito",
+      "Check-up annuali e programmi di prevenzione su misura",
+      "Interpreti medici e assistenza documentale",
+      "Trasporto sanitario e coordinamento voli medicalizzati su richiesta",
+      "Ritiri di benessere e soggiorni di recupero post-trattamento",
+      "Cartelle cliniche cifrate, accessibili solo al referente designato",
+    ],
+    faq: [
+      {
+        q: "Sostituite il mio medico di fiducia?",
+        a: "No: lavoriamo insieme a lui, non al posto suo, aggiungendo l'accesso che da soli non avreste — a uno specialista, a una clinica, a un secondo parere in tempi che altrimenti non esisterebbero.",
+      },
+      {
+        q: "Come proteggete la riservatezza dei dati sanitari?",
+        a: "Cifratura, accesso limitato, un NDA con ogni clinico coinvolto. Il vostro fascicolo non esce mai oltre ciò che un caso richiede davvero.",
+      },
+      {
+        q: "Coprite anche le emergenze all'estero?",
+        a: "Sì: coordinamento con ospedali locali e, se necessario, trasporto sanitario o volo medicalizzato — lo stesso desk che gestisce il resto della nostra aviazione.",
+      },
+      {
+        q: "Il servizio copre anche i familiari?",
+        a: "Sì, il profilo di membership può estendersi al nucleo familiare stretto, con la stessa riservatezza.",
+      },
+      {
+        q: "Cosa succede se serve una second opinion urgente?",
+        a: "Mobilitiamo la rete entro 48 ore, spesso meno, con la documentazione già tradotta e pronta per lo specialista.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Chi ci chiama non cerca comodità. Cerca una risposta prima che la paura arrivi per prima. Il nostro lavoro è arrivarci noi, prima.",
+      name: "Dr. Werner Huber",
+      role: "Direttore Medico",
+    },
+    detailTone: "marble",
+    detailCaption: "Clinica privata, Zurigo — sala di consulto",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
