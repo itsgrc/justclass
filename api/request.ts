@@ -6,12 +6,19 @@
  * per lo sviluppo locale con plain `vite dev`/`vite preview`, questo
  * stesso handler è montato da scripts/dev-api-server.mjs dietro un
  * proxy configurato in vite.config.ts — vedi api/README.md.
+ *
+ * Fase 1 Monetizzazione: ogni richiesta viene associata a un fornitore
+ * di referral (src/data/providers.ts) in base al servizio scelto, con
+ * un codice di tracciamento univoco. L'email al fornitore è simulata —
+ * va sempre e solo al desk stesso, mai a un dominio esterno reale.
  */
 import { appendFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import nodemailer from "nodemailer";
 import "dotenv/config";
+import { getProvidersForService } from "../src/data/providers";
+import type { Provider } from "../src/data/providers";
 
 interface VercelRequest {
   method?: string;
@@ -47,6 +54,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function reference(): string {
   return `JC-${new Date().getFullYear()}-${String(Math.floor(1000 + Math.random() * 9000))}`;
+}
+
+function referralCode(provider: Provider): string {
+  return `JUSTCLASS-${provider.trackingCode}-${Date.now()}`;
 }
 
 function validate(body: RequestPayload): string | null {
@@ -113,6 +124,30 @@ function clientEmailHtml(body: RequestPayload, ref: string): string {
   </div>`;
 }
 
+/* Email al fornitore — SIMULATA: va sempre al desk, mai al dominio esterno reale */
+function providerEmailHtml(body: RequestPayload, ref: string, code: string, provider: Provider): string {
+  const rows = [
+    ["Codice di tracciamento", code],
+    ["Riferimento JUSTCLASS", ref],
+    ["Destinazione", body.destination],
+    ["Date", `${body.dateFrom ?? "—"}${body.dateTo ? ` → ${body.dateTo}` : ""}`],
+    ["Ospiti", body.guests],
+    ["Note", body.notes || "—"],
+    ["Nome cliente", body.name],
+    ["Contatto", `${body.email}${body.phone ? ` · ${body.phone}` : ""}`],
+  ];
+  return `<div style="font-family:Georgia,serif;max-width:560px">
+    <p style="letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:#96703B">
+      Simulazione — destinatario reale: ${provider.contactEmail}
+    </p>
+    <h2>Nuova richiesta da JUSTCLASS per ${provider.name}</h2>
+    <table cellpadding="6">${rows
+      .map(([k, v]) => `<tr><td style="color:#756a58">${k}</td><td><b>${v ?? "—"}</b></td></tr>`)
+      .join("")}</table>
+    <p style="font-size:12px;color:#756a58">Accordo di affiliazione ${provider.trackingCode} — commissione ${provider.referralPercent}%.</p>
+  </div>`;
+}
+
 async function logToFile(entry: Record<string, unknown>) {
   const dir = join(process.cwd(), "data");
   if (!existsSync(dir)) await mkdir(dir, { recursive: true });
@@ -133,9 +168,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const ref = reference();
+  const provider = body.service ? getProvidersForService("it", body.service)[0] : undefined;
+  const refCode = provider ? referralCode(provider) : undefined;
 
   try {
-    await logToFile({ ref, receivedAt: new Date().toISOString(), ...body });
+    await logToFile({
+      ref,
+      receivedAt: new Date().toISOString(),
+      ...body,
+      provider: provider?.id ?? null,
+      referral_code: refCode ?? null,
+      status: "inoltrata",
+    });
   } catch {
     // Il registro è un supporto operativo, non deve bloccare la conferma al cliente.
   }
@@ -145,6 +189,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const fromName = process.env.FROM_NAME || "JUSTCLASS";
     const fromEmail = process.env.FROM_EMAIL || process.env.SMTP_USER!;
     const deskEmail = process.env.DESK_EMAIL || fromEmail;
+
+    if (provider && refCode) {
+      try {
+        await transport.sendMail({
+          from: `"${fromName}" <${fromEmail}>`,
+          to: deskEmail,
+          subject: `[SIMULAZIONE → ${provider.name}] Richiesta ${ref} — ${refCode}`,
+          html: providerEmailHtml(body, ref, refCode, provider),
+        });
+      } catch (err) {
+        // L'email al fornitore è un di più operativo: non deve mai
+        // compromettere la conferma al cliente, ne' essere segnalata come tale.
+        console.error("Invio email simulata al fornitore fallito:", err);
+      }
+    }
 
     try {
       await transport.sendMail({
@@ -165,10 +224,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // conferma: la richiesta resta registrata, il desk la vede comunque
       // nel file di log. Segnaliamo l'errore lato server, non al cliente.
       console.error("Invio email fallito:", err);
-      res.status(200).json({ success: true, ref, warning: "email-not-sent" });
+      res.status(200).json({ success: true, ref, provider: provider?.name ?? null, warning: "email-not-sent" });
       return;
     }
   }
 
-  res.status(200).json({ success: true, ref });
+  res.status(200).json({ success: true, ref, provider: provider?.name ?? null });
 }

@@ -6,7 +6,13 @@
  * volete un registro delle richieste, legate un binding KV o D1 (vedi
  * functions/README.md) — senza binding l'endpoint funziona comunque,
  * semplicemente non tiene un log lato server.
+ *
+ * Fase 1 Monetizzazione: stessa logica di referral di api/request.ts —
+ * provider assegnato dal servizio, codice di tracciamento, email al
+ * fornitore simulata (va sempre al desk, mai a un dominio esterno).
  */
+import { getProvidersForService } from "../../src/data/providers";
+import type { Provider } from "../../src/data/providers";
 
 interface Env {
   RESEND_API_KEY?: string;
@@ -40,6 +46,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function reference(): string {
   return `JC-${new Date().getFullYear()}-${String(Math.floor(1000 + Math.random() * 9000))}`;
+}
+
+function referralCode(provider: Provider): string {
+  return `JUSTCLASS-${provider.trackingCode}-${Date.now()}`;
 }
 
 function validate(body: RequestPayload): string | null {
@@ -95,6 +105,30 @@ function clientEmailHtml(body: RequestPayload, ref: string): string {
   </div>`;
 }
 
+/* Email al fornitore — SIMULATA: va sempre al desk, mai al dominio esterno reale */
+function providerEmailHtml(body: RequestPayload, ref: string, code: string, provider: Provider): string {
+  const rows: [string, string | undefined][] = [
+    ["Codice di tracciamento", code],
+    ["Riferimento JUSTCLASS", ref],
+    ["Destinazione", body.destination],
+    ["Date", `${body.dateFrom ?? "—"}${body.dateTo ? ` → ${body.dateTo}` : ""}`],
+    ["Ospiti", body.guests],
+    ["Note", body.notes || "—"],
+    ["Nome cliente", body.name],
+    ["Contatto", `${body.email}${body.phone ? ` · ${body.phone}` : ""}`],
+  ];
+  return `<div style="font-family:Georgia,serif;max-width:560px">
+    <p style="letter-spacing:0.08em;text-transform:uppercase;font-size:11px;color:#96703B">
+      Simulazione — destinatario reale: ${provider.contactEmail}
+    </p>
+    <h2>Nuova richiesta da JUSTCLASS per ${provider.name}</h2>
+    <table cellpadding="6">${rows
+      .map(([k, v]) => `<tr><td style="color:#756a58">${k}</td><td><b>${v ?? "—"}</b></td></tr>`)
+      .join("")}</table>
+    <p style="font-size:12px;color:#756a58">Accordo di affiliazione ${provider.trackingCode} — commissione ${provider.referralPercent}%.</p>
+  </div>`;
+}
+
 async function sendEmail(
   env: Env,
   to: string,
@@ -139,13 +173,22 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   const ref = reference();
+  const provider = body.service ? getProvidersForService("it", body.service)[0] : undefined;
+  const refCode = provider ? referralCode(provider) : undefined;
 
   // Registro opzionale: attivo solo se è legato un binding KV chiamato REQUESTS_KV.
   if (env.REQUESTS_KV) {
     try {
       await env.REQUESTS_KV.put(
         `request:${ref}`,
-        JSON.stringify({ ref, receivedAt: new Date().toISOString(), ...body }),
+        JSON.stringify({
+          ref,
+          receivedAt: new Date().toISOString(),
+          ...body,
+          provider: provider?.id ?? null,
+          referral_code: refCode ?? null,
+          status: "inoltrata",
+        }),
       );
     } catch {
       // Il registro è un supporto operativo, non deve bloccare la conferma al cliente.
@@ -153,6 +196,21 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   }
 
   const deskEmail = env.DESK_EMAIL || env.FROM_EMAIL;
+
+  if (provider && refCode && deskEmail) {
+    try {
+      await sendEmail(
+        env,
+        deskEmail,
+        `[SIMULAZIONE → ${provider.name}] Richiesta ${ref} — ${refCode}`,
+        providerEmailHtml(body, ref, refCode, provider),
+      );
+    } catch (err) {
+      // L'email al fornitore è un di più operativo: non deve mai
+      // compromettere la conferma al cliente, ne' essere segnalata come tale.
+      console.error("Invio email simulata al fornitore fallito:", err);
+    }
+  }
 
   try {
     if (deskEmail) {
@@ -169,10 +227,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     // L'invio email non configurato o fallito non deve impedire la conferma:
     // la richiesta è comunque valida e il riferimento va dato al cliente.
     console.error("Invio email fallito:", err);
-    return Response.json({ success: true, ref, warning: "email-not-sent" });
+    return Response.json({ success: true, ref, provider: provider?.name ?? null, warning: "email-not-sent" });
   }
 
-  return Response.json({ success: true, ref });
+  return Response.json({ success: true, ref, provider: provider?.name ?? null });
 };
 
 export const onRequestGet: PagesFunction = async () =>

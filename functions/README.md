@@ -48,6 +48,14 @@ wrangler kv namespace create REQUESTS_KV
 Senza il binding, l'endpoint funziona lo stesso: semplicemente non tiene
 un log lato server oltre alle email inviate.
 
+## Referral (Fase 1 Monetizzazione)
+
+Stessa logica della versione Vercel (vedi `api/README.md`): se il
+servizio ha un fornitore in `src/data/providers.ts`, la voce KV include
+anche `provider`, `referral_code` e `status: "inoltrata"`, e parte una
+terza email — sempre al `DESK_EMAIL`, mai a un dominio esterno reale —
+che simula quella che riceverebbe il fornitore.
+
 ## Deploy
 
 ```bash

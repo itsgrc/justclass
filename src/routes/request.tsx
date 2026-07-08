@@ -138,6 +138,8 @@ const STRINGS = {
     receivedForSelf:
       "Un membro del desk vi scriverà all'indirizzo indicato entro quattro ore, con una proposta riservata e senza impegno.",
     receivedFooter: "Rispetteremo le fasce orarie che ci avete indicato.",
+    forwardedTo: (provider: string, serviceLabel: string) =>
+      `La vostra richiesta è stata inoltrata a ${provider}, nostro partner per ${serviceLabel}. Vi risponderanno direttamente.`,
     thanksFor: "e grazie della fiducia.",
     theDesk: "— Il desk",
     backHome: "Tornate alla home",
@@ -284,6 +286,8 @@ const STRINGS = {
     receivedForSelf:
       "A member of the desk will write to the address you gave within four hours, with a confidential, no-obligation proposal.",
     receivedFooter: "We'll honour the time windows you've indicated.",
+    forwardedTo: (provider: string, serviceLabel: string) =>
+      `Your request has been forwarded to ${provider}, our partner for ${serviceLabel}. They'll respond to you directly.`,
     thanksFor: "and thank you for your trust.",
     theDesk: "— The Desk",
     backHome: "Back to Home",
@@ -468,6 +472,7 @@ function RequestPage() {
   };
 
   const [reference, setReference] = useState<string | null>(null);
+  const [forwardedProvider, setForwardedProvider] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = <K extends keyof FormData>(key: K, value: FormData[K]) => {
@@ -517,11 +522,12 @@ function RequestPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data: { success: boolean; ref?: string; error?: string } = await res.json();
+      const data: { success: boolean; ref?: string; provider?: string | null; error?: string } = await res.json();
       if (!res.ok || !data.success) {
         throw new Error(data.error || "La richiesta non è andata a buon fine.");
       }
       setReference(data.ref ?? null);
+      setForwardedProvider(data.provider ?? null);
       setDone(true);
       clearDraft();
       window.scrollTo({ top: 0 });
@@ -553,6 +559,11 @@ function RequestPage() {
           <p className="mx-auto mt-8 max-w-md leading-relaxed text-taupe">
             {form.forWhom === "other" ? s.receivedForOther : s.receivedForSelf} {s.receivedFooter}
           </p>
+          {forwardedProvider && selectedService && (
+            <p className="mx-auto mt-6 max-w-md text-xs leading-relaxed text-taupe/70">
+              {s.forwardedTo(forwardedProvider, selectedService.label)}
+            </p>
+          )}
           <p className="mx-auto mt-10 max-w-md font-display text-2xl leading-snug font-light italic">
             {s.greeting()}, {s.thanksFor}
             <span className="mt-3 block text-lg text-bronze">{s.theDesk}</span>

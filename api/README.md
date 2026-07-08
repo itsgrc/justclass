@@ -4,6 +4,25 @@ Endpoint serverless (formato Vercel: `export default function handler(req, res)`
 che riceve il form di richiesta, invia due email (desk + cliente) via
 SMTP e registra ogni richiesta in `data/requests.jsonl`.
 
+## Referral (Fase 1 Monetizzazione)
+
+Se il servizio richiesto è coperto da un fornitore in
+`src/data/providers.ts` (oggi: yacht → Floatist, jet → PrivateFly,
+auto → Blacklane, hotel → Expedia Partner Solutions), la richiesta
+viene arricchita con:
+
+- `provider`: id del fornitore (`null` se il servizio non ne ha uno)
+- `referral_code`: `JUSTCLASS-<codice del fornitore>-<timestamp>`
+- `status`: sempre `"inoltrata"` alla creazione — gli stati successivi
+  si cambiano dalla dashboard `/admin`
+
+Viene inviata anche una terza email, **sempre e solo al desk**
+(mai a un dominio esterno reale), che simula quella che in produzione
+andrebbe al fornitore — utile per vedere cosa riceverebbe senza
+rischiare di scrivere a un'azienda vera con un indirizzo indovinato.
+La risposta dell'endpoint include `"provider": "Nome Fornitore"` (o
+`null`), che il form usa per la riga di riepilogo post-invio.
+
 > **Deploy su Cloudflare Pages anziché Vercel?** Usate
 > `functions/api/request.ts` invece di questo file — stessa logica,
 > adattata al runtime Workers (niente nodemailer, invio via API HTTP).
@@ -36,7 +55,7 @@ l'intero flusso del form senza una casella email vera.
 ## Formato risposta
 
 ```json
-{ "success": true, "ref": "JC-2026-4821" }
+{ "success": true, "ref": "JC-2026-4821", "provider": "Floatist" }
 { "success": false, "error": "L'email non è valida." }
 ```
 
