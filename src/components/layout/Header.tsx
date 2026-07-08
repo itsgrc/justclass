@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import MobileMenu from "@/components/layout/MobileMenu";
+import ServicesMenu from "@/components/layout/ServicesMenu";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import LanguageToggle from "@/components/ui/LanguageToggle";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -8,6 +9,8 @@ import { useLanguage } from "@/i18n/LanguageContext";
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
   const NAV = [
@@ -25,6 +28,26 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!servicesOpen) return;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setServicesOpen(false);
+    };
+    const onClickOutside = (e: MouseEvent) => {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClickOutside);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClickOutside);
+    };
+  }, [servicesOpen]);
 
   return (
     <>
@@ -45,6 +68,12 @@ export default function Header() {
           </Link>
 
           <nav className="hidden items-center gap-9 lg:flex" aria-label="Principale">
+            <ServicesMenu
+              ref={servicesRef}
+              open={servicesOpen}
+              onToggle={() => setServicesOpen((v) => !v)}
+              onClose={() => setServicesOpen(false)}
+            />
             {NAV.map((item) => (
               <Link
                 key={item.to}
