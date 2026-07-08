@@ -8,6 +8,8 @@ dist-artifact
 .env.*
 !.env.example
 /data/requests.jsonl
+/data/request-status.json
+/data/admin-config.json
 .dev.vars
 .dev.vars.*
 !.dev.vars.example

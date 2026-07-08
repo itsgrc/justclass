@@ -6,3 +6,6 @@ RESEND_API_KEY=
 FROM_EMAIL=
 FROM_NAME=JUSTCLASS
 DESK_EMAIL=private@justclass.com
+
+# Dashboard /api/admin/requests — vedi .env.example per i dettagli.
+ADMIN_PASSWORD=

@@ -1,12 +1,15 @@
 /*
- * Shim locale per /api in sviluppo: un server Node minimo che monta
- * api/request.ts (via tsx, on-the-fly) su http://localhost:3001,
+ * Shim locale per /api in sviluppo: un server Node minimo che monta gli
+ * handler in api/ (via tsx, on-the-fly) su http://localhost:3001,
  * dietro il proxy configurato in vite.config.ts. Su Vercel questo
  * file non serve — la piattaforma monta /api da sé.
  */
 import { createServer } from "node:http";
 
-const { default: handler } = await import("../api/request.ts");
+const ROUTES = {
+  "/api/request": () => import("../api/request.ts"),
+  "/api/admin/requests": () => import("../api/admin/requests.ts"),
+};
 
 const PORT = 3001;
 
@@ -25,7 +28,9 @@ createServer(async (req, res) => {
     res.end(JSON.stringify(body));
   };
 
-  if (req.url !== "/api/request") {
+  const { pathname } = new URL(req.url, "http://localhost");
+  const loadRoute = ROUTES[pathname];
+  if (!loadRoute) {
     send(404, { success: false, error: "Non trovato." });
     return;
   }
@@ -39,8 +44,9 @@ createServer(async (req, res) => {
     return;
   }
 
+  const { default: handler } = await loadRoute();
   await handler(
-    { method: req.method, body },
+    { method: req.method, body, headers: req.headers },
     { status: (code) => ({ json: (payload) => send(code, payload) }) },
   );
 }).listen(PORT, () => {
