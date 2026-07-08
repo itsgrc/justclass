@@ -5,10 +5,7 @@
  * file non serve — la piattaforma monta /api da sé.
  */
 import { createServer } from "node:http";
-import { register } from "node:module";
-import { pathToFileURL } from "node:url";
 
-register("tsx/esm", pathToFileURL("./"));
 const { default: handler } = await import("../api/request.ts");
 
 const PORT = 3001;
