@@ -36,6 +36,8 @@ npm run preview  # anteprima della build
 | `/journal` | Indice editoriale: in evidenza + archivio |
 | `/journal/:slug` | Articolo: corpo serif a blocchi, citazioni, lastre |
 | `/request` | Preventivo multi-step (3 passi, prefill via `?service=&asset=`) |
+| `/care` | La cura: fragilità, animali, luoghi, equipaggi — gentilezza operativa |
+| `/guides/myba` | Guida gratuita al contratto MYBA, stampabile, senza email |
 | `/contact` | Sedi, desk tematici, orari |
 | `*` | 404 brandizzata |
 

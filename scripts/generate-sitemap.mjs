@@ -21,7 +21,7 @@ const serviceIds = idsOf(read("src/data/services.ts"), "id");
 const fleetIds = idsOf(read("src/data/fleet.ts"), "id");
 const articleSlugs = idsOf(read("src/data/journal.ts"), "slug");
 
-const staticPaths = ["/", "/fleet", "/itineraries", "/calendar", "/about", "/journal", "/request", "/contact"];
+const staticPaths = ["/", "/fleet", "/itineraries", "/calendar", "/care", "/guides/myba", "/about", "/journal", "/request", "/contact"];
 
 const paths = [
   ...staticPaths,

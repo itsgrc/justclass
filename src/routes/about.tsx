@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { affiliations, numbers, team, timeline, values } from "@/data/maison";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
@@ -108,6 +108,41 @@ function AboutPage() {
               <p className="mt-3 text-sm leading-relaxed text-taupe">{a.detail}</p>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* La cura: la gentilezza operativa, in quattro righe e una pagina */}
+      <section className="bg-parchment">
+        <div className="container-luxe grid gap-12 py-20 lg:grid-cols-12 lg:py-24">
+          <Reveal className="lg:col-span-4">
+            <p className="eyebrow text-bronze">La cura</p>
+            <h2 className="mt-7 font-display text-4xl leading-tight font-light">
+              La gentilezza,
+              <br />
+              <em className="font-normal">come procedura.</em>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.12} className="lg:col-span-7 lg:col-start-6">
+            <ul>
+              {[
+                "Chi è fragile viaggia con noi: ascensori a bordo, transfer porta-a-poltrona, ossigeno in quota.",
+                "Il vostro cane ha un ritratto nel dossier, come voi.",
+                "Ancoriamo fuori dalla posidonia e compriamo dai fornitori dei posti; SAF proposto di default.",
+                "Trattiamo bene chi vi serve: la differenza si sente a bordo.",
+              ].map((line) => (
+                <li
+                  key={line}
+                  className="flex items-baseline gap-5 border-b border-ink/10 py-4 font-light"
+                >
+                  <span className="rule w-6 shrink-0 self-center bg-bronze/60" aria-hidden />
+                  {line}
+                </li>
+              ))}
+            </ul>
+            <Link to="/care" className="link-luxe eyebrow mt-8 inline-block text-bronze">
+              La pagina della cura, per esteso
+            </Link>
+          </Reveal>
         </div>
       </section>
 

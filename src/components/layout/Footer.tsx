@@ -158,6 +158,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/care" className="link-luxe text-sm hover:text-cream">
+                  La cura
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/myba" className="link-luxe text-sm hover:text-cream">
+                  La guida MYBA
+                </Link>
+              </li>
+              <li>
                 <Link to="/request" className="link-luxe text-sm hover:text-cream">
                   Richiedete una proposta
                 </Link>

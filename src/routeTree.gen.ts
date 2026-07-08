@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RequestRouteImport } from './routes/request'
 import { Route as ItinerariesRouteImport } from './routes/itineraries'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CareRouteImport } from './routes/care'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -19,6 +20,7 @@ import { Route as JournalIndexRouteImport } from './routes/journal.index'
 import { Route as FleetIndexRouteImport } from './routes/fleet.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
+import { Route as GuidesMybaRouteImport } from './routes/guides.myba'
 import { Route as FleetIdRouteImport } from './routes/fleet.$id'
 
 const RequestRoute = RequestRouteImport.update({
@@ -34,6 +36,11 @@ const ItinerariesRoute = ItinerariesRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareRoute = CareRouteImport.update({
+  id: '/care',
+  path: '/care',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalendarRoute = CalendarRouteImport.update({
@@ -71,6 +78,11 @@ const JournalSlugRoute = JournalSlugRouteImport.update({
   path: '/journal/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesMybaRoute = GuidesMybaRouteImport.update({
+  id: '/guides/myba',
+  path: '/guides/myba',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FleetIdRoute = FleetIdRouteImport.update({
   id: '/fleet/$id',
   path: '/fleet/$id',
@@ -81,10 +93,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/calendar': typeof CalendarRoute
+  '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/itineraries': typeof ItinerariesRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
+  '/guides/myba': typeof GuidesMybaRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/fleet/': typeof FleetIndexRoute
@@ -94,10 +108,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/calendar': typeof CalendarRoute
+  '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/itineraries': typeof ItinerariesRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
+  '/guides/myba': typeof GuidesMybaRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/fleet': typeof FleetIndexRoute
@@ -108,10 +124,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/calendar': typeof CalendarRoute
+  '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/itineraries': typeof ItinerariesRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
+  '/guides/myba': typeof GuidesMybaRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/fleet/': typeof FleetIndexRoute
@@ -123,10 +141,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/calendar'
+    | '/care'
     | '/contact'
     | '/itineraries'
     | '/request'
     | '/fleet/$id'
+    | '/guides/myba'
     | '/journal/$slug'
     | '/services/$slug'
     | '/fleet/'
@@ -136,10 +156,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/calendar'
+    | '/care'
     | '/contact'
     | '/itineraries'
     | '/request'
     | '/fleet/$id'
+    | '/guides/myba'
     | '/journal/$slug'
     | '/services/$slug'
     | '/fleet'
@@ -149,10 +171,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/calendar'
+    | '/care'
     | '/contact'
     | '/itineraries'
     | '/request'
     | '/fleet/$id'
+    | '/guides/myba'
     | '/journal/$slug'
     | '/services/$slug'
     | '/fleet/'
@@ -163,10 +187,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CalendarRoute: typeof CalendarRoute
+  CareRoute: typeof CareRoute
   ContactRoute: typeof ContactRoute
   ItinerariesRoute: typeof ItinerariesRoute
   RequestRoute: typeof RequestRoute
   FleetIdRoute: typeof FleetIdRoute
+  GuidesMybaRoute: typeof GuidesMybaRoute
   JournalSlugRoute: typeof JournalSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   FleetIndexRoute: typeof FleetIndexRoute
@@ -194,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/care': {
+      id: '/care'
+      path: '/care'
+      fullPath: '/care'
+      preLoaderRoute: typeof CareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calendar': {
@@ -245,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/myba': {
+      id: '/guides/myba'
+      path: '/guides/myba'
+      fullPath: '/guides/myba'
+      preLoaderRoute: typeof GuidesMybaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fleet/$id': {
       id: '/fleet/$id'
       path: '/fleet/$id'
@@ -259,10 +299,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CalendarRoute: CalendarRoute,
+  CareRoute: CareRoute,
   ContactRoute: ContactRoute,
   ItinerariesRoute: ItinerariesRoute,
   RequestRoute: RequestRoute,
   FleetIdRoute: FleetIdRoute,
+  GuidesMybaRoute: GuidesMybaRoute,
   JournalSlugRoute: JournalSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   FleetIndexRoute: FleetIndexRoute,
