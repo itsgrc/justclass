@@ -1170,4 +1170,82 @@ export const servicesEn: Service[] = [
     detailTone: "marble",
     detailCaption: "A foundation's storeroom, Basel — a private viewing",
   },
+  {
+    id: "events",
+    index: "16",
+    label: "Events",
+    title: "Not everything, we do ourselves.",
+    description:
+      "For large-scale private events, we don't produce them ourselves: we introduce you to production houses vetted at our own standard, and stay the thread that ties the rest together.",
+    specs: [
+      { term: "Role", detail: "Introduction and coordination, not production" },
+      { term: "Network", detail: "A handful of production houses, vetted in person" },
+      { term: "Coordination", detail: "Villas, dining, charter, security, one thread" },
+    ],
+    tone: "sail",
+    caption: "Evening set-up, a villa garden — before the guests arrive",
+    heroLine: "Private events? We'll introduce you to those who do it at our level.",
+    metaDescription:
+      "For large-scale private events, we don't produce them ourselves: we introduce you to production houses vetted at our own standard, and stay the thread that ties everything together.",
+    narrative: [
+      "Running a two-hundred-guest gala, or a wedding spread across three days, is a discipline of its own — with its own production companies, lighting designers, event architects. Building that in-house, just to say we offer everything, would mean doing it worse than specialists who do nothing else all year. So instead of pretending, we keep a short list of production houses we've actually worked alongside and trust, and make a personal introduction, vouched for the same way as everything else in this catalogue.",
+      "What we keep is the coordinating thread: the venue through Villa & Residences, catering through Private Dining & Wine, guest transport through Cars and Aviation, security through Protection & Security — all channelled through the same point of contact you already have, so producing the event and living through it don't fall into two disconnected worlds. We only introduce houses whose work we've seen firsthand, and your usual contact stays reachable throughout the evening, even though the direction itself sits elsewhere.",
+    ],
+    process: [
+      {
+        title: "Listening",
+        detail: "What kind of event, how many people, what atmosphere — we understand before we point you anywhere.",
+      },
+      {
+        title: "Introduction",
+        detail: "The right production house for the occasion, among the few we know in person.",
+      },
+      {
+        title: "Coordination",
+        detail: "Villa, catering, transport and security stay with us, woven into the production's own plan.",
+      },
+      {
+        title: "Presence",
+        detail: "Your point of contact stays reachable for the whole evening, even though the direction sits elsewhere.",
+      },
+    ],
+    inclusions: [
+      "Introduction to event production houses vetted in person",
+      "Villa or venue coordination through the Villa & Residences service",
+      "Catering and cellar through Private Dining & Wine",
+      "Guest transport coordinated with charter and cars",
+      "Security and access coordinated with Protection & Security",
+      "A JUSTCLASS point of contact reachable for the whole event",
+    ],
+    faq: [
+      {
+        q: "Why don't you produce events yourselves?",
+        a: "Because doing it well is a craft of its own, with specialists who do nothing else all year. Building an in-house department just so we could say we offer everything would mean doing it worse than people who only do that. We'd rather point you somewhere good.",
+      },
+      {
+        q: "How do you choose the production house you introduce us to?",
+        a: "We know only a few, and we've watched them work in person. It isn't a list of commercial partners — it's a short list we'd trust for ourselves.",
+      },
+      {
+        q: "What do you actually do during the event, then?",
+        a: "We stay the thread that ties the rest together: the venue, the catering, guest transport, security. The event itself is theirs to produce; your experience around it stays ours.",
+      },
+      {
+        q: "Can you still help with a small event among friends?",
+        a: "Yes: up to about twenty guests, we handle it directly ourselves, through Private Dining & Wine.",
+      },
+      {
+        q: "Who pays whom, in this arrangement?",
+        a: "You pay the production house for their work, and us for coordination and access to the other services. No hidden commission on the introduction — that isn't our trade.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I could open an events department and tell you we do it all ourselves. I'd rather tell you the truth: for an evening like that, better people than us exist in that specific craft. Our job is knowing them, and staying at your side for everything else.",
+      name: "Nadia Castellani",
+      role: "Director, Events",
+    },
+    detailTone: "night",
+    detailCaption: "Pre-event walk-through, a private theatre — morning",
+  },
 ];

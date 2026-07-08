@@ -1232,6 +1232,84 @@ export const services: Service[] = [
     detailTone: "marble",
     detailCaption: "Deposito di una fondazione, Basilea — sopralluogo riservato",
   },
+  {
+    id: "events",
+    index: "16",
+    label: "Eventi",
+    title: "Non tutto, lo facciamo noi.",
+    description:
+      "Per eventi privati su grande scala non produciamo noi stessi: vi mettiamo in contatto con case di produzione verificate al nostro livello, e restiamo il filo che tiene insieme il resto.",
+    specs: [
+      { term: "Ruolo", detail: "Introduzione e coordinamento, non produzione" },
+      { term: "Rete", detail: "Poche case di produzione, verificate di persona" },
+      { term: "Coordinamento", detail: "Ville, dining, charter, security in un unico filo" },
+    ],
+    tone: "sail",
+    caption: "Allestimento serale, giardino di una villa — prima degli ospiti",
+    heroLine: "Eventi privati? Vi mettiamo in contatto con chi lo fa al nostro livello.",
+    metaDescription:
+      "Per eventi privati su grande scala non produciamo noi stessi: vi mettiamo in contatto con case di produzione verificate al nostro livello, e restiamo il filo che tiene insieme il resto.",
+    narrative: [
+      "Organizzare una gala per duecento ospiti, o un matrimonio su tre giorni, è un mestiere a sé — con le sue case di produzione, i suoi light designer, i suoi architetti d'evento. Costruire tutto questo in casa, solo per poter dire di offrire ogni cosa, significherebbe farlo peggio di chi non fa altro tutto l'anno. Per questo, invece di fingere, teniamo una lista breve di case di produzione con cui abbiamo davvero lavorato fianco a fianco e di cui ci fidiamo, e facciamo una presentazione personale, garantita allo stesso modo di tutto il resto in questo catalogo.",
+      "Ciò che manteniamo è il filo che tiene insieme il resto: la location attraverso il servizio Villa & Residenze, il catering attraverso Private Dining & Wine, i trasporti degli ospiti attraverso Automobili e Aviazione, la sicurezza attraverso Protezione & Security — tutto incanalato nello stesso referente che già avete, così che produrre l'evento e viverlo non finiscano in due mondi scollegati. Presentiamo solo case di cui abbiamo visto il lavoro di persona, e il vostro referente abituale resta raggiungibile per tutta la serata, anche se la regia sta altrove.",
+    ],
+    process: [
+      {
+        title: "Ascolto",
+        detail: "Che tipo di evento, quante persone, quale atmosfera — capiamo prima di indirizzarvi da qualche parte.",
+      },
+      {
+        title: "Introduzione",
+        detail: "La casa di produzione giusta per l'occasione, tra le poche che conosciamo di persona.",
+      },
+      {
+        title: "Coordinamento",
+        detail: "Villa, catering, trasporti e sicurezza restano nostri, incastrati nel piano della produzione.",
+      },
+      {
+        title: "Presenza",
+        detail: "Il vostro referente resta raggiungibile per tutta la serata, anche se la regia sta altrove.",
+      },
+    ],
+    inclusions: [
+      "Introduzione a case di produzione eventi verificate di persona",
+      "Coordinamento di villa o location attraverso il servizio Villa & Residenze",
+      "Catering e cantina attraverso il servizio Private Dining & Wine",
+      "Trasporti ospiti coordinati con charter e automobili",
+      "Sicurezza e accessi coordinati con il servizio Protezione & Security",
+      "Un referente JUSTCLASS raggiungibile per l'intera durata dell'evento",
+    ],
+    faq: [
+      {
+        q: "Perché non organizzate gli eventi voi stessi?",
+        a: "Perché farlo bene è un mestiere a sé, con specialisti che non fanno altro tutto l'anno. Costruire un reparto interno solo per poter dire di offrire tutto significherebbe farlo peggio di chi lo fa solo. Preferiamo indirizzarvi bene.",
+      },
+      {
+        q: "Come scegliete la casa di produzione da presentarvi?",
+        a: "Ne conosciamo poche, e le abbiamo viste lavorare di persona. Non è un elenco di partner commerciali: è una lista breve che useremmo anche per noi stessi.",
+      },
+      {
+        q: "Cosa fate voi, allora, durante l'evento?",
+        a: "Restiamo il filo che tiene insieme il resto: la villa, il catering, i trasporti degli ospiti, la sicurezza. La produzione dell'evento è loro; la vostra esperienza intorno all'evento resta nostra.",
+      },
+      {
+        q: "Potete comunque aiutare con un evento piccolo, tra amici?",
+        a: "Sì: fino a una ventina di ospiti restiamo noi a occuparcene direttamente, attraverso il servizio Private Dining & Wine.",
+      },
+      {
+        q: "Chi paga chi, in questo schema?",
+        a: "Voi pagate la casa di produzione per il suo lavoro, e noi per il coordinamento e l'accesso agli altri servizi. Nessuna commissione nascosta sull'introduzione: non è quello il nostro mestiere.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Potrei aprire un reparto eventi e dirvi che facciamo tutto noi. Preferisco dirvi la verità: per una serata così, esistono persone migliori di noi in quel mestiere specifico. Il nostro lavoro è conoscerle, e restare al vostro fianco per tutto il resto.",
+      name: "Nadia Castellani",
+      role: "Direttrice, Eventi",
+    },
+    detailTone: "night",
+    detailCaption: "Sopralluogo pre-evento, teatro privato — mattina",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
