@@ -858,4 +858,82 @@ export const servicesEn: Service[] = [
     detailTone: "salon",
     detailCaption: "Private cellar, Burgundy — vertical tasting",
   },
+  {
+    id: "legacy",
+    index: "12",
+    label: "Family & Legacy",
+    title: "Three generations, one journey.",
+    description:
+      "Not a kids' club: journeys and experiences built for three generations at once, paced for an eight-year-old and an eighty-year-old alike. The journey your grandchild will tell their own children about.",
+    specs: [
+      { term: "Format", detail: "Three generations, one itinerary" },
+      { term: "Curation", detail: "Genealogist and family photographer" },
+      { term: "Pace", detail: "Built for grandparents, parents and grandchildren together" },
+    ],
+    tone: "riviera",
+    caption: "Seaside terrace, three generations at the table — teatime",
+    heroLine: "The journey your grandchild will tell their own children about.",
+    metaDescription:
+      "Journeys and experiences built for three generations together: not a kids' club, but the family story your grandchildren will tell their own children.",
+    narrative: [
+      "Most 'family-friendly' travel means a kids' club, a buffet, and the grandparents left to their own devices by the pool. What we build is the opposite: a genealogist researches your own family's story first — where an ancestor came from, an old family business, a house that once belonged to you — and weaves it into an itinerary paced for an eight-year-old and an eighty-year-old alike, together, in the same rooms.",
+      "What comes after is the part that lasts. A photographer or documentary maker captures real moments rather than posed ones; an interview puts the oldest generation on camera telling the stories that usually only get told once, at a funeral. A bound book or a family film is delivered on your return — made to be watched again in twenty years, not scrolled past next week.",
+    ],
+    process: [
+      {
+        title: "Research",
+        detail: "A genealogist reconstructs your family's story: origins, places, documents forgotten in some archive.",
+      },
+      {
+        title: "Itinerary",
+        detail: "A route that weaves that story into the journey, paced for an eight-year-old and an eighty-year-old alike.",
+      },
+      {
+        title: "The record",
+        detail: "A photographer or documentary maker capturing real moments, and a filmed interview with the family's oldest generation.",
+      },
+      {
+        title: "Legacy",
+        detail: "A bound book or a family film, delivered on your return, made to be watched again in twenty years.",
+      },
+    ],
+    inclusions: [
+      "Genealogical research and identification of family places",
+      "An itinerary calibrated for three generations, with different paces and needs",
+      "A dedicated photographer or documentary maker for the whole journey",
+      "A filmed interview with the family's oldest members",
+      "A bound photo book or an edited film, delivered after the journey",
+      "Coordination with villas, charter and concierge for everyone's logistics",
+    ],
+    faq: [
+      {
+        q: "Does this include childcare or activities for the kids?",
+        a: "That's not the centre of it: minders and activities for the youngest are arranged if needed, but the point is an experience the whole family shares, not a way of keeping them occupied elsewhere.",
+      },
+      {
+        q: "How do you choose which places to visit?",
+        a: "Starting from your own story, not a guidebook: the town a great-grandfather left, the building that once housed the family business, the archive holding a surname that no longer exists anywhere else.",
+      },
+      {
+        q: "What if we don't have any family documents?",
+        a: "The genealogist works from scratch too, through civil and church archives: often more turns up than the family itself remembered.",
+      },
+      {
+        q: "How long does a journey like this usually take?",
+        a: "Anywhere from five days to two weeks, depending on how many generations and places are involved. The genealogical research, though, starts months before.",
+      },
+      {
+        q: "What do we actually receive at the end?",
+        a: "A bound photo book or a family film, whichever you prefer, along with a folder containing the complete genealogical research.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I don't plan holidays for children. I build the memory a family will tell at the table thirty years from now — and for that you need the real story, not an entertainer.",
+      name: "Beatrix von Hollen",
+      role: "Director, Family & Legacy",
+    },
+    detailTone: "sail",
+    detailCaption: "Town archive, a provincial village — an afternoon of research",
+  },
 ];

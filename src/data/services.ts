@@ -920,6 +920,84 @@ export const services: Service[] = [
     detailTone: "salon",
     detailCaption: "Cantina privata, Borgogna — degustazione verticale",
   },
+  {
+    id: "legacy",
+    index: "12",
+    label: "Family & Legacy",
+    title: "Tre generazioni, un solo viaggio.",
+    description:
+      "Non un kids club: viaggi ed esperienze costruiti per tre generazioni insieme, al ritmo di chi ha otto anni e di chi ne ha ottanta. Il viaggio che vostro nipote racconterà ai suoi figli.",
+    specs: [
+      { term: "Formato", detail: "Tre generazioni, un solo itinerario" },
+      { term: "Curatela", detail: "Genealogista e fotografo di famiglia" },
+      { term: "Ritmo", detail: "Adatto a nonni, genitori e nipoti insieme" },
+    ],
+    tone: "riviera",
+    caption: "Terrazza sul mare, tre generazioni a tavola — ora del tè",
+    heroLine: "Il viaggio che vostro nipote racconterà ai suoi figli.",
+    metaDescription:
+      "Viaggi ed esperienze pensati per tre generazioni insieme: non un kids club, ma il racconto di famiglia che i vostri nipoti racconteranno ai loro figli.",
+    narrative: [
+      "La maggior parte dei viaggi \"per famiglie\" significa un kids club, un buffet, e i nonni lasciati a loro stessi a bordo piscina. Ciò che costruiamo noi è l'opposto: un genealogista ricostruisce prima la storia della vostra famiglia — da dove veniva un antenato, una vecchia azienda di famiglia, una casa che un tempo era vostra — e la intreccia in un itinerario calibrato per chi ha otto anni e per chi ne ha ottanta, insieme, nelle stesse stanze.",
+      "Ciò che arriva dopo è la parte che resta. Un fotografo o un documentarista cattura momenti veri, non posati; un'intervista mette la generazione più anziana davanti alla telecamera a raccontare le storie che di solito si raccontano una sola volta, a un funerale. Un libro rilegato o un film di famiglia viene consegnato al ritorno — pensato per essere riguardato tra vent'anni, non scorso distrattamente la settimana dopo.",
+    ],
+    process: [
+      {
+        title: "Ricerca",
+        detail: "Un genealogista ricostruisce la storia della vostra famiglia: origini, luoghi, documenti dimenticati in un archivio.",
+      },
+      {
+        title: "Itinerario",
+        detail: "Un percorso che intreccia quella storia con il viaggio, al ritmo di chi ha otto anni e di chi ne ha ottanta.",
+      },
+      {
+        title: "Il racconto",
+        detail: "Un fotografo o documentarista che cattura momenti veri, e un'intervista filmata alla generazione più anziana della famiglia.",
+      },
+      {
+        title: "Eredità",
+        detail: "Un libro rilegato o un film di famiglia, consegnato al ritorno, pensato per essere riguardato tra vent'anni.",
+      },
+    ],
+    inclusions: [
+      "Ricerca genealogica e identificazione dei luoghi di famiglia",
+      "Itinerario calibrato su tre generazioni, con ritmi ed esigenze diverse",
+      "Fotografo o documentarista dedicato per l'intero viaggio",
+      "Intervista filmata ai membri più anziani della famiglia",
+      "Libro fotografico rilegato o montaggio video, consegnato dopo il viaggio",
+      "Coordinamento con ville, charter e concierge per la logistica di tutti",
+    ],
+    faq: [
+      {
+        q: "Include un servizio di intrattenimento per i bambini?",
+        a: "Non è il centro del servizio: tate e attività per i più piccoli si organizzano se servono, ma il punto è un'esperienza condivisa da tutta la famiglia, non un modo per tenerli occupati altrove.",
+      },
+      {
+        q: "Come scegliete i luoghi da visitare?",
+        a: "Partendo dalla vostra storia, non da una guida turistica: il paese da cui è partito un bisnonno, l'edificio che un tempo era dell'azienda di famiglia, l'archivio che conserva un cognome che non esiste più altrove.",
+      },
+      {
+        q: "E se non abbiamo documenti di famiglia?",
+        a: "Il genealogista lavora anche da zero, attraverso archivi civili ed ecclesiastici: spesso si trova più di quanto la famiglia stessa ricordasse.",
+      },
+      {
+        q: "Quanto dura tipicamente un viaggio così?",
+        a: "Da cinque giorni a due settimane, secondo quante generazioni e quanti luoghi sono coinvolti. La ricerca genealogica, però, comincia mesi prima.",
+      },
+      {
+        q: "Cosa riceviamo alla fine, in concreto?",
+        a: "Un libro fotografico rilegato o un film di famiglia, secondo la vostra preferenza, oltre a una cartella con la ricerca genealogica completa.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non organizzo vacanze per bambini. Costruisco il ricordo che una famiglia racconterà a tavola tra trent'anni — e per questo serve la storia vera, non un animatore.",
+      name: "Beatrix von Hollen",
+      role: "Direttrice, Family & Legacy",
+    },
+    detailTone: "sail",
+    detailCaption: "Archivio comunale, un paese di provincia — pomeriggio di ricerca",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
