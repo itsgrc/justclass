@@ -67,7 +67,7 @@ export default function Header() {
             JUSTCLASS
           </Link>
 
-          <nav className="hidden items-center gap-9 lg:flex" aria-label="Principale">
+          <nav className="hidden items-center gap-5 lg:flex" aria-label="Principale">
             <ServicesMenu
               ref={servicesRef}
               open={servicesOpen}
@@ -87,7 +87,7 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-6">
             <LanguageToggle />
             <ThemeToggle />
             <Link

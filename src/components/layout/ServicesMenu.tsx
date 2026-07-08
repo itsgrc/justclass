@@ -11,6 +11,9 @@ interface ServicesMenuProps {
   onClose: () => void;
 }
 
+/* Etichetta breve per il trigger di navigazione — "I servizi" resta riservato al titolo del menu mobile */
+const TRIGGER_LABEL = { it: "Servizi", en: "Services" } as const;
+
 /*
  * Mega-menu dell'header: l'intero catalogo dei servizi, due colonne,
  * indice numerato come nelle pagine editoriali. Data-driven: cresce
@@ -20,7 +23,7 @@ const ServicesMenu = forwardRef<HTMLDivElement, ServicesMenuProps>(function Serv
   { open, onToggle, onClose },
   ref,
 ) {
-  const { t, locale } = useLanguage();
+  const { locale } = useLanguage();
   const services = getServicesForLocale(locale);
 
   return (
@@ -32,7 +35,7 @@ const ServicesMenu = forwardRef<HTMLDivElement, ServicesMenuProps>(function Serv
         aria-expanded={open}
         className="link-luxe eyebrow cursor-pointer text-taupe transition-colors duration-500 hover:text-ink"
       >
-        {t.nav.services}
+        {TRIGGER_LABEL[locale]}
       </button>
 
       <AnimatePresence>
@@ -42,7 +45,7 @@ const ServicesMenu = forwardRef<HTMLDivElement, ServicesMenuProps>(function Serv
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: EASE_LUXE }}
-            className="absolute left-1/2 top-full z-50 mt-6 w-[42rem] -translate-x-1/2 border border-ink/10 bg-ivory p-10"
+            className="absolute left-0 top-full z-50 mt-6 w-[42rem] border border-ink/10 bg-ivory p-10"
           >
             <div className="grid grid-cols-2 gap-x-10">
               {services.map((service) => (
