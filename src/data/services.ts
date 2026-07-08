@@ -1154,6 +1154,84 @@ export const services: Service[] = [
     detailTone: "amber",
     detailCaption: "Boutique privata, Milano — appuntamento serale",
   },
+  {
+    id: "art",
+    index: "15",
+    label: "Arte & Cultura",
+    title: "Le porte chiuse, aperte per voi.",
+    description:
+      "Curatela d'arte privata: visite a porte chiuse in fondazioni e studi d'artista, consulenza per acquisizioni e autenticazioni, un curatore dedicato per ogni membro. Non un biglietto d'ingresso.",
+    specs: [
+      { term: "Accesso", detail: "Fondazioni, studi d'artista, collezioni private" },
+      { term: "Consulenza", detail: "Autenticazione, valutazione, acquisizione" },
+      { term: "Curatela", detail: "Una storica dell'arte dedicata" },
+    ],
+    tone: "dusk",
+    caption: "Studio d'artista, Berlino — luce di pomeriggio",
+    heroLine: "Un curatore privato, non un biglietto d'ingresso.",
+    metaDescription:
+      "Curatela d'arte privata: visite a porte chiuse in fondazioni e studi d'artista, consulenza per acquisizioni e autenticazioni, un curatore dedicato per ogni membro.",
+    narrative: [
+      "Una curatrice privata organizza ciò che un biglietto da museo non può comprare: i depositi di una fondazione, dove vive davvero la maggior parte di una collezione; lo studio di un artista in un giorno in cui sta lavorando; la galleria privata di un collezionista che di norma non vede nessuno fuori dalla famiglia. Attraversare quelle porte richiede relazioni costruite in anni, presentazioni fatte di persona e garantite, e membri che capiscano l'etichetta dell'essere ospiti dentro l'opera di una vita.",
+      "La consulenza corre in parallelo: autenticazione, valutazione indipendente, e una strategia d'acquisizione onesta per chi colleziona, o vuole cominciare — onesta anche quando significa dire di non comprare. Quando un'opera deve cambiare mano in modo riservato, coordiniamo con il nostro desk Asta. E l'accesso va oltre le arti visive: un concerto privato in una biblioteca storica, una sera dentro un archivio, l'incontro con un direttore d'orchestra prima di un concerto.",
+    ],
+    process: [
+      {
+        title: "Colloquio",
+        detail: "Cosa collezionate già, cosa cercate di scoprire, quale rapporto avete con l'arte oltre l'investimento.",
+      },
+      {
+        title: "Accesso",
+        detail: "Visite a porte chiuse organizzate: depositi di fondazioni, studi d'artista, collezioni private.",
+      },
+      {
+        title: "Consulenza",
+        detail: "Autenticazione indipendente, valutazione, una strategia d'acquisizione onesta — anche quando dice di no.",
+      },
+      {
+        title: "Seguito",
+        detail: "Coordinamento con il desk Asta per acquisti o vendite riservate, e un avviso quando emerge un'opera pertinente.",
+      },
+    ],
+    inclusions: [
+      "Curatrice d'arte dedicata, storica dell'arte con rete personale",
+      "Visite a porte chiuse in fondazioni, studi d'artista e collezioni private",
+      "Autenticazione e valutazione indipendente delle opere",
+      "Consulenza per acquisizioni, anche quando la risposta onesta è di non comprare",
+      "Coordinamento con il servizio Asta per transazioni riservate",
+      "Accesso a concerti privati, archivi storici e biblioteche non aperte al pubblico",
+    ],
+    faq: [
+      {
+        q: "Serve essere già collezionisti per usare il servizio?",
+        a: "No: molti membri cominciano proprio da qui, con una curatrice che li introduce con calma, senza la pressione di dover comprare qualcosa alla prima visita.",
+      },
+      {
+        q: "Come garantite l'autenticità di un'opera?",
+        a: "Periti indipendenti per ogni ambito — non collegati a chi vende — con una documentazione che segue standard riconosciuti dal mercato internazionale.",
+      },
+      {
+        q: "Potete organizzare l'incontro con un artista specifico?",
+        a: "Spesso sì, se la relazione lo consente e l'artista è disponibile: non promettiamo mai un incontro che non dipende da noi.",
+      },
+      {
+        q: "La curatrice guadagna una commissione se compriamo?",
+        a: "No: il compenso è nella membership, non nella transazione. È il motivo per cui un consiglio di non comprare resta un consiglio genuino.",
+      },
+      {
+        q: "Gestite anche vendite, non solo acquisti?",
+        a: "Sì, spesso in coordinamento con il servizio Asta, quando una vendita richiede la stessa riservatezza di un acquisto.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Il mio lavoro non è farvi comprare. È dirvi la verità su un'opera — anche quando la verità è che dovreste aspettare, o lasciar perdere del tutto.",
+      name: "Professoressa Ilse Kranz",
+      role: "Curatrice, Arte & Cultura",
+    },
+    detailTone: "marble",
+    detailCaption: "Deposito di una fondazione, Basilea — sopralluogo riservato",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);

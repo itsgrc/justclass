@@ -1092,4 +1092,82 @@ export const servicesEn: Service[] = [
     detailTone: "amber",
     detailCaption: "Private boutique, Milan — an evening appointment",
   },
+  {
+    id: "art",
+    index: "15",
+    label: "Art & Culture",
+    title: "The doors that stay closed, opened for you.",
+    description:
+      "Private art curation: closed-door visits to foundations and artist studios, advice on acquisitions and authentication, a dedicated curator for every member. Not an entrance ticket.",
+    specs: [
+      { term: "Access", detail: "Foundations, artist studios, private collections" },
+      { term: "Advisory", detail: "Authentication, valuation, acquisition" },
+      { term: "Curation", detail: "A dedicated art historian" },
+    ],
+    tone: "dusk",
+    caption: "Artist's studio, Berlin — afternoon light",
+    heroLine: "A private curator, not an entrance ticket.",
+    metaDescription:
+      "Private art curation: closed-door visits to foundations and artist studios, advice on acquisitions and authentication, a dedicated curator for every member.",
+    narrative: [
+      "A private curator arranges what a museum ticket can't buy: a foundation's storerooms, where most of a collection actually lives; an artist's studio on a day they happen to be working; a private collector's home gallery that normally no one outside the family sees. Getting through those doors takes relationships built over years, introductions made in person and vouched for, and members who understand the etiquette of being a guest inside someone's life's work.",
+      "The advisory side runs alongside it: authentication, independent valuation, and an honest acquisition strategy for members who collect, or want to start — honest even when it means telling you not to buy. When a piece needs to change hands privately, we coordinate with our Auction desk. And the access extends beyond visual art: a private concert in a historic library, an evening inside an archive, meeting a conductor before a performance.",
+    ],
+    process: [
+      {
+        title: "Interview",
+        detail: "What you already collect, what you're trying to discover, what your relationship with art is beyond investment.",
+      },
+      {
+        title: "Access",
+        detail: "Closed-door visits arranged: foundation storerooms, artist studios, private collections.",
+      },
+      {
+        title: "Advisory",
+        detail: "Independent authentication, valuation, an honest acquisition strategy — even when it says no.",
+      },
+      {
+        title: "Follow-up",
+        detail: "Coordination with the Auction desk for private purchases or sales, and word when a relevant piece surfaces.",
+      },
+    ],
+    inclusions: [
+      "A dedicated art curator, an art historian with a personal network",
+      "Closed-door visits to foundations, artist studios and private collections",
+      "Independent authentication and valuation of works",
+      "Acquisition advice, even when the honest answer is not to buy",
+      "Coordination with the Auction desk for confidential transactions",
+      "Access to private concerts, historic archives and libraries closed to the public",
+    ],
+    faq: [
+      {
+        q: "Do you need to already be a collector to use this?",
+        a: "No: many members start exactly here, with a curator who introduces them gradually, without the pressure of having to buy something on the first visit.",
+      },
+      {
+        q: "How do you guarantee a work's authenticity?",
+        a: "Independent specialists for each field — unconnected to the seller — with documentation that follows standards recognised across the international market.",
+      },
+      {
+        q: "Can you arrange a meeting with a specific artist?",
+        a: "Often, yes, if the relationship allows it and the artist is available: we never promise a meeting that isn't ours to guarantee.",
+      },
+      {
+        q: "Does the curator earn a commission if we buy?",
+        a: "No: the fee sits in the membership, not the transaction. That's exactly why advice not to buy stays genuine advice.",
+      },
+      {
+        q: "Do you handle sales, not just purchases?",
+        a: "Yes, often in coordination with the Auction desk, when a sale needs the same discretion as a purchase.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "My job isn't to make you buy. It's to tell you the truth about a work — even when the truth is that you should wait, or walk away entirely.",
+      name: "Professor Ilse Kranz",
+      role: "Curator, Art & Culture",
+    },
+    detailTone: "marble",
+    detailCaption: "A foundation's storeroom, Basel — a private viewing",
+  },
 ];
