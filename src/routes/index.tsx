@@ -11,7 +11,7 @@ import { pageHead } from "@/lib/seo";
 export const Route = createFileRoute("/")({
   head: () =>
     pageHead(
-      "JUSTCLASS — Charter, aviazione privata & concierge",
+      "Charter, aviazione privata & concierge",
       "Yacht, jet privati, automobili d'eccezione e un concierge che risponde sempre. Un unico interlocutore, discrezione assoluta. Su misura, dal 2012.",
       { path: "/" },
     ),
