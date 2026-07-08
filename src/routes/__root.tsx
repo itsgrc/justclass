@@ -12,6 +12,7 @@ import NotFound from "@/components/layout/NotFound";
 import BackToTop from "@/components/ui/BackToTop";
 import { EASE_LUXE } from "@/lib/motion";
 import { pageHead } from "@/lib/seo";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export const Route = createRootRoute({
   head: () =>
@@ -28,6 +29,7 @@ function RootLayout() {
   const reduced = useReducedMotion();
   const mainRef = useRef<HTMLElement>(null);
   const isFirstRender = useRef(true);
+  const { t } = useLanguage();
 
   // Dopo ogni navigazione il focus riparte dal contenuto, non dal nulla.
   useEffect(() => {
@@ -42,7 +44,7 @@ function RootLayout() {
     <div className="flex min-h-screen flex-col">
       <HeadContent />
       <a href="#contenuto" className="skip-link eyebrow">
-        Saltate al contenuto
+        {t.common.skipToContent}
       </a>
       <Header />
       <main id="contenuto" ref={mainRef} tabIndex={-1} className="flex-1 focus:outline-none">

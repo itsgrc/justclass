@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 type Theme = "giorno" | "sera";
 
@@ -14,6 +15,7 @@ function currentTheme(): Theme {
  */
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>(currentTheme);
+  const { t } = useLanguage();
 
   const toggle = () => {
     const next: Theme = theme === "sera" ? "giorno" : "sera";
@@ -37,7 +39,7 @@ export default function ThemeToggle() {
       className="link-luxe eyebrow cursor-pointer text-taupe transition-colors duration-500 hover:text-ink"
       aria-label={theme === "sera" ? "Passate alla modalità giorno" : "Passate alla modalità sera"}
     >
-      {theme === "sera" ? "Giorno" : "Sera"}
+      {theme === "sera" ? t.common.day : t.common.night}
     </button>
   );
 }

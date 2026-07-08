@@ -2,19 +2,22 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import MobileMenu from "@/components/layout/MobileMenu";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-
-const NAV = [
-  { label: "Flotta", to: "/fleet" },
-  { label: "Itinerari", to: "/itineraries" },
-  { label: "Calendario", to: "/calendar" },
-  { label: "Journal", to: "/journal" },
-  { label: "La maison", to: "/about" },
-  { label: "Contatti", to: "/contact" },
-];
+import LanguageToggle from "@/components/ui/LanguageToggle";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLanguage();
+
+  const NAV = [
+    { label: t.nav.fleet, to: "/fleet" },
+    { label: t.nav.itineraries, to: "/itineraries" },
+    { label: t.nav.calendar, to: "/calendar" },
+    { label: t.nav.journal, to: "/journal" },
+    { label: t.nav.about, to: "/about" },
+    { label: t.nav.contact, to: "/contact" },
+  ] as const;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -56,13 +59,14 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-8">
+            <LanguageToggle />
             <ThemeToggle />
             <Link
               to="/request"
               preload="intent"
               className="link-luxe-lined link-luxe eyebrow hidden text-bronze sm:inline-block"
             >
-              Richiedete una proposta
+              {t.nav.requestCta}
             </Link>
             <button
               type="button"
@@ -71,7 +75,7 @@ export default function Header() {
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
             >
-              Menu
+              {t.nav.menu}
             </button>
           </div>
         </div>

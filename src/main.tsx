@@ -11,6 +11,7 @@ import "@/styles/global.css";
 
 import { routeTree } from "./routeTree.gen";
 import PendingRule from "@/components/ui/PendingRule";
+import { LanguageProvider } from "@/i18n/LanguageContext";
 
 const router = createRouter({
   routeTree,
@@ -27,6 +28,8 @@ declare module "@tanstack/react-router" {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <LanguageProvider>
+      <RouterProvider router={router} />
+    </LanguageProvider>
   </StrictMode>,
 );

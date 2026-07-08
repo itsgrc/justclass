@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import { services } from "@/data/services";
 import { offices } from "@/data/maison";
 import { EASE_LUXE } from "@/lib/motion";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 type NewsletterState = "idle" | "sending" | "done" | "error";
 
 function Newsletter() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [state, setState] = useState<NewsletterState>("idle");
 
@@ -31,10 +33,8 @@ function Newsletter() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: EASE_LUXE }}
       >
-        <p className="font-display text-xl font-light text-cream italic">Benvenuti.</p>
-        <p className="mt-2 text-sm leading-relaxed text-sand/80">
-          La prima lettera arriva con calma — una al mese, nessuna eccezione.
-        </p>
+        <p className="font-display text-xl font-light text-cream italic">{t.footer.newsletterDoneTitle}</p>
+        <p className="mt-2 text-sm leading-relaxed text-sand/80">{t.footer.newsletterDoneDetail}</p>
       </motion.div>
     );
   }
@@ -42,11 +42,9 @@ function Newsletter() {
   return (
     <form onSubmit={submit} noValidate>
       <label htmlFor="newsletter-email" className="eyebrow text-champagne/70">
-        La lettera della maison
+        {t.footer.newsletterTitle}
       </label>
-      <p className="mt-3 text-sm leading-relaxed text-sand/70">
-        Una lettera al mese: rotte, date riservate, nuovi asset. Niente altro.
-      </p>
+      <p className="mt-3 text-sm leading-relaxed text-sand/70">{t.footer.newsletterDetail}</p>
       <div className="mt-5 flex items-end gap-4">
         <div className="flex-1">
           <input
@@ -58,7 +56,7 @@ function Newsletter() {
               setEmail(e.target.value);
               if (state === "error") setState("idle");
             }}
-            placeholder="Il vostro indirizzo"
+            placeholder={t.footer.newsletterPlaceholder}
             aria-invalid={state === "error" || undefined}
             aria-describedby={state === "error" ? "newsletter-error" : undefined}
             className="w-full border-0 border-b border-cream/25 bg-transparent py-2.5 text-sm font-light text-cream placeholder:text-sand/50 focus:border-champagne focus:outline-none"
@@ -69,12 +67,12 @@ function Newsletter() {
           disabled={state === "sending"}
           className="link-luxe eyebrow cursor-pointer pb-2.5 text-champagne disabled:opacity-50"
         >
-          {state === "sending" ? "Un istante" : "Iscrivetevi"}
+          {state === "sending" ? t.footer.newsletterSending : t.footer.newsletterCta}
         </button>
       </div>
       {state === "error" && (
         <p id="newsletter-error" className="mt-3 text-xs text-champagne/90">
-          Controllate l'indirizzo: qualcosa non torna.
+          {t.footer.newsletterError}
         </p>
       )}
     </form>
@@ -82,6 +80,8 @@ function Newsletter() {
 }
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-espresso text-sand">
       <div className="container-luxe pt-24 pb-12">
@@ -89,8 +89,7 @@ export default function Footer() {
           <div className="lg:col-span-4">
             <p className="font-sans text-sm tracking-luxe text-cream">JUSTCLASS</p>
             <p className="mt-6 max-w-xs font-display text-2xl leading-snug text-cream/80 italic">
-              Charter nautico, aviazione privata, automobili e concierge — su
-              misura, dal 2012.
+              {t.footer.tagline}
             </p>
             <div className="mt-10 flex gap-8">
               <a
@@ -113,7 +112,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="eyebrow text-champagne/70">Servizi</p>
+            <p className="eyebrow text-champagne/70">{t.footer.services}</p>
             <ul className="mt-6 space-y-3">
               {services.map((s) => (
                 <li key={s.id}>
@@ -130,51 +129,51 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="eyebrow text-champagne/70">La maison</p>
+            <p className="eyebrow text-champagne/70">{t.footer.maison}</p>
             <ul className="mt-6 space-y-3">
               <li>
                 <Link to="/fleet" className="link-luxe text-sm hover:text-cream">
-                  La flotta
+                  {t.footer.theFleet}
                 </Link>
               </li>
               <li>
                 <Link to="/itineraries" className="link-luxe text-sm hover:text-cream">
-                  Itinerari firmati
+                  {t.footer.itineraries}
                 </Link>
               </li>
               <li>
                 <Link to="/calendar" className="link-luxe text-sm hover:text-cream">
-                  Il calendario
+                  {t.footer.calendar}
                 </Link>
               </li>
               <li>
                 <Link to="/journal" className="link-luxe text-sm hover:text-cream">
-                  Journal
+                  {t.footer.journal}
                 </Link>
               </li>
               <li>
                 <Link to="/about" className="link-luxe text-sm hover:text-cream">
-                  Storia e persone
+                  {t.footer.history}
                 </Link>
               </li>
               <li>
                 <Link to="/care" className="link-luxe text-sm hover:text-cream">
-                  La cura
+                  {t.footer.care}
                 </Link>
               </li>
               <li>
                 <Link to="/guides/myba" className="link-luxe text-sm hover:text-cream">
-                  La guida MYBA
+                  {t.footer.mybaGuide}
                 </Link>
               </li>
               <li>
                 <Link to="/request" className="link-luxe text-sm hover:text-cream">
-                  Richiedete una proposta
+                  {t.footer.requestProposal}
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="link-luxe text-sm hover:text-cream">
-                  Contatti
+                  {t.footer.contact}
                 </Link>
               </li>
             </ul>
@@ -196,16 +195,16 @@ export default function Footer() {
         <div className="rule-dark mt-20" />
 
         <div className="mt-8 flex flex-col gap-4 text-xs text-sand/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; MMXXVI JUSTCLASS — Tutti i diritti riservati</p>
+          <p>&copy; MMXXVI JUSTCLASS — {t.footer.rights}</p>
           <div className="flex gap-8">
             <a href="mailto:private@justclass.com" className="link-luxe hover:text-cream">
               private@justclass.com
             </a>
             <a href="/" className="link-luxe hover:text-cream">
-              Privacy
+              {t.footer.privacy}
             </a>
             <a href="/" className="link-luxe hover:text-cream">
-              Cookie
+              {t.footer.cookies}
             </a>
           </div>
         </div>

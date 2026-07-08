@@ -3,21 +3,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import { services } from "@/data/services";
 import { EASE_LUXE } from "@/lib/motion";
+import { useLanguage } from "@/i18n/LanguageContext";
+import LanguageToggle from "@/components/ui/LanguageToggle";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 interface MobileMenuProps {
   open: boolean;
   onClose: () => void;
 }
-
-const PRIMARY = [
-  { label: "Home", to: "/" },
-  { label: "Flotta", to: "/fleet" },
-  { label: "Itinerari", to: "/itineraries" },
-  { label: "Calendario", to: "/calendar" },
-  { label: "Journal", to: "/journal" },
-  { label: "La maison", to: "/about" },
-  { label: "Contatti", to: "/contact" },
-];
 
 /*
  * Overlay a tutto schermo su fondo espresso: voci principali in serif,
@@ -26,6 +19,17 @@ const PRIMARY = [
  */
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
+  const { t } = useLanguage();
+
+  const PRIMARY = [
+    { label: t.nav.home, to: "/" },
+    { label: t.nav.fleet, to: "/fleet" },
+    { label: t.nav.itineraries, to: "/itineraries" },
+    { label: t.nav.calendar, to: "/calendar" },
+    { label: t.nav.journal, to: "/journal" },
+    { label: t.nav.about, to: "/about" },
+    { label: t.nav.contact, to: "/contact" },
+  ] as const;
 
   useEffect(() => {
     if (!open) return;
@@ -58,14 +62,18 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
         >
           <div className="container-luxe flex h-20 items-center justify-between">
             <span className="font-sans text-sm tracking-luxe text-cream">JUSTCLASS</span>
-            <button
-              ref={closeRef}
-              type="button"
-              onClick={onClose}
-              className="link-luxe eyebrow cursor-pointer text-champagne"
-            >
-              Chiudi
-            </button>
+            <div className="flex items-center gap-8">
+              <LanguageToggle />
+              <ThemeToggle />
+              <button
+                ref={closeRef}
+                type="button"
+                onClick={onClose}
+                className="link-luxe eyebrow cursor-pointer text-champagne"
+              >
+                {t.nav.close}
+              </button>
+            </div>
           </div>
 
           <div className="container-luxe grid gap-16 pt-10 pb-20 sm:grid-cols-2">
@@ -98,7 +106,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
 
             <div className="flex flex-col justify-between gap-16">
               <nav aria-label="Servizi">
-                <p className="eyebrow text-champagne/70">I servizi</p>
+                <p className="eyebrow text-champagne/70">{t.nav.services}</p>
                 <motion.ul
                   className="mt-6"
                   initial="hidden"
@@ -139,9 +147,9 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                   onClick={onClose}
                   className="eyebrow mb-14 inline-block border border-champagne/50 px-10 py-4.5 text-center text-champagne transition-colors duration-500 hover:bg-champagne hover:text-espresso"
                 >
-                  Richiedete una proposta
+                  {t.nav.requestCta}
                 </Link>
-                <p className="eyebrow text-champagne/70">Il desk</p>
+                <p className="eyebrow text-champagne/70">{t.nav.desk}</p>
                 <a
                   href="mailto:private@justclass.com"
                   className="link-luxe mt-4 inline-block text-sand hover:text-cream"
