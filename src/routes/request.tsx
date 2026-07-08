@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { services } from "@/data/services";
-import { getAsset } from "@/data/fleet";
-import { requestFaq } from "@/data/faq";
+import { getServicesForLocale } from "@/data/services";
+import { getAssetForLocale } from "@/data/fleet";
+import { getRequestFaqForLocale } from "@/data/faq";
 import PageHeader from "@/components/ui/PageHeader";
 import HairlineButton from "@/components/ui/HairlineButton";
 import RuleReveal from "@/components/ui/RuleReveal";
@@ -11,6 +11,7 @@ import FaqList from "@/components/ui/FaqList";
 import { SelectField, TextAreaField, TextField } from "@/components/ui/Field";
 import { EASE_LUXE } from "@/lib/motion";
 import { pageHead } from "@/lib/seo";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface RequestSearch {
   service?: string;
@@ -57,8 +58,6 @@ interface FormData {
 
 type Errors = Partial<Record<keyof FormData, string>>;
 
-const STEPS = ["Il servizio", "I dettagli", "I recapiti", "Il riepilogo"] as const;
-
 const EMPTY_FORM: FormData = {
   service: "",
   destination: "",
@@ -80,36 +79,6 @@ const EMPTY_FORM: FormData = {
   consent: false,
 };
 
-const BUDGET_LABELS: Record<string, string> = {
-  "": "Preferite non indicarlo",
-  "25-50": "€25.000 – €50.000",
-  "50-100": "€50.000 – €100.000",
-  "100-250": "€100.000 – €250.000",
-  "250+": "Oltre €250.000",
-};
-
-const CHANNEL_LABELS: Record<string, string> = {
-  email: "Per email",
-  phone: "Per telefono",
-  whatsapp: "Su WhatsApp",
-};
-
-/* La gentilezza di chiedere QUANDO — e quando no. */
-const WINDOW_LABELS: Record<string, string> = {
-  any: "In qualsiasi momento",
-  office: "Solo in orario d'ufficio (9–19)",
-  "not-early": "Mai prima delle 10",
-  "not-late": "Mai dopo le 19",
-};
-
-const TIMEZONE_LABELS: Record<string, string> = {
-  cet: "Europa centrale",
-  uk: "Regno Unito",
-  gulf: "Golfo",
-  us: "Costa Est, Stati Uniti",
-  asia: "Asia — Singapore / Hong Kong",
-};
-
 const DRAFT_KEY = "jc-request-draft";
 
 const stepMotion = {
@@ -118,6 +87,301 @@ const stepMotion = {
   exit: { opacity: 0, y: -12 },
   transition: { duration: 0.6, ease: EASE_LUXE },
 };
+
+const STRINGS = {
+  it: {
+    steps: ["Il servizio", "I dettagli", "I recapiti", "Il riepilogo"],
+    budgetLabels: {
+      "": "Preferite non indicarlo",
+      "25-50": "€25.000 – €50.000",
+      "50-100": "€50.000 – €100.000",
+      "100-250": "€100.000 – €250.000",
+      "250+": "Oltre €250.000",
+    } as Record<string, string>,
+    channelLabels: {
+      email: "Per email",
+      phone: "Per telefono",
+      whatsapp: "Su WhatsApp",
+    } as Record<string, string>,
+    windowLabels: {
+      any: "In qualsiasi momento",
+      office: "Solo in orario d'ufficio (9–19)",
+      "not-early": "Mai prima delle 10",
+      "not-late": "Mai dopo le 19",
+    } as Record<string, string>,
+    timezoneLabels: {
+      cet: "Europa centrale",
+      uk: "Regno Unito",
+      gulf: "Golfo",
+      us: "Costa Est, Stati Uniti",
+      asia: "Asia — Singapore / Hong Kong",
+    } as Record<string, string>,
+    greeting: () => {
+      const h = new Date().getHours();
+      if (h < 6) return "Buona notte";
+      if (h < 13) return "Buona giornata";
+      if (h < 18) return "Buon pomeriggio";
+      return "Buona serata";
+    },
+    errServiceRequired: "Scegliete un servizio per continuare.",
+    errDestination: "Dove vorreste essere? Anche un'idea vaga va bene.",
+    errDateFrom: "Indicate almeno una data di partenza orientativa.",
+    errDateTo: "Il ritorno precede la partenza: controllate le date.",
+    errName: "Come possiamo chiamarvi?",
+    errEmail: "Serve un indirizzo email valido per la proposta.",
+    errConsent: "Serve il vostro consenso per poterli trattare.",
+    referenceLabel: (ref?: string | null) => `Richiesta ${ref ?? "ricevuta"}`,
+    receivedTitle1: "Ricevuta.",
+    receivedTitle2: "Ora tocca a noi.",
+    receivedForOther:
+      "Un membro del desk scriverà a voi — e, se lo vorrete, anche a chi viaggia — entro quattro ore, con una proposta riservata e senza impegno.",
+    receivedForSelf:
+      "Un membro del desk vi scriverà all'indirizzo indicato entro quattro ore, con una proposta riservata e senza impegno.",
+    receivedFooter: "Rispetteremo le fasce orarie che ci avete indicato.",
+    thanksFor: "e grazie della fiducia.",
+    theDesk: "— Il desk",
+    backHome: "Tornate alla home",
+    eyebrow: "La vostra richiesta",
+    titleLine1: "Due minuti a voi.",
+    titleLine2: "Quattro ore a noi.",
+    standfirst:
+      "Quattro passaggi gentili, riepilogo compreso. Nessuna registrazione, nessuna chiamata non richiesta: solo una proposta riservata, entro quattro ore lavorative.",
+    draftRestored: "Abbiamo conservato la vostra bozza — riprendete da dove eravate.",
+    startOver: "Ricominciate da capo",
+    progressAria: "Avanzamento",
+    chooseServiceLegend: "Scegliete il servizio",
+    serviceRadioAria: "Servizio richiesto",
+    chosen: "Scelto",
+    assetLabel: "Asset",
+    assetNoted: (name: string, marque: string) => `${name} — ${marque}, già annotato nella richiesta.`,
+    continue: "Continuate",
+    detailsLegend: "I dettagli del viaggio",
+    destinationLabel: "Destinazione o rotta",
+    destinationPlaceholder: "Es. Costa d'Amalfi, oppure Milano → Londra",
+    departureLabel: "Partenza, anche indicativa",
+    returnLabel: "Ritorno — facoltativo",
+    guestsLabel: "Ospiti",
+    moreThan12: "Più di 12",
+    budgetLabel: "Budget orientativo — facoltativo",
+    budgetHint: "Ci aiuta a calibrare la proposta, non a gonfiarla.",
+    notesLabel: "Preferenze e note",
+    notesPlaceholder: "Abitudini, occasioni, esigenze particolari: più ci dite, meno vi chiederemo.",
+    giftLine:
+      "È un regalo. Lo tratteremo da regalo: comunicazioni solo a voi, e una presentazione degna di chi lo riceve.",
+    goBack: "Tornate indietro",
+    contactsLegend: "I vostri recapiti",
+    forWhomQuestion: "La richiesta è per voi?",
+    forWhomAria: "Per chi scrivete",
+    travelMyself: "Viaggio io",
+    travelOther: "Scrivo per conto di qualcun altro",
+    travelerNameLabel: "Chi viaggia — nome o iniziali",
+    travelerNamePlaceholder: "Basta un riferimento: la discrezione la mettiamo noi",
+    travelerEmailLabel: "Email di chi viaggia — facoltativa",
+    travelerEmailPlaceholder: "Solo se gradita",
+    dualSummaryNote:
+      "Il riepilogo arriverà a entrambi, se ci lasciate il secondo indirizzo; la proposta è comunque scritta per essere inoltrata così com'è.",
+    yourNameLabel: "Il vostro nome",
+    fullNameLabel: "Nome e cognome",
+    emailLabel: "Email",
+    phoneLabel: "Telefono — facoltativo",
+    contactPreferenceLabel: "Come preferite essere ricontattati",
+    contactWhenLabel: "Quando possiamo contattarvi",
+    contactWhenHint: "Rispettiamo il sonno e le cene: ditecelo e ci atteniamo.",
+    timezoneLabel: "Il vostro fuso orario",
+    consentLine:
+      "Acconsento al trattamento dei dati per ricevere la proposta. Nessuna newsletter non richiesta, nessuna cessione a terzi: i dati restano nella maison.",
+    toSummary: "Al riepilogo",
+    summaryIntro:
+      "Ecco cosa ci avete detto. Nessuno preme \"invia\" col dubbio: controllate con calma, e correggete quello che volete.",
+    termService: "Servizio",
+    termAsset: "Asset",
+    termDestination: "Destinazione",
+    termDates: "Date",
+    returnUndefined: " — ritorno da definire",
+    termGuests: "Ospiti",
+    termBudget: "Budget",
+    termGift: "Regalo",
+    giftYes: "Sì — comunicazioni riservate a chi lo offre",
+    termNotes: "Note",
+    termWhoTravels: "Chi viaggia",
+    writesFor: (name: string) => `— scrive ${name}`,
+    anotherGuest: (name: string) => `Un altro ospite — scrive ${name}`,
+    termContacts: "Recapiti",
+    alsoSummaryTo: (email: string) => `riepilogo anche a ${email}`,
+    termContact: "Contatto",
+    editLabel: "Modificate",
+    editAria: (term: string) => `Modificate: ${term}`,
+    whatYoullReceive: "Cosa riceverete",
+    previewGreeting: (name: string) => `"${name}, grazie`,
+    previewDefaultGuest: "Gentile ospite",
+    previewBody: (destination: string) =>
+      `della richiesta. Qui sotto due proposte per ${destination}, con i numeri già chiari e una nostra preferenza, motivata. — Il desk"`,
+    previewDefaultDestination: "la vostra destinazione",
+    previewFooter:
+      "Così comincerà la prima email: firmata da una persona, entro quattro ore lavorative, nel rispetto delle fasce orarie indicate.",
+    sendingLabel: "Invio in corso…",
+    sendRequest: "Inviate la richiesta",
+    reassurance: [
+      ["4 ore", "prima risposta, nei giorni lavorativi"],
+      ["Riservata", "la proposta la leggete solo voi"],
+      ["Senza impegno", "nessun vincolo fino alla firma"],
+    ] as [string, string][],
+    notForYou:
+      "E se non facessimo al caso vostro, ve lo diremo con la stessa franchezza — indirizzandovi, quando possiamo, da chi lo fa.",
+    preferVoiceBefore: "Preferite parlarne a voce? Il desk risponde al",
+    preferVoiceAfter: "— oppure passate da una delle",
+    ourOffices: "nostre sedi",
+    beforeWriting: "Prima di scrivere",
+    submitErrorFallback:
+      "Si è verificato un problema nell'invio. Per favore, scriveteci direttamente a private@justclass.com o chiamateci al +377 99 00 00 00 — la vostra richiesta non è andata persa, ce la ripetete a voce.",
+  },
+  en: {
+    steps: ["The Service", "The Details", "Your Contacts", "The Summary"],
+    budgetLabels: {
+      "": "Prefer Not to Say",
+      "25-50": "€25,000 – €50,000",
+      "50-100": "€50,000 – €100,000",
+      "100-250": "€100,000 – €250,000",
+      "250+": "Over €250,000",
+    } as Record<string, string>,
+    channelLabels: {
+      email: "By Email",
+      phone: "By Phone",
+      whatsapp: "On WhatsApp",
+    } as Record<string, string>,
+    windowLabels: {
+      any: "Any time",
+      office: "Office hours only (9–7pm)",
+      "not-early": "Never before 10am",
+      "not-late": "Never after 7pm",
+    } as Record<string, string>,
+    timezoneLabels: {
+      cet: "Central Europe",
+      uk: "United Kingdom",
+      gulf: "Gulf",
+      us: "US East Coast",
+      asia: "Asia — Singapore / Hong Kong",
+    } as Record<string, string>,
+    greeting: () => {
+      const h = new Date().getHours();
+      if (h < 6) return "Good night";
+      if (h < 13) return "Good day";
+      if (h < 18) return "Good afternoon";
+      return "Good evening";
+    },
+    errServiceRequired: "Choose a service to continue.",
+    errDestination: "Where would you like to be? Even a vague idea is fine.",
+    errDateFrom: "Give us at least a tentative departure date.",
+    errDateTo: "The return precedes the departure: please check the dates.",
+    errName: "What should we call you?",
+    errEmail: "A valid email address is needed for the proposal.",
+    errConsent: "We need your consent to process this.",
+    referenceLabel: (ref?: string | null) => `Request ${ref ?? "received"}`,
+    receivedTitle1: "Received.",
+    receivedTitle2: "Now it's our turn.",
+    receivedForOther:
+      "A member of the desk will write to you — and, if you'd like, to the traveller too — within four hours, with a confidential, no-obligation proposal.",
+    receivedForSelf:
+      "A member of the desk will write to the address you gave within four hours, with a confidential, no-obligation proposal.",
+    receivedFooter: "We'll honour the time windows you've indicated.",
+    thanksFor: "and thank you for your trust.",
+    theDesk: "— The Desk",
+    backHome: "Back to Home",
+    eyebrow: "Your Request",
+    titleLine1: "Two minutes for you.",
+    titleLine2: "Four hours for us.",
+    standfirst:
+      "Four gentle steps, summary included. No registration, no unsolicited calls: just a confidential proposal, within four working hours.",
+    draftRestored: "We kept your draft — pick up where you left off.",
+    startOver: "Start Over",
+    progressAria: "Progress",
+    chooseServiceLegend: "Choose the service",
+    serviceRadioAria: "Requested service",
+    chosen: "Chosen",
+    assetLabel: "Asset",
+    assetNoted: (name: string, marque: string) => `${name} — ${marque}, already noted in the request.`,
+    continue: "Continue",
+    detailsLegend: "Trip details",
+    destinationLabel: "Destination or Route",
+    destinationPlaceholder: "E.g. Amalfi Coast, or Milan → London",
+    departureLabel: "Departure, even tentative",
+    returnLabel: "Return — optional",
+    guestsLabel: "Guests",
+    moreThan12: "More than 12",
+    budgetLabel: "Approximate Budget — optional",
+    budgetHint: "It helps us calibrate the proposal, not inflate it.",
+    notesLabel: "Preferences and Notes",
+    notesPlaceholder: "Habits, occasions, particular needs: the more you tell us, the less we'll need to ask.",
+    giftLine:
+      "It's a gift. We'll treat it as one: communications to you only, and a presentation worthy of the recipient.",
+    goBack: "Go Back",
+    contactsLegend: "Your contacts",
+    forWhomQuestion: "Is this request for you?",
+    forWhomAria: "Who you're writing for",
+    travelMyself: "I'm travelling",
+    travelOther: "I'm writing on someone else's behalf",
+    travelerNameLabel: "Who's Travelling — Name or Initials",
+    travelerNamePlaceholder: "A reference is enough: we handle the discretion",
+    travelerEmailLabel: "Traveller's Email — optional",
+    travelerEmailPlaceholder: "Only if welcome",
+    dualSummaryNote:
+      "The summary will reach both of you, if you leave us the second address; the proposal is written to be forwarded as is regardless.",
+    yourNameLabel: "Your Name",
+    fullNameLabel: "Full Name",
+    emailLabel: "Email",
+    phoneLabel: "Phone — optional",
+    contactPreferenceLabel: "How You'd Prefer to Be Contacted",
+    contactWhenLabel: "When We Can Contact You",
+    contactWhenHint: "We respect sleep and dinners: tell us and we'll stick to it.",
+    timezoneLabel: "Your Time Zone",
+    consentLine:
+      "I consent to the processing of my data to receive the proposal. No unsolicited newsletters, no sharing with third parties: the data stays within the maison.",
+    toSummary: "To the Summary",
+    summaryIntro:
+      "Here's what you've told us. Nobody presses \"send\" with doubts: take your time reviewing, and change whatever you like.",
+    termService: "Service",
+    termAsset: "Asset",
+    termDestination: "Destination",
+    termDates: "Dates",
+    returnUndefined: " — return to be defined",
+    termGuests: "Guests",
+    termBudget: "Budget",
+    termGift: "Gift",
+    giftYes: "Yes — communications reserved for the giver",
+    termNotes: "Notes",
+    termWhoTravels: "Who's Travelling",
+    writesFor: (name: string) => `— written by ${name}`,
+    anotherGuest: (name: string) => `Another guest — written by ${name}`,
+    termContacts: "Contacts",
+    alsoSummaryTo: (email: string) => `summary also to ${email}`,
+    termContact: "Contact",
+    editLabel: "Edit",
+    editAria: (term: string) => `Edit: ${term}`,
+    whatYoullReceive: "What You'll Receive",
+    previewGreeting: (name: string) => `"${name}, thank you`,
+    previewDefaultGuest: "Dear guest",
+    previewBody: (destination: string) =>
+      `for your request. Below, two proposals for ${destination}, with the numbers already clear and a preference from us, explained. — The Desk"`,
+    previewDefaultDestination: "your destination",
+    previewFooter:
+      "That's how the first email will begin: signed by a person, within four working hours, respecting the time windows you indicated.",
+    sendingLabel: "Sending…",
+    sendRequest: "Send the Request",
+    reassurance: [
+      ["4 hours", "first response, on working days"],
+      ["Confidential", "only you read the proposal"],
+      ["No obligation", "no commitment until signature"],
+    ] as [string, string][],
+    notForYou:
+      "And if we're not right for you, we'll say so with the same frankness — pointing you, when we can, to someone who is.",
+    preferVoiceBefore: "Prefer to talk it through? The desk answers at",
+    preferVoiceAfter: "— or drop by one of our",
+    ourOffices: "offices",
+    beforeWriting: "Before You Write",
+    submitErrorFallback:
+      "There was a problem sending this. Please write to us directly at private@justclass.com or call us at +377 99 00 00 00 — your request isn't lost, just tell us in person.",
+  },
+} as const;
 
 function readDraft(): { form: FormData; step: number } | null {
   try {
@@ -134,25 +398,23 @@ function readDraft(): { form: FormData; step: number } | null {
   }
 }
 
-/* Il ringraziamento cambia con l'ora: piccole cose, fatte apposta. */
-function greeting(): string {
-  const h = new Date().getHours();
-  if (h < 6) return "Buona notte";
-  if (h < 13) return "Buona giornata";
-  if (h < 18) return "Buon pomeriggio";
-  return "Buona serata";
-}
-
 function RequestPage() {
+  const { locale } = useLanguage();
+  const s = STRINGS[locale];
+  const services = getServicesForLocale(locale);
+  const requestFaq = getRequestFaqForLocale(locale);
   const { service: serviceParam, asset: assetParam, selection: selectionParam } = Route.useSearch();
-  const prefilledAsset = useMemo(() => (assetParam ? getAsset(assetParam) : undefined), [assetParam]);
+  const prefilledAsset = useMemo(
+    () => (assetParam ? getAssetForLocale(locale, assetParam) : undefined),
+    [assetParam, locale],
+  );
   const selectionAssets = useMemo(
     () =>
       (selectionParam ?? "")
         .split(",")
-        .map((id) => getAsset(id.trim()))
+        .map((id) => getAssetForLocale(locale, id.trim()))
         .filter((a) => a !== undefined),
-    [selectionParam],
+    [selectionParam, locale],
   );
   const draft = useRef(typeof window === "undefined" ? null : readDraft());
 
@@ -164,7 +426,7 @@ function RequestPage() {
   const [form, setForm] = useState<FormData>(() => {
     const base = draft.current?.form ?? { ...EMPTY_FORM };
     // I parametri in URL sono un'intenzione esplicita: vincono sulla bozza.
-    if (services.some((s) => s.id === serviceParam)) base.service = serviceParam as string;
+    if (services.some((sv) => sv.id === serviceParam)) base.service = serviceParam as string;
     if (prefilledAsset) {
       const line = `Asset di interesse: ${prefilledAsset.name} (${prefilledAsset.marque})`;
       if (!base.notes.includes(line)) base.notes = base.notes ? `${base.notes}\n${line}` : line;
@@ -213,20 +475,18 @@ function RequestPage() {
     setErrors((e) => ({ ...e, [key]: undefined }));
   };
 
-  const validateStep = (s: number): boolean => {
+  const validateStep = (st: number): boolean => {
     const next: Errors = {};
-    if (s === 0 && !form.service) next.service = "Scegliete un servizio per continuare.";
-    if (s === 1) {
-      if (!form.destination.trim()) next.destination = "Dove vorreste essere? Anche un'idea vaga va bene.";
-      if (!form.dateFrom) next.dateFrom = "Indicate almeno una data di partenza orientativa.";
-      if (form.dateTo && form.dateFrom && form.dateTo < form.dateFrom)
-        next.dateTo = "Il ritorno precede la partenza: controllate le date.";
+    if (st === 0 && !form.service) next.service = s.errServiceRequired;
+    if (st === 1) {
+      if (!form.destination.trim()) next.destination = s.errDestination;
+      if (!form.dateFrom) next.dateFrom = s.errDateFrom;
+      if (form.dateTo && form.dateFrom && form.dateTo < form.dateFrom) next.dateTo = s.errDateTo;
     }
-    if (s === 2) {
-      if (!form.name.trim()) next.name = "Come possiamo chiamarvi?";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-        next.email = "Serve un indirizzo email valido per la proposta.";
-      if (!form.consent) next.consent = "Serve il vostro consenso per poterli trattare.";
+    if (st === 2) {
+      if (!form.name.trim()) next.name = s.errName;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) next.email = s.errEmail;
+      if (!form.consent) next.consent = s.errConsent;
     }
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -234,17 +494,17 @@ function RequestPage() {
 
   const goNext = () => {
     if (!validateStep(step)) return;
-    setStep((s) => Math.min(s + 1, 3));
+    setStep((st) => Math.min(st + 1, 3));
     window.scrollTo({ top: 0 });
   };
 
   const goBack = () => {
-    setStep((s) => Math.max(s - 1, 0));
+    setStep((st) => Math.max(st - 1, 0));
     window.scrollTo({ top: 0 });
   };
 
-  const goTo = (s: number) => {
-    setStep(s);
+  const goTo = (st: number) => {
+    setStep(st);
     window.scrollTo({ top: 0 });
   };
 
@@ -266,15 +526,13 @@ function RequestPage() {
       clearDraft();
       window.scrollTo({ top: 0 });
     } catch {
-      setSubmitError(
-        "Si è verificato un problema nell'invio. Per favore, scriveteci direttamente a private@justclass.com o chiamateci al +377 99 00 00 00 — la vostra richiesta non è andata persa, ce la ripetete a voce.",
-      );
+      setSubmitError(s.submitErrorFallback);
     } finally {
       setSending(false);
     }
   };
 
-  const selectedService = services.find((s) => s.id === form.service);
+  const selectedService = services.find((sv) => sv.id === form.service);
 
   if (done) {
     return (
@@ -286,24 +544,21 @@ function RequestPage() {
           className="max-w-xl"
         >
           <RuleReveal className="mx-auto w-16" />
-          <p className="eyebrow mt-10 text-bronze">Richiesta {reference ?? "ricevuta"}</p>
+          <p className="eyebrow mt-10 text-bronze">{s.referenceLabel(reference)}</p>
           <h1 className="mt-8 font-display text-5xl leading-tight font-light sm:text-6xl">
-            Ricevuta.
+            {s.receivedTitle1}
             <br />
-            <em className="font-normal">Ora tocca a noi.</em>
+            <em className="font-normal">{s.receivedTitle2}</em>
           </h1>
           <p className="mx-auto mt-8 max-w-md leading-relaxed text-taupe">
-            {form.forWhom === "other"
-              ? "Un membro del desk scriverà a voi — e, se lo vorrete, anche a chi viaggia — entro quattro ore, con una proposta riservata e senza impegno."
-              : "Un membro del desk vi scriverà all'indirizzo indicato entro quattro ore, con una proposta riservata e senza impegno."}{" "}
-            Rispetteremo le fasce orarie che ci avete indicato.
+            {form.forWhom === "other" ? s.receivedForOther : s.receivedForSelf} {s.receivedFooter}
           </p>
           <p className="mx-auto mt-10 max-w-md font-display text-2xl leading-snug font-light italic">
-            {greeting()}, e grazie della fiducia.
-            <span className="mt-3 block text-lg text-bronze">— Il desk</span>
+            {s.greeting()}, {s.thanksFor}
+            <span className="mt-3 block text-lg text-bronze">{s.theDesk}</span>
           </p>
           <div className="mt-14">
-            <HairlineButton to="/">Tornate alla home</HairlineButton>
+            <HairlineButton to="/">{s.backHome}</HairlineButton>
           </div>
         </motion.div>
       </section>
@@ -313,31 +568,29 @@ function RequestPage() {
   return (
     <>
       <PageHeader
-        eyebrow="La vostra richiesta"
-        titleLines={["Due minuti a voi.", <em key="1">Quattro ore a noi.</em>]}
-        standfirst="Quattro passaggi gentili, riepilogo compreso. Nessuna registrazione, nessuna chiamata non richiesta: solo una proposta riservata, entro quattro ore lavorative."
+        eyebrow={s.eyebrow}
+        titleLines={[s.titleLine1, <em key="1">{s.titleLine2}</em>]}
+        standfirst={s.standfirst}
       />
 
       <section className="container-luxe pb-32">
         {restored && (
           <div className="mb-12 flex flex-wrap items-baseline gap-x-6 gap-y-2 border border-ink/15 px-6 py-4">
-            <p className="text-sm text-taupe">
-              Abbiamo conservato la vostra bozza — riprendete da dove eravate.
-            </p>
+            <p className="text-sm text-taupe">{s.draftRestored}</p>
             <button
               type="button"
               onClick={startOver}
               className="link-luxe eyebrow cursor-pointer text-bronze"
             >
-              Ricominciate da capo
+              {s.startOver}
             </button>
           </div>
         )}
 
         {/* Avanzamento */}
-        <nav aria-label="Avanzamento" className="flex flex-wrap items-center gap-x-4 gap-y-3">
-          {STEPS.map((label, i) => (
-            <div key={label} className={`flex items-center gap-4 ${i < STEPS.length - 1 ? "sm:flex-1" : ""}`}>
+        <nav aria-label={s.progressAria} className="flex flex-wrap items-center gap-x-4 gap-y-3">
+          {s.steps.map((label, i) => (
+            <div key={label} className={`flex items-center gap-4 ${i < s.steps.length - 1 ? "sm:flex-1" : ""}`}>
               <span
                 className={`eyebrow whitespace-nowrap transition-colors duration-500 ${
                   i === step ? "text-bronze" : i < step ? "text-ink" : "text-taupe/60"
@@ -346,7 +599,7 @@ function RequestPage() {
               >
                 0{i + 1} — {label}
               </span>
-              {i < STEPS.length - 1 && (
+              {i < s.steps.length - 1 && (
                 <span
                   className={`rule hidden flex-1 transition-colors duration-700 sm:block ${i < step ? "bg-bronze/50" : ""}`}
                   aria-hidden
@@ -360,8 +613,8 @@ function RequestPage() {
           <AnimatePresence mode="wait">
             {step === 0 && (
               <motion.fieldset key="step-0" {...stepMotion}>
-                <legend className="sr-only">Scegliete il servizio</legend>
-                <div role="radiogroup" aria-label="Servizio richiesto">
+                <legend className="sr-only">{s.chooseServiceLegend}</legend>
+                <div role="radiogroup" aria-label={s.serviceRadioAria}>
                   {services.map((service) => {
                     const selected = form.service === service.id;
                     return (
@@ -391,7 +644,7 @@ function RequestPage() {
                         <span
                           className={`eyebrow shrink-0 transition-opacity duration-500 ${selected ? "text-bronze opacity-100" : "opacity-0"}`}
                         >
-                          Scelto
+                          {s.chosen}
                         </span>
                       </label>
                     );
@@ -401,14 +654,14 @@ function RequestPage() {
 
                 {prefilledAsset && (
                   <p className="mt-8 flex items-baseline gap-4 border border-ink/15 px-6 py-4 text-sm text-taupe">
-                    <span className="eyebrow text-bronze">Asset</span>
-                    {prefilledAsset.name} — {prefilledAsset.marque}, già annotato nella richiesta.
+                    <span className="eyebrow text-bronze">{s.assetLabel}</span>
+                    {s.assetNoted(prefilledAsset.name, prefilledAsset.marque)}
                   </p>
                 )}
 
                 <div className="mt-12">
                   <HairlineButton type="button" onClick={goNext}>
-                    Continuate
+                    {s.continue}
                   </HairlineButton>
                 </div>
               </motion.fieldset>
@@ -416,25 +669,25 @@ function RequestPage() {
 
             {step === 1 && (
               <motion.fieldset key="step-1" {...stepMotion}>
-                <legend className="sr-only">I dettagli del viaggio</legend>
+                <legend className="sr-only">{s.detailsLegend}</legend>
                 <div className="grid gap-10">
                   <TextField
-                    label="Destinazione o rotta"
-                    placeholder="Es. Costa d'Amalfi, oppure Milano → Londra"
+                    label={s.destinationLabel}
+                    placeholder={s.destinationPlaceholder}
                     value={form.destination}
                     onChange={(e) => set("destination", e.target.value)}
                     error={errors.destination}
                   />
                   <div className="grid gap-10 sm:grid-cols-2">
                     <TextField
-                      label="Partenza, anche indicativa"
+                      label={s.departureLabel}
                       type="date"
                       value={form.dateFrom}
                       onChange={(e) => set("dateFrom", e.target.value)}
                       error={errors.dateFrom}
                     />
                     <TextField
-                      label="Ritorno — facoltativo"
+                      label={s.returnLabel}
                       type="date"
                       value={form.dateTo}
                       onChange={(e) => set("dateTo", e.target.value)}
@@ -443,7 +696,7 @@ function RequestPage() {
                   </div>
                   <div className="grid gap-10 sm:grid-cols-2">
                     <SelectField
-                      label="Ospiti"
+                      label={s.guestsLabel}
                       value={form.guests}
                       onChange={(e) => set("guests", e.target.value)}
                     >
@@ -452,15 +705,15 @@ function RequestPage() {
                           {n}
                         </option>
                       ))}
-                      <option value="13+">Più di 12</option>
+                      <option value="13+">{s.moreThan12}</option>
                     </SelectField>
                     <SelectField
-                      label="Budget orientativo — facoltativo"
+                      label={s.budgetLabel}
                       value={form.budget}
                       onChange={(e) => set("budget", e.target.value)}
-                      hint="Ci aiuta a calibrare la proposta, non a gonfiarla."
+                      hint={s.budgetHint}
                     >
-                      {Object.entries(BUDGET_LABELS).map(([value, label]) => (
+                      {Object.entries(s.budgetLabels).map(([value, label]) => (
                         <option key={value} value={value}>
                           {label}
                         </option>
@@ -468,8 +721,8 @@ function RequestPage() {
                     </SelectField>
                   </div>
                   <TextAreaField
-                    label="Preferenze e note"
-                    placeholder="Abitudini, occasioni, esigenze particolari: più ci dite, meno vi chiederemo."
+                    label={s.notesLabel}
+                    placeholder={s.notesPlaceholder}
                     value={form.notes}
                     onChange={(e) => set("notes", e.target.value)}
                   />
@@ -482,19 +735,16 @@ function RequestPage() {
                       onChange={(e) => set("gift", e.target.checked)}
                       className="size-4 translate-y-0.5 cursor-pointer accent-(--color-bronze)"
                     />
-                    <span>
-                      È un regalo. Lo tratteremo da regalo: comunicazioni solo a
-                      voi, e una presentazione degna di chi lo riceve.
-                    </span>
+                    <span>{s.giftLine}</span>
                   </label>
                 </div>
 
                 <div className="mt-12 flex flex-wrap items-center gap-8">
                   <HairlineButton type="button" onClick={goNext}>
-                    Continuate
+                    {s.continue}
                   </HairlineButton>
                   <button type="button" onClick={goBack} className="link-luxe eyebrow cursor-pointer text-taupe">
-                    Tornate indietro
+                    {s.goBack}
                   </button>
                 </div>
               </motion.fieldset>
@@ -502,16 +752,16 @@ function RequestPage() {
 
             {step === 2 && (
               <motion.fieldset key="step-2" {...stepMotion}>
-                <legend className="sr-only">I vostri recapiti</legend>
+                <legend className="sr-only">{s.contactsLegend}</legend>
                 <div className="grid gap-10">
                   {/* Spesso a scrivere è un assistente: il form lo rispetta */}
                   <div>
-                    <p className="eyebrow text-taupe">La richiesta è per voi?</p>
-                    <div role="radiogroup" aria-label="Per chi scrivete" className="mt-4 flex flex-wrap gap-x-10 gap-y-3">
+                    <p className="eyebrow text-taupe">{s.forWhomQuestion}</p>
+                    <div role="radiogroup" aria-label={s.forWhomAria} className="mt-4 flex flex-wrap gap-x-10 gap-y-3">
                       {(
                         [
-                          ["me", "Viaggio io"],
-                          ["other", "Scrivo per conto di qualcun altro"],
+                          ["me", s.travelMyself],
+                          ["other", s.travelOther],
                         ] as const
                       ).map(([value, label]) => (
                         <label key={value} className="flex cursor-pointer items-baseline gap-3">
@@ -531,37 +781,33 @@ function RequestPage() {
                     {form.forWhom === "other" && (
                       <div className="mt-8 grid gap-8 sm:grid-cols-2">
                         <TextField
-                          label="Chi viaggia — nome o iniziali"
-                          placeholder="Basta un riferimento: la discrezione la mettiamo noi"
+                          label={s.travelerNameLabel}
+                          placeholder={s.travelerNamePlaceholder}
                           value={form.travelerName}
                           onChange={(e) => set("travelerName", e.target.value)}
                         />
                         <TextField
-                          label="Email di chi viaggia — facoltativa"
+                          label={s.travelerEmailLabel}
                           type="email"
-                          placeholder="Solo se gradita"
+                          placeholder={s.travelerEmailPlaceholder}
                           value={form.travelerEmail}
                           onChange={(e) => set("travelerEmail", e.target.value)}
                         />
-                        <p className="text-xs leading-relaxed text-taupe/80 sm:col-span-2">
-                          Il riepilogo arriverà a entrambi, se ci lasciate il
-                          secondo indirizzo; la proposta è comunque scritta per
-                          essere inoltrata così com'è.
-                        </p>
+                        <p className="text-xs leading-relaxed text-taupe/80 sm:col-span-2">{s.dualSummaryNote}</p>
                       </div>
                     )}
                   </div>
 
                   <div className="grid gap-10 sm:grid-cols-2">
                     <TextField
-                      label={form.forWhom === "other" ? "Il vostro nome" : "Nome e cognome"}
+                      label={form.forWhom === "other" ? s.yourNameLabel : s.fullNameLabel}
                       autoComplete="name"
                       value={form.name}
                       onChange={(e) => set("name", e.target.value)}
                       error={errors.name}
                     />
                     <TextField
-                      label="Email"
+                      label={s.emailLabel}
                       type="email"
                       autoComplete="email"
                       value={form.email}
@@ -571,18 +817,18 @@ function RequestPage() {
                   </div>
                   <div className="grid gap-10 sm:grid-cols-2">
                     <TextField
-                      label="Telefono — facoltativo"
+                      label={s.phoneLabel}
                       type="tel"
                       autoComplete="tel"
                       value={form.phone}
                       onChange={(e) => set("phone", e.target.value)}
                     />
                     <SelectField
-                      label="Come preferite essere ricontattati"
+                      label={s.contactPreferenceLabel}
                       value={form.channel}
                       onChange={(e) => set("channel", e.target.value)}
                     >
-                      {Object.entries(CHANNEL_LABELS).map(([value, label]) => (
+                      {Object.entries(s.channelLabels).map(([value, label]) => (
                         <option key={value} value={value}>
                           {label}
                         </option>
@@ -593,23 +839,23 @@ function RequestPage() {
                   {/* Quando NON disturbarvi: la domanda che nessuno fa */}
                   <div className="grid gap-10 sm:grid-cols-2">
                     <SelectField
-                      label="Quando possiamo contattarvi"
+                      label={s.contactWhenLabel}
                       value={form.contactWindow}
                       onChange={(e) => set("contactWindow", e.target.value)}
-                      hint="Rispettiamo il sonno e le cene: ditecelo e ci atteniamo."
+                      hint={s.contactWhenHint}
                     >
-                      {Object.entries(WINDOW_LABELS).map(([value, label]) => (
+                      {Object.entries(s.windowLabels).map(([value, label]) => (
                         <option key={value} value={value}>
                           {label}
                         </option>
                       ))}
                     </SelectField>
                     <SelectField
-                      label="Il vostro fuso orario"
+                      label={s.timezoneLabel}
                       value={form.timezone}
                       onChange={(e) => set("timezone", e.target.value)}
                     >
-                      {Object.entries(TIMEZONE_LABELS).map(([value, label]) => (
+                      {Object.entries(s.timezoneLabels).map(([value, label]) => (
                         <option key={value} value={value}>
                           {label}
                         </option>
@@ -626,11 +872,7 @@ function RequestPage() {
                         className="size-4 translate-y-0.5 cursor-pointer accent-(--color-bronze)"
                         aria-invalid={Boolean(errors.consent) || undefined}
                       />
-                      <span>
-                        Acconsento al trattamento dei dati per ricevere la
-                        proposta. Nessuna newsletter non richiesta, nessuna
-                        cessione a terzi: i dati restano nella maison.
-                      </span>
+                      <span>{s.consentLine}</span>
                     </label>
                     {errors.consent && <p className="mt-3 text-xs text-error">{errors.consent}</p>}
                   </div>
@@ -638,10 +880,10 @@ function RequestPage() {
 
                 <div className="mt-12 flex flex-wrap items-center gap-8">
                   <HairlineButton type="button" onClick={goNext}>
-                    Al riepilogo
+                    {s.toSummary}
                   </HairlineButton>
                   <button type="button" onClick={goBack} className="link-luxe eyebrow cursor-pointer text-taupe">
-                    Tornate indietro
+                    {s.goBack}
                   </button>
                 </div>
               </motion.fieldset>
@@ -649,45 +891,42 @@ function RequestPage() {
 
             {step === 3 && (
               <motion.div key="step-3" {...stepMotion}>
-                <p className="max-w-xl text-sm leading-relaxed text-taupe">
-                  Ecco cosa ci avete detto. Nessuno preme "invia" col dubbio:
-                  controllate con calma, e correggete quello che volete.
-                </p>
+                <p className="max-w-xl text-sm leading-relaxed text-taupe">{s.summaryIntro}</p>
 
                 <dl className="mt-10">
                   {(
                     [
-                      ["Servizio", selectedService?.label ?? "—", 0],
-                      ...(prefilledAsset ? [["Asset", `${prefilledAsset.name} — ${prefilledAsset.marque}`, 0] as const] : []),
-                      ["Destinazione", form.destination || "—", 1],
+                      [s.termService, selectedService?.label ?? "—", 0],
+                      ...(prefilledAsset ? [[s.termAsset, `${prefilledAsset.name} — ${prefilledAsset.marque}`, 0] as const] : []),
+                      [s.termDestination, form.destination || "—", 1],
                       [
-                        "Date",
+                        s.termDates,
                         form.dateFrom
-                          ? `${form.dateFrom}${form.dateTo ? ` → ${form.dateTo}` : " — ritorno da definire"}`
+                          ? `${form.dateFrom}${form.dateTo ? ` → ${form.dateTo}` : s.returnUndefined}`
                           : "—",
                         1,
                       ],
-                      ["Ospiti", form.guests, 1],
-                      ["Budget", BUDGET_LABELS[form.budget] ?? "—", 1],
-                      ...(form.gift ? [["Regalo", "Sì — comunicazioni riservate a chi lo offre", 1] as const] : []),
-                      ...(form.notes ? [["Note", form.notes, 1] as const] : []),
+                      [s.termGuests, form.guests, 1],
+                      [s.termBudget, s.budgetLabels[form.budget] ?? "—", 1],
+                      ...(form.gift ? [[s.termGift, s.giftYes, 1] as const] : []),
+                      ...(form.notes ? [[s.termNotes, form.notes, 1] as const] : []),
                       [
-                        "Chi viaggia",
+                        s.termWhoTravels,
                         form.forWhom === "other"
                           ? form.travelerName
-                            ? `${form.travelerName} — scrive ${form.name}`
-                            : `Un altro ospite — scrive ${form.name}`
+                            ? `${form.travelerName} ${s.writesFor(form.name)}`
+                            : s.anotherGuest(form.name)
                           : form.name,
                         2,
                       ],
                       [
-                        "Recapiti",
-                        `${form.email}${form.phone ? ` · ${form.phone}` : ""}${form.forWhom === "other" && form.travelerEmail ? ` · riepilogo anche a ${form.travelerEmail}` : ""}`,
+                        s.termContacts,
+                        `${form.email}${form.phone ? ` · ${form.phone}` : ""}${form.forWhom === "other" && form.travelerEmail ? ` · ${s.alsoSummaryTo(form.travelerEmail)}` : ""}`,
                         2,
                       ],
                       [
-                        "Contatto",
-                        `${CHANNEL_LABELS[form.channel]} · ${WINDOW_LABELS[form.contactWindow]?.toLowerCase()} · ${TIMEZONE_LABELS[form.timezone]}`,
+                        s.termContact,
+                        `${s.channelLabels[form.channel]} · ${s.windowLabels[form.contactWindow]?.toLowerCase()} · ${s.timezoneLabels[form.timezone]}`,
                         2,
                       ],
                     ] as const
@@ -703,9 +942,9 @@ function RequestPage() {
                           type="button"
                           onClick={() => goTo(editStep)}
                           className="link-luxe eyebrow cursor-pointer text-bronze"
-                          aria-label={`Modificate: ${term}`}
+                          aria-label={s.editAria(term)}
                         >
-                          Modificate
+                          {s.editLabel}
                         </button>
                       </dd>
                     </div>
@@ -714,27 +953,22 @@ function RequestPage() {
 
                 {/* Cosa riceverete: l'anteprima della risposta del desk */}
                 <div className="mt-10 border border-ink/15 px-7 py-6">
-                  <p className="eyebrow text-bronze">Cosa riceverete</p>
+                  <p className="eyebrow text-bronze">{s.whatYoullReceive}</p>
                   <p className="mt-4 font-display text-lg leading-snug font-light italic">
-                    "{form.name ? form.name.split(" ")[0] : "Gentile ospite"}, grazie
-                    della richiesta. Qui sotto due proposte per{" "}
-                    {form.destination || "la vostra destinazione"}, con i numeri già
-                    chiari e una nostra preferenza, motivata. — Il desk"
+                    {s.previewGreeting(form.name ? form.name.split(" ")[0] : s.previewDefaultGuest)}{" "}
+                    {s.previewBody(form.destination || s.previewDefaultDestination)}
                   </p>
-                  <p className="mt-4 text-xs leading-relaxed text-taupe/80">
-                    Così comincerà la prima email: firmata da una persona, entro
-                    quattro ore lavorative, nel rispetto delle fasce orarie indicate.
-                  </p>
+                  <p className="mt-4 text-xs leading-relaxed text-taupe/80">{s.previewFooter}</p>
                 </div>
 
                 <div className="mt-12 flex flex-wrap items-center gap-8">
                   <HairlineButton type="button" onClick={submit} disabled={sending}>
-                    {sending ? "Invio in corso…" : "Inviate la richiesta"}
+                    {sending ? s.sendingLabel : s.sendRequest}
                   </HairlineButton>
                   {sending && <span className="rule-pending w-16" aria-hidden />}
                   {!sending && (
                     <button type="button" onClick={goBack} className="link-luxe eyebrow cursor-pointer text-taupe">
-                      Tornate indietro
+                      {s.goBack}
                     </button>
                   )}
                 </div>
@@ -751,11 +985,7 @@ function RequestPage() {
 
         {/* Rassicurazione */}
         <div className="mt-24 grid max-w-2xl gap-8 border-t border-ink/10 pt-10 sm:grid-cols-3">
-          {[
-            ["4 ore", "prima risposta, nei giorni lavorativi"],
-            ["Riservata", "la proposta la leggete solo voi"],
-            ["Senza impegno", "nessun vincolo fino alla firma"],
-          ].map(([value, label]) => (
+          {s.reassurance.map(([value, label]) => (
             <div key={value}>
               <p className="font-display text-xl italic">{value}</p>
               <p className="mt-1 text-xs leading-relaxed text-taupe">{label}</p>
@@ -763,22 +993,19 @@ function RequestPage() {
           ))}
         </div>
 
-        <p className="mt-8 max-w-2xl text-sm leading-relaxed text-taupe">
-          E se non facessimo al caso vostro, ve lo diremo con la stessa
-          franchezza — indirizzandovi, quando possiamo, da chi lo fa.
-        </p>
+        <p className="mt-8 max-w-2xl text-sm leading-relaxed text-taupe">{s.notForYou}</p>
 
         <p className="mt-8 max-w-2xl text-xs leading-relaxed text-taupe/80">
-          Preferite parlarne a voce? Il desk risponde al{" "}
+          {s.preferVoiceBefore}{" "}
           <a href="tel:+37799000000" className="link-luxe-lined link-luxe text-bronze">
             +377 99 00 00 00
           </a>{" "}
-          — oppure passate da una delle <Link to="/contact" className="link-luxe-lined link-luxe text-bronze">nostre sedi</Link>.
+          {s.preferVoiceAfter} <Link to="/contact" className="link-luxe-lined link-luxe text-bronze">{s.ourOffices}</Link>.
         </p>
 
         {/* Le domande che precedono ogni richiesta: soldi, dati, impegno */}
         <div className="mt-24 max-w-2xl">
-          <p className="eyebrow text-bronze">Prima di scrivere</p>
+          <p className="eyebrow text-bronze">{s.beforeWriting}</p>
           <div className="mt-8">
             <FaqList items={requestFaq} />
           </div>
