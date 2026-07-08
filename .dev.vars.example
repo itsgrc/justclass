@@ -1,0 +1,8 @@
+# Variabili d'ambiente per `wrangler pages dev` in locale.
+# Copiate in .dev.vars (mai versionato) e compilate.
+# In produzione si impostano invece da Cloudflare Pages → Settings → Environment variables.
+
+RESEND_API_KEY=
+FROM_EMAIL=
+FROM_NAME=JUSTCLASS
+DESK_EMAIL=private@justclass.com

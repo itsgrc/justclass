@@ -4,6 +4,12 @@ Endpoint serverless (formato Vercel: `export default function handler(req, res)`
 che riceve il form di richiesta, invia due email (desk + cliente) via
 SMTP e registra ogni richiesta in `data/requests.jsonl`.
 
+> **Deploy su Cloudflare Pages anziché Vercel?** Usate
+> `functions/api/request.ts` invece di questo file — stessa logica,
+> adattata al runtime Workers (niente nodemailer, invio via API HTTP).
+> Vedi `functions/README.md`. I due adattatori convivono senza conflitti:
+> ogni piattaforma monta solo la propria cartella.
+
 ## Produzione (Vercel)
 
 Nessuna configurazione aggiuntiva: Vercel monta automaticamente ogni

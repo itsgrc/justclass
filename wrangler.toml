@@ -1,0 +1,9 @@
+name = "justclass"
+compatibility_date = "2026-07-08"
+pages_build_output_dir = "dist"
+
+# Legate qui un binding KV se volete un registro persistente delle
+# richieste (vedi functions/README.md e functions/api/request.ts).
+# [[kv_namespaces]]
+# binding = "REQUESTS_KV"
+# id = "<incollate qui l'id creato con: wrangler kv namespace create REQUESTS_KV>"
