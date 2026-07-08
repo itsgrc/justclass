@@ -10,9 +10,14 @@
  * Fase 1 Monetizzazione: stessa logica di referral di api/request.ts —
  * provider assegnato dal servizio, codice di tracciamento, email al
  * fornitore simulata (va sempre al desk, mai a un dominio esterno).
+ * Disponibilità sempre simulata (src/api/providers/mock.ts): la
+ * variante con adapter reale/USE_MOCK vive solo nella versione Node
+ * (api/request.ts), dove le credenziali dei fornitori sono più
+ * naturali da gestire lato server tradizionale.
  */
 import { getProvidersForService } from "../../src/data/providers";
 import type { Provider } from "../../src/data/providers";
+import { getMockAvailability } from "../../src/api/providers/mock";
 
 interface Env {
   RESEND_API_KEY?: string;
@@ -106,7 +111,13 @@ function clientEmailHtml(body: RequestPayload, ref: string): string {
 }
 
 /* Email al fornitore — SIMULATA: va sempre al desk, mai al dominio esterno reale */
-function providerEmailHtml(body: RequestPayload, ref: string, code: string, provider: Provider): string {
+function providerEmailHtml(
+  body: RequestPayload,
+  ref: string,
+  code: string,
+  provider: Provider,
+  availability: { available: boolean; note: string },
+): string {
   const rows: [string, string | undefined][] = [
     ["Codice di tracciamento", code],
     ["Riferimento JUSTCLASS", ref],
@@ -125,6 +136,9 @@ function providerEmailHtml(body: RequestPayload, ref: string, code: string, prov
     <table cellpadding="6">${rows
       .map(([k, v]) => `<tr><td style="color:#756a58">${k}</td><td><b>${v ?? "—"}</b></td></tr>`)
       .join("")}</table>
+    <p style="color:#756a58;font-size:13px">
+      Disponibilità (${availability.available ? "verde" : "da verificare"}): ${availability.note}
+    </p>
     <p style="font-size:12px;color:#756a58">Accordo di affiliazione ${provider.trackingCode} — commissione ${provider.referralPercent}%.</p>
   </div>`;
 }
@@ -175,6 +189,9 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const ref = reference();
   const provider = body.service ? getProvidersForService("it", body.service)[0] : undefined;
   const refCode = provider ? referralCode(provider) : undefined;
+  const availability = provider
+    ? getMockAvailability(body.service!, { dateFrom: body.dateFrom, dateTo: body.dateTo })
+    : undefined;
 
   // Registro opzionale: attivo solo se è legato un binding KV chiamato REQUESTS_KV.
   if (env.REQUESTS_KV) {
@@ -188,6 +205,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
           provider: provider?.id ?? null,
           referral_code: refCode ?? null,
           status: "inoltrata",
+          availability: availability ?? null,
         }),
       );
     } catch {
@@ -197,13 +215,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const deskEmail = env.DESK_EMAIL || env.FROM_EMAIL;
 
-  if (provider && refCode && deskEmail) {
+  if (provider && refCode && availability && deskEmail) {
     try {
       await sendEmail(
         env,
         deskEmail,
         `[SIMULAZIONE → ${provider.name}] Richiesta ${ref} — ${refCode}`,
-        providerEmailHtml(body, ref, refCode, provider),
+        providerEmailHtml(body, ref, refCode, provider, availability),
       );
     } catch (err) {
       // L'email al fornitore è un di più operativo: non deve mai

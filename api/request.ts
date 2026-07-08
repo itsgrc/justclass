@@ -19,6 +19,9 @@ import nodemailer from "nodemailer";
 import "dotenv/config";
 import { getProvidersForService } from "../src/data/providers";
 import type { Provider } from "../src/data/providers";
+import { getMockAvailability } from "../src/api/providers/mock";
+import type { AvailabilityCheck } from "../src/api/providers/mock";
+import { getPrivateFlyAvailability } from "../src/api/providers/privatefly";
 
 interface VercelRequest {
   method?: string;
@@ -58,6 +61,27 @@ function reference(): string {
 
 function referralCode(provider: Provider): string {
   return `JUSTCLASS-${provider.trackingCode}-${Date.now()}`;
+}
+
+/*
+ * USE_MOCK=true (default) usa la disponibilità simulata; false prova
+ * l'adapter reale (oggi solo per PrivateFly) e ricade sul mock se non
+ * ci sono credenziali o la chiamata fallisce — non deve mai bloccare
+ * l'invio della richiesta.
+ */
+async function checkProviderAvailability(
+  serviceId: string,
+  params: { dateFrom?: string; dateTo?: string },
+): Promise<AvailabilityCheck> {
+  const useMock = (process.env.USE_MOCK ?? "true").toLowerCase() !== "false";
+  if (!useMock && serviceId === "jet" && process.env.PRIVATEFLY_API_KEY) {
+    try {
+      return await getPrivateFlyAvailability({ apiKey: process.env.PRIVATEFLY_API_KEY }, params);
+    } catch (err) {
+      console.error("PrivateFly non raggiungibile, ripiego sul mock:", err);
+    }
+  }
+  return getMockAvailability(serviceId, params);
 }
 
 function validate(body: RequestPayload): string | null {
@@ -125,7 +149,13 @@ function clientEmailHtml(body: RequestPayload, ref: string): string {
 }
 
 /* Email al fornitore — SIMULATA: va sempre al desk, mai al dominio esterno reale */
-function providerEmailHtml(body: RequestPayload, ref: string, code: string, provider: Provider): string {
+function providerEmailHtml(
+  body: RequestPayload,
+  ref: string,
+  code: string,
+  provider: Provider,
+  availability: AvailabilityCheck,
+): string {
   const rows = [
     ["Codice di tracciamento", code],
     ["Riferimento JUSTCLASS", ref],
@@ -144,6 +174,9 @@ function providerEmailHtml(body: RequestPayload, ref: string, code: string, prov
     <table cellpadding="6">${rows
       .map(([k, v]) => `<tr><td style="color:#756a58">${k}</td><td><b>${v ?? "—"}</b></td></tr>`)
       .join("")}</table>
+    <p style="color:#756a58;font-size:13px">
+      Disponibilità (${availability.available ? "verde" : "da verificare"}): ${availability.note}
+    </p>
     <p style="font-size:12px;color:#756a58">Accordo di affiliazione ${provider.trackingCode} — commissione ${provider.referralPercent}%.</p>
   </div>`;
 }
@@ -170,6 +203,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const ref = reference();
   const provider = body.service ? getProvidersForService("it", body.service)[0] : undefined;
   const refCode = provider ? referralCode(provider) : undefined;
+  const availability = provider
+    ? await checkProviderAvailability(body.service!, { dateFrom: body.dateFrom, dateTo: body.dateTo })
+    : undefined;
 
   try {
     await logToFile({
@@ -179,6 +215,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       provider: provider?.id ?? null,
       referral_code: refCode ?? null,
       status: "inoltrata",
+      availability: availability ?? null,
     });
   } catch {
     // Il registro è un supporto operativo, non deve bloccare la conferma al cliente.
@@ -190,13 +227,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const fromEmail = process.env.FROM_EMAIL || process.env.SMTP_USER!;
     const deskEmail = process.env.DESK_EMAIL || fromEmail;
 
-    if (provider && refCode) {
+    if (provider && refCode && availability) {
       try {
         await transport.sendMail({
           from: `"${fromName}" <${fromEmail}>`,
           to: deskEmail,
           subject: `[SIMULAZIONE → ${provider.name}] Richiesta ${ref} — ${refCode}`,
-          html: providerEmailHtml(body, ref, refCode, provider),
+          html: providerEmailHtml(body, ref, refCode, provider, availability),
         });
       } catch (err) {
         // L'email al fornitore è un di più operativo: non deve mai
