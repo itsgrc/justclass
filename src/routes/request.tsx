@@ -205,10 +205,8 @@ function RequestPage() {
     setRestored(false);
   };
 
-  const reference = useMemo(
-    () => `JC-${new Date().getFullYear()}-${String(Math.floor(1000 + Math.random() * 9000))}`,
-    [],
-  );
+  const [reference, setReference] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = <K extends keyof FormData>(key: K, value: FormData[K]) => {
     setForm((f) => ({ ...f, [key]: value }));
@@ -252,12 +250,28 @@ function RequestPage() {
 
   const submit = async () => {
     setSending(true);
-    // Endpoint reale da collegare: il desk riceve, il cliente vede la conferma.
-    await new Promise((r) => setTimeout(r, 1200));
-    setSending(false);
-    setDone(true);
-    clearDraft();
-    window.scrollTo({ top: 0 });
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data: { success: boolean; ref?: string; error?: string } = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "La richiesta non è andata a buon fine.");
+      }
+      setReference(data.ref ?? null);
+      setDone(true);
+      clearDraft();
+      window.scrollTo({ top: 0 });
+    } catch {
+      setSubmitError(
+        "Si è verificato un problema nell'invio. Per favore, scriveteci direttamente a private@justclass.com o chiamateci al +377 99 00 00 00 — la vostra richiesta non è andata persa, ce la ripetete a voce.",
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   const selectedService = services.find((s) => s.id === form.service);
@@ -272,7 +286,7 @@ function RequestPage() {
           className="max-w-xl"
         >
           <RuleReveal className="mx-auto w-16" />
-          <p className="eyebrow mt-10 text-bronze">Richiesta {reference}</p>
+          <p className="eyebrow mt-10 text-bronze">Richiesta {reference ?? "ricevuta"}</p>
           <h1 className="mt-8 font-display text-5xl leading-tight font-light sm:text-6xl">
             Ricevuta.
             <br />
@@ -715,7 +729,7 @@ function RequestPage() {
 
                 <div className="mt-12 flex flex-wrap items-center gap-8">
                   <HairlineButton type="button" onClick={submit} disabled={sending}>
-                    {sending ? "Un istante…" : "Inviate la richiesta"}
+                    {sending ? "Invio in corso…" : "Inviate la richiesta"}
                   </HairlineButton>
                   {sending && <span className="rule-pending w-16" aria-hidden />}
                   {!sending && (
@@ -724,6 +738,12 @@ function RequestPage() {
                     </button>
                   )}
                 </div>
+
+                {submitError && (
+                  <p className="mt-6 max-w-xl text-sm leading-relaxed text-error" role="alert">
+                    {submitError}
+                  </p>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
