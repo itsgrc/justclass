@@ -936,4 +936,82 @@ export const servicesEn: Service[] = [
     detailTone: "sail",
     detailCaption: "Town archive, a provincial village — an afternoon of research",
   },
+  {
+    id: "security",
+    index: "13",
+    label: "Protection & Security",
+    title: "Security, made invisible.",
+    description:
+      "Executive protection, handled quietly: vetted former special-forces officers, risk assessments before every trip, residential security. You don't think about it. We do.",
+    specs: [
+      { term: "Team", detail: "Former special forces, vetted and discreet" },
+      { term: "Coverage", detail: "Person, residence, travel" },
+      { term: "Activation", detail: "Within 24 hours, anywhere in Europe" },
+    ],
+    tone: "night",
+    caption: "Advance reconnaissance, city centre — dawn",
+    heroLine: "You don't think about it. We do.",
+    metaDescription:
+      "Confidential executive protection: vetted former special-forces officers, advance risk assessments, residential and travel security. You don't think about it. We do.",
+    narrative: [
+      "Most people picture protection as a man in a dark suit standing by the door. The real work looks nothing like that: a risk assessment carried out before anyone travels — venue reconnaissance, route planning, liaison with local authorities where the relationship allows it — and close protection officers chosen for their ability to disappear into a room, not dominate it. Every one of them comes from a vetted background in special forces or law enforcement, trained specifically for low-profile executive protection, not for looking the part.",
+      "The residential side works the same way: security audits of alarm systems, access points and household staff, protection extended to family members and, where needed, to children at school, calibrated so it never feels like surveillance. All of it runs invisibly alongside our other desks — drivers, crew, pilots — so that a member never has to think about any of it. That, in the end, is the entire point.",
+    ],
+    process: [
+      {
+        title: "Risk assessment",
+        detail: "An advance analysis of the person, the places and the travel involved, before any operational decision is made.",
+      },
+      {
+        title: "Team",
+        detail: "Officers selected from our network, former special forces or law enforcement, chosen for discretion as much as skill.",
+      },
+      {
+        title: "Reconnaissance",
+        detail: "Advance visits to routes, venues and residences, with a written plan ready before you arrive.",
+      },
+      {
+        title: "Presence",
+        detail: "Continuous protection during travel or a stay, coordinated with drivers, pilots and household staff.",
+      },
+    ],
+    inclusions: [
+      "A risk assessment before every trip or event",
+      "Close protection officers, former special forces, vetted and discreet",
+      "Reconnaissance of routes, venues and residences",
+      "Residential security audits, including systems and household staff",
+      "Coordination with drivers, crew and pilots for continuous coverage",
+      "Activation within 24 hours, anywhere in Europe",
+    ],
+    faq: [
+      {
+        q: "Are the officers visible, or do they blend in?",
+        a: "They blend in. The training we look for is the kind that lets someone stay in a room unnoticed — not the man in the dark jacket by the door.",
+      },
+      {
+        q: "Do you protect family members too, not just the member?",
+        a: "Yes, including the specific needs of children and teenagers, with a level of discretion designed so they never feel watched.",
+      },
+      {
+        q: "How much notice do you need to activate protection?",
+        a: "Twenty-four hours across most of Europe, if the situation calls for it. For planned events, we prefer weeks, so the reconnaissance is done properly.",
+      },
+      {
+        q: "Do you also audit residences and offices?",
+        a: "Yes: alarm systems, access points, verification of household staff. A typical audit takes a day, the report a few days more.",
+      },
+      {
+        q: "What happens in a genuinely critical situation?",
+        a: "Evacuation protocols already written down, direct contact with local authorities where the relationship allows it, and immediate coordination with charter and aviation for a fast return.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "The best compliment we get is not being noticed. If a guest becomes aware of the security around them, it usually means something didn't go quite as it should have.",
+      name: "Colonel (Ret'd) Richard Vane",
+      role: "Director, Protection & Security",
+    },
+    detailTone: "tarmac",
+    detailCaption: "Operational briefing, ahead of a transfer — 5:30am",
+  },
 ];

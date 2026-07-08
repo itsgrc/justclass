@@ -998,6 +998,84 @@ export const services: Service[] = [
     detailTone: "sail",
     detailCaption: "Archivio comunale, un paese di provincia — pomeriggio di ricerca",
   },
+  {
+    id: "security",
+    index: "13",
+    label: "Protezione & Security",
+    title: "La sicurezza, invisibile.",
+    description:
+      "Protezione esecutiva gestita in silenzio: agenti ex forze speciali verificati e discreti, valutazione del rischio prima di ogni spostamento, sicurezza residenziale. Non ci pensate voi. Ci pensiamo noi.",
+    specs: [
+      { term: "Team", detail: "Ex forze speciali, verificati e discreti" },
+      { term: "Copertura", detail: "Persona, residenza, spostamenti" },
+      { term: "Attivazione", detail: "Entro 24 ore, ovunque in Europa" },
+    ],
+    tone: "night",
+    caption: "Ricognizione preventiva, centro città — alba",
+    heroLine: "Non ci pensate voi. Ci pensiamo noi.",
+    metaDescription:
+      "Protezione esecutiva riservata: personale ex forze speciali, verificato e discreto, ricognizioni preventive, sicurezza residenziale e degli spostamenti. Non ci pensate voi.",
+    narrative: [
+      "Molti immaginano la protezione come un uomo in giacca scura accanto alla porta. Il lavoro vero non somiglia affatto a quello: una valutazione del rischio condotta prima che chiunque si sposti — ricognizione delle location, pianificazione dei percorsi, contatti con le autorità locali dove la relazione lo consente — e agenti di protezione scelti per la capacità di scomparire in una stanza, non di dominarla. Ognuno di loro proviene da un passato verificato nelle forze speciali o nelle forze dell'ordine, formato specificamente per la protezione esecutiva a basso profilo, non per l'aspetto della parte.",
+      "Il lato residenziale funziona allo stesso modo: audit di sicurezza su impianti d'allarme, punti di accesso e personale di casa, protezione estesa ai familiari e, se serve, ai bambini a scuola, calibrata per non sembrare mai sorveglianza. Tutto questo scorre in modo invisibile accanto agli altri nostri desk — autisti, equipaggi, piloti — così che un membro non debba mai pensarci. È, alla fine, l'intero senso del servizio.",
+    ],
+    process: [
+      {
+        title: "Valutazione del rischio",
+        detail: "Un'analisi preventiva della persona, dei luoghi e degli spostamenti coinvolti, prima di qualunque decisione operativa.",
+      },
+      {
+        title: "Squadra",
+        detail: "Agenti selezionati dal nostro network, ex forze speciali o forze dell'ordine, scelti per discrezione oltre che per competenza.",
+      },
+      {
+        title: "Ricognizione",
+        detail: "Sopralluoghi su percorsi, location e residenze, con un piano scritto pronto prima del vostro arrivo.",
+      },
+      {
+        title: "Presenza",
+        detail: "Protezione continua durante lo spostamento o il soggiorno, coordinata con autisti, piloti e personale di casa.",
+      },
+    ],
+    inclusions: [
+      "Valutazione del rischio prima di ogni spostamento o evento",
+      "Agenti di protezione ex forze speciali, verificati e discreti",
+      "Ricognizione di percorsi, location e residenze",
+      "Audit di sicurezza residenziale, inclusi impianti e personale di casa",
+      "Coordinamento con autisti, equipaggi e piloti per una copertura continua",
+      "Attivazione entro 24 ore, ovunque in Europa",
+    ],
+    faq: [
+      {
+        q: "Gli agenti sono visibili o si mimetizzano?",
+        a: "Si mimetizzano. La formazione che cerchiamo è quella che permette di restare in una stanza senza farsi notare — non l'uomo in giacca scura sulla porta.",
+      },
+      {
+        q: "Proteggete anche i familiari, non solo il membro?",
+        a: "Sì, incluse le esigenze specifiche di bambini e adolescenti, con un livello di discrezione pensato per non farli mai sentire sorvegliati.",
+      },
+      {
+        q: "Quanto preavviso serve per attivare una protezione?",
+        a: "Ventiquattro ore in gran parte d'Europa, se la situazione lo richiede. Per eventi programmati preferiamo settimane, per una ricognizione fatta come si deve.",
+      },
+      {
+        q: "Fate anche audit di sicurezza per residenze e uffici?",
+        a: "Sì: impianti d'allarme, punti di accesso, verifica del personale di casa. Un audit tipico dura una giornata, il rapporto qualche giorno in più.",
+      },
+      {
+        q: "Cosa succede in una situazione realmente critica?",
+        a: "Protocolli di evacuazione già scritti, contatti diretti con le autorità locali dove la relazione lo consente, e coordinamento immediato con charter e aviazione per un rientro rapido.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Il miglior complimento che riceviamo è non essere notati. Se un ospite si accorge della sicurezza intorno a sé, di solito significa che qualcosa non ha funzionato come doveva.",
+      name: "Colonnello (ris.) Richard Vane",
+      role: "Direttore, Protezione & Security",
+    },
+    detailTone: "tarmac",
+    detailCaption: "Briefing operativo, prima di un trasferimento — ore 05:30",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
