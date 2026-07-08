@@ -1310,6 +1310,84 @@ export const services: Service[] = [
     detailTone: "night",
     detailCaption: "Sopralluogo pre-evento, teatro privato — mattina",
   },
+  {
+    id: "hotel",
+    index: "17",
+    label: "Hotel",
+    title: "La chiave che non si trova online.",
+    description:
+      "Non prenotiamo camere: apriamo porte — suite iconiche, palace storici, resort privati che non compaiono in nessun motore di ricerca. Ogni hotel ha camere. Pochi hanno una porta che si apre solo per voi.",
+    specs: [
+      { term: "Accesso", detail: "Suite iconiche, palace storici, resort privati" },
+      { term: "Relazione", detail: "Direttori d'albergo, non un motore di prenotazione" },
+      { term: "Vantaggi", detail: "Upgrade, colazione, credito hotel incluso" },
+    ],
+    tone: "harbor",
+    caption: "Suite d'angolo, ultimo piano — luce del primo pomeriggio",
+    heroLine: "Ogni hotel ha camere. Pochi hanno una porta che si apre solo per voi.",
+    metaDescription:
+      "Accesso privato a suite iconiche, palace storici e resort riservati: non una prenotazione alberghiera, ma una porta che si apre grazie a una relazione diretta con chi li dirige.",
+    narrative: [
+      "Non abbiamo un reparto hotel che prenota camere più a buon mercato di quanto fareste voi stessi. Abbiamo relazioni dirette e personali con i direttori generali e i proprietari di una lista breve di indirizzi — grandi palace storici, resort su isole private, poche insegne indipendenti che non rincorrono le recensioni online — costruite in anni: il tipo di relazione che ottiene per un membro la suite d'angolo che non compare mai sul motore di prenotazione, o un tavolo in terrazza che risulta \"al completo\" nel momento esatto in cui un membro telefona.",
+      "Ciò che arriva insieme alla camera conta altrettanto: early check-in e late check-out come prassi, colazione e un credito hotel inclusi invece che venduti in più, una persona vera — il direttore generale o il suo vice — che sa del vostro arrivo prima ancora che atterriate, e la riservatezza di cui hanno bisogno gli ospiti riconoscibili. Le preferenze passano da un soggiorno all'altro: la stessa suite quando possibile, le stesse attenzioni silenziose, senza dover chiedere due volte.",
+    ],
+    process: [
+      {
+        title: "Ascolto",
+        detail: "Destinazione, date, che tipo di soggiorno cercate: rigenerante, mondano, isolato.",
+      },
+      {
+        title: "Selezione",
+        detail: "Due o tre indirizzi tra quelli che conosciamo di persona, mai un elenco generato da un algoritmo.",
+      },
+      {
+        title: "Richiesta",
+        detail: "La relazione diretta con la direzione ottiene ciò che un motore di prenotazione non vede nemmeno.",
+      },
+      {
+        title: "Soggiorno",
+        detail: "Il direttore sa che arrivate, prima ancora che voi arriviate.",
+      },
+    ],
+    inclusions: [
+      "Accesso a suite e ville d'hotel non sempre disponibili online",
+      "Early check-in e late check-out, come prassi",
+      "Colazione e credito hotel inclusi sulla maggior parte degli indirizzi",
+      "Upgrade di camera quando la disponibilità lo consente",
+      "Un referente in loco, non solo alla reception",
+      "Continuità delle preferenze tra un soggiorno e l'altro",
+    ],
+    faq: [
+      {
+        q: "In cosa siete diversi da un sito di prenotazione?",
+        a: "Un sito vende la stessa camera a chiunque abbia una carta di credito. Noi offriamo una relazione diretta con la direzione, costruita in anni: è quella relazione, non uno sconto, a fare la differenza.",
+      },
+      {
+        q: "Gli hotel che proponete sono sempre gli stessi?",
+        a: "Un numero limitato per scelta: conosciamo di persona ogni direttore, ogni proprietà. Preferiamo poche relazioni vere a un catalogo lungo e anonimo.",
+      },
+      {
+        q: "Cosa succede se l'hotel risulta al completo?",
+        a: "Spesso troviamo comunque spazio, perché la richiesta passa dalla direzione, non dal motore di prenotazione pubblico. Se davvero non c'è nulla, lo diciamo subito e proponiamo un'alternativa alla pari.",
+      },
+      {
+        q: "Il servizio include anche resort e ville private, non solo hotel in città?",
+        a: "Sì: palace storici, resort su isole private, boutique hotel indipendenti. Il filo conduttore è la relazione diretta, non la categoria.",
+      },
+      {
+        q: "Serve prenotare con largo anticipo?",
+        a: "Per le suite più richieste, sì, soprattutto in alta stagione. Per il resto, spesso bastano pochi giorni: è proprio lì che la relazione diretta fa la differenza.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non prenoto camere. Coltivo una manciata di relazioni con le persone che le dirigono — ed è quella manciata, non un listino, a decidere quale porta si apre.",
+      name: "Constance Aubert-Rey",
+      role: "Direttrice, Hotel",
+    },
+    detailTone: "amber",
+    detailCaption: "Lobby di un palace storico, Venezia — ora di pranzo",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
