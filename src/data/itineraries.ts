@@ -1,4 +1,6 @@
 import type { PlateTone } from "@/components/ui/Plate";
+import type { Locale } from "@/i18n/types";
+import { itinerariesEn } from "./itineraries.en";
 
 export interface ItineraryStep {
   when: string;
@@ -204,3 +206,9 @@ export const itineraries: Itinerary[] = [
 ];
 
 export const getItinerary = (id: string) => itineraries.find((i) => i.id === id);
+
+export const getItinerariesForLocale = (locale: Locale): Itinerary[] =>
+  locale === "en" ? itinerariesEn : itineraries;
+
+export const getItineraryForLocale = (locale: Locale, id: string) =>
+  getItinerariesForLocale(locale).find((i) => i.id === id);

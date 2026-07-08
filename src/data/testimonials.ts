@@ -1,3 +1,6 @@
+import type { Locale } from "@/i18n/types";
+import { testimonialsEn } from "./testimonials.en";
+
 export interface Testimonial {
   quote: string;
   initials: string;
@@ -28,3 +31,6 @@ export const testimonials: Testimonial[] = [
     attribution: "Collezionista, Monte-Carlo — membro dal 2022",
   },
 ];
+
+export const getTestimonialsForLocale = (locale: Locale): Testimonial[] =>
+  locale === "en" ? testimonialsEn : testimonials;

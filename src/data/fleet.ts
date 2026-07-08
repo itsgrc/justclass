@@ -1,4 +1,6 @@
 import type { PlateTone } from "@/components/ui/Plate";
+import type { Locale } from "@/i18n/types";
+import { categoryLabelsEn, emptyLegsEn, fleetEn } from "./fleet.en";
 
 export type FleetCategory = "yacht" | "jet" | "auto";
 
@@ -575,3 +577,16 @@ export const getAsset = (id: string) => fleet.find((a) => a.id === id);
 
 export const fleetByCategory = (category: FleetCategory) =>
   fleet.filter((a) => a.category === category);
+
+export const getFleetForLocale = (locale: Locale): FleetAsset[] => (locale === "en" ? fleetEn : fleet);
+
+export const getAssetForLocale = (locale: Locale, id: string) =>
+  getFleetForLocale(locale).find((a) => a.id === id);
+
+export const fleetByCategoryForLocale = (locale: Locale, category: FleetCategory) =>
+  getFleetForLocale(locale).filter((a) => a.category === category);
+
+export const getEmptyLegsForLocale = (locale: Locale): EmptyLeg[] => (locale === "en" ? emptyLegsEn : emptyLegs);
+
+export const getCategoryLabelsForLocale = (locale: Locale): Record<FleetCategory, string> =>
+  locale === "en" ? categoryLabelsEn : categoryLabels;

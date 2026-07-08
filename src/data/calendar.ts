@@ -1,3 +1,6 @@
+import type { Locale } from "@/i18n/types";
+import { seasonMomentsEn } from "./calendar.en";
+
 export interface SeasonMoment {
   month: string;
   title: string;
@@ -94,3 +97,6 @@ export const seasonMoments: SeasonMoment[] = [
     serviceId: "concierge",
   },
 ];
+
+export const getSeasonMomentsForLocale = (locale: Locale): SeasonMoment[] =>
+  locale === "en" ? seasonMomentsEn : seasonMoments;

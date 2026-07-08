@@ -1,3 +1,14 @@
+import type { Locale } from "@/i18n/types";
+import {
+  affiliationsEn,
+  desksEn,
+  numbersEn,
+  officesEn,
+  teamEn,
+  timelineEn,
+  valuesEn,
+} from "./maison.en";
+
 export interface TimelineEntry {
   year: string;
   title: string;
@@ -182,3 +193,18 @@ export const desks = [
   { label: "Automobili", email: "cars@justclass.com" },
   { label: "Concierge — membri", email: "concierge@justclass.com" },
 ];
+
+export const getTimelineForLocale = (locale: Locale): TimelineEntry[] => (locale === "en" ? timelineEn : timeline);
+
+export const getValuesForLocale = (locale: Locale): MaisonValue[] => (locale === "en" ? valuesEn : values);
+
+export const getNumbersForLocale = (locale: Locale): KeyNumber[] => (locale === "en" ? numbersEn : numbers);
+
+export const getTeamForLocale = (locale: Locale): TeamMember[] => (locale === "en" ? teamEn : team);
+
+export const getOfficesForLocale = (locale: Locale): Office[] => (locale === "en" ? officesEn : offices);
+
+export const getAffiliationsForLocale = (locale: Locale): Affiliation[] =>
+  locale === "en" ? affiliationsEn : affiliations;
+
+export const getDesksForLocale = (locale: Locale): typeof desks => (locale === "en" ? desksEn : desks);

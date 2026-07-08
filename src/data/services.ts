@@ -1,4 +1,6 @@
 import type { PlateTone } from "@/components/ui/Plate";
+import type { Locale } from "@/i18n/types";
+import { servicesEn } from "./services.en";
 
 export interface ServiceSpec {
   term: string;
@@ -374,3 +376,8 @@ export const services: Service[] = [
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
+
+export const getServicesForLocale = (locale: Locale): Service[] => (locale === "en" ? servicesEn : services);
+
+export const getServiceForLocale = (locale: Locale, id: string) =>
+  getServicesForLocale(locale).find((s) => s.id === id);

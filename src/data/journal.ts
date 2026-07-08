@@ -1,4 +1,6 @@
 import type { PlateTone } from "@/components/ui/Plate";
+import type { Locale } from "@/i18n/types";
+import { articlesEn } from "./journal.en";
 
 export type ArticleBlock =
   | { type: "paragraph"; text: string }
@@ -345,9 +347,14 @@ export const articles: Article[] = [
 
 export const getArticle = (slug: string) => articles.find((a) => a.slug === slug);
 
-export const formatArticleDate = (iso: string) =>
-  new Intl.DateTimeFormat("it-IT", {
+export const formatArticleDate = (iso: string, locale: Locale = "it") =>
+  new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "it-IT", {
     day: "numeric",
     month: "long",
     year: "numeric",
   }).format(new Date(iso));
+
+export const getArticlesForLocale = (locale: Locale): Article[] => (locale === "en" ? articlesEn : articles);
+
+export const getArticleForLocale = (locale: Locale, slug: string) =>
+  getArticlesForLocale(locale).find((a) => a.slug === slug);
