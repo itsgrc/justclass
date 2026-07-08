@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { services } from "@/data/services";
+import { getServicesForLocale } from "@/data/services";
 import { EASE_LUXE } from "@/lib/motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import LanguageToggle from "@/components/ui/LanguageToggle";
@@ -19,7 +19,9 @@ interface MobileMenuProps {
  */
 export default function MobileMenu({ open, onClose }: MobileMenuProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  const services = getServicesForLocale(locale);
+  const officesLine = locale === "en" ? "London · Monte Carlo · Milan — 24/7" : "Londra · Monte-Carlo · Milano — 24/7";
 
   const PRIMARY = [
     { label: t.nav.home, to: "/" },
@@ -156,9 +158,7 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
                 >
                   private@justclass.com
                 </a>
-                <p className="mt-2 text-sm text-sand/70">
-                  Londra · Monte-Carlo · Milano — 24/7
-                </p>
+                <p className="mt-2 text-sm text-sand/70">{officesLine}</p>
               </motion.div>
             </div>
           </div>

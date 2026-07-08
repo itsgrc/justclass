@@ -2,8 +2,8 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { services } from "@/data/services";
-import { offices } from "@/data/maison";
+import { getServicesForLocale } from "@/data/services";
+import { getOfficesForLocale } from "@/data/maison";
 import { EASE_LUXE } from "@/lib/motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -80,7 +80,9 @@ function Newsletter() {
 }
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
+  const services = getServicesForLocale(locale);
+  const offices = getOfficesForLocale(locale);
 
   return (
     <footer className="bg-espresso text-sand">
