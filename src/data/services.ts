@@ -530,6 +530,84 @@ export const services: Service[] = [
     detailTone: "marble",
     detailCaption: "Clinica privata, Zurigo — sala di consulto",
   },
+  {
+    id: "experience",
+    index: "07",
+    label: "Esperienza",
+    title: "Il capitolo, non il pacchetto.",
+    description:
+      "Viaggi scritti su misura, non assemblati da un catalogo: un'autrice di viaggio dedicata, itinerari mai ripetuti, accessi che hanno richiesto mesi di lavoro. Non vendiamo pacchetti. Scriviamo un capitolo del vostro anno.",
+    specs: [
+      { term: "Formato", detail: "Itinerario unico, mai ripetuto" },
+      { term: "Accessi", detail: "Fondazioni, atelier, dietro le quinte" },
+      { term: "Redazione", detail: "Autrice dedicata, non un template" },
+    ],
+    tone: "dusk",
+    caption: "Deserto del Wadi Rum, campo privato — tramonto",
+    heroLine: "Non vendiamo pacchetti. Scriviamo un capitolo del vostro anno.",
+    metaDescription:
+      "Viaggi su misura scritti come un capitolo, non venduti come un pacchetto: accessi impossibili, itinerari mai ripetuti, un'autrice dedicata per ogni membro.",
+    narrative: [
+      "Gran parte del turismo di lusso è un catalogo assemblato con carta migliore. Il nostro comincia diversamente: un'autrice di viaggio si siede con voi — non un questionario di preferenze, una conversazione su cosa questo anno della vostra vita ha davvero bisogno di segnare — e solo dopo comincia a scrivere. L'itinerario che ne esce si legge come un testo, con un inizio, uno svolgimento e una fine, non come un foglio di calcolo con un font più elegante.",
+      "Gli accessi sono dove si fa il lavoro vero, ed è quello che si vede meno: un museo chiuso aperto un'ora prima del pubblico, una cena in un luogo che non prende prenotazioni, un'udienza con la famiglia dietro un mestiere praticato allo stesso modo da duecento anni. Una visita privata in cantina con l'enologo all'alba, prima che arrivino i vendemmiatori. Niente di tutto questo si compra a listino: quasi sempre si chiede, con mesi d'anticipo, da chi già ci conosce.",
+    ],
+    process: [
+      {
+        title: "Colloquio",
+        detail: "Non un questionario di preferenze — una conversazione sul momento della vita che questo viaggio deve segnare.",
+      },
+      {
+        title: "Scrittura",
+        detail: "Un itinerario scritto come un racconto: giorno per giorno, tenuto insieme da un filo che lo attraversa.",
+      },
+      {
+        title: "Accessi",
+        detail: "Mesi di lavoro dietro le quinte per ottenere ciò che normalmente non è in vendita.",
+      },
+      {
+        title: "Viaggio",
+        detail: "Un'autrice raggiungibile per tutta la durata — non per gestire imprevisti, ma per restare fedeli a come il capitolo è stato scritto.",
+      },
+    ],
+    inclusions: [
+      "Itinerario scritto su misura, mai ripetuto per un altro membro",
+      "Accessi privati a fondazioni, collezioni e archivi solitamente chiusi",
+      "Incontri con artigiani, famiglie e custodi di un luogo",
+      "Coordinamento con charter, ville e concierge in un unico racconto",
+      "Un'autrice dedicata, raggiungibile per tutto il viaggio",
+      "Un diario di viaggio rilegato, consegnato al ritorno",
+    ],
+    faq: [
+      {
+        q: "In cosa siete diversi da un'agenzia di viaggi di lusso?",
+        a: "Un'agenzia vende un catalogo più caro. Noi non abbiamo un catalogo: ogni itinerario nasce da una conversazione e non si ripete mai identico per un altro membro.",
+      },
+      {
+        q: "Quanto tempo serve per organizzare un viaggio così?",
+        a: "Per gli accessi più delicati, anche mesi: una fondazione che apre le porte fuori orario non si improvvisa. Per il resto, bastano poche settimane.",
+      },
+      {
+        q: "Possiamo modificare l'itinerario durante il viaggio?",
+        a: "Sì, ed è previsto: l'autrice resta raggiungibile per riscrivere un capitolo se l'umore del gruppo prende un'altra strada.",
+      },
+      {
+        q: "È un servizio per famiglie o solo per coppie e singoli?",
+        a: "Per chiunque abbia un anno da segnare: famiglie, coppie, un gruppo di amici che festeggia un traguardo. Il capitolo si scrive sulle persone, non sul numero.",
+      },
+      {
+        q: "Cosa non riuscite a garantire?",
+        a: "La disponibilità di certe persone o luoghi non dipende da noi: un artista può rifiutare, un archivio può restare chiuso. In quei casi lo diciamo con chiarezza e proponiamo un'alternativa altrettanto vera.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non vendo un pacchetto. Scrivo un capitolo della vostra vita, e come ogni buon capitolo deve avere un motivo per essere raccontato dopo.",
+      name: "Camille Faure",
+      role: "Direttrice, Esperienza",
+    },
+    detailTone: "sail",
+    detailCaption: "Biblioteca privata di un castello, Valle della Loira — mattina",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);

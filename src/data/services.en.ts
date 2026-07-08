@@ -468,4 +468,82 @@ export const servicesEn: Service[] = [
     detailTone: "marble",
     detailCaption: "Private clinic, Zurich — consultation room",
   },
+  {
+    id: "experience",
+    index: "07",
+    label: "Experience",
+    title: "The chapter, not the package.",
+    description:
+      "Journeys written to measure, not assembled from a catalogue: a dedicated travel author, itineraries never repeated, access that took months to arrange. We don't sell packages. We write a chapter of your year.",
+    specs: [
+      { term: "Format", detail: "One itinerary, never repeated" },
+      { term: "Access", detail: "Foundations, ateliers, behind closed doors" },
+      { term: "Authorship", detail: "A dedicated author, not a template" },
+    ],
+    tone: "dusk",
+    caption: "Wadi Rum desert, private camp — sunset",
+    heroLine: "We don't sell packages. We write a chapter of your year.",
+    metaDescription:
+      "Bespoke journeys written like a chapter, not sold like a package: impossible access, itineraries never repeated, a dedicated author for every member.",
+    narrative: [
+      "Most luxury travel is a catalogue assembled on better paper. Ours starts differently: a travel author sits down with you — not a preferences questionnaire, a conversation about what this year of your life genuinely needs to mark — and only then begins to write. What comes back reads like a piece of writing, with a beginning, a middle and an end, not a spreadsheet with a nicer font.",
+      "The access is where the real work happens, and it's the part you see least of: a closed museum opened an hour before the public arrives, a dinner in a place that takes no reservations, an audience with the family behind a craft practised the same way for two hundred years. A private cellar tour with the winemaker at dawn, before the pickers arrive. None of it is bought off a price list — almost all of it is asked for, months ahead, by people who already trust us.",
+    ],
+    process: [
+      {
+        title: "Interview",
+        detail: "Not a preferences questionnaire — a conversation about the moment in your life this journey is meant to mark.",
+      },
+      {
+        title: "Writing",
+        detail: "An itinerary written like a story: day by day, held together by a thread that runs through it.",
+      },
+      {
+        title: "Access",
+        detail: "Months of work behind the scenes to secure what isn't normally for sale.",
+      },
+      {
+        title: "Journey",
+        detail: "An author reachable throughout — not to manage mishaps, but to keep the chapter true to how it was written.",
+      },
+    ],
+    inclusions: [
+      "A bespoke itinerary, never repeated for another member",
+      "Private access to foundations, collections and archives usually closed to the public",
+      "Meetings with artisans, families and custodians of a place",
+      "Coordination with charter, villas and concierge inside a single narrative",
+      "A dedicated author, reachable for the whole journey",
+      "A bound travel journal, delivered on your return",
+    ],
+    faq: [
+      {
+        q: "How are you different from a luxury travel agency?",
+        a: "An agency sells a pricier catalogue. We have no catalogue: every itinerary starts from a conversation and is never repeated identically for another member.",
+      },
+      {
+        q: "How long does a journey like this take to arrange?",
+        a: "For the most delicate access, sometimes months — a foundation that opens its doors after hours isn't improvised. For the rest, a few weeks is usually enough.",
+      },
+      {
+        q: "Can the itinerary change mid-journey?",
+        a: "Yes, and it's expected: your author stays reachable to rewrite a chapter if the group's mood takes a different turn.",
+      },
+      {
+        q: "Is this for families, or just couples and solo travellers?",
+        a: "For anyone with a year worth marking — families, couples, a group of friends celebrating a milestone. The chapter is written around the people, not the headcount.",
+      },
+      {
+        q: "What can't you guarantee?",
+        a: "The availability of certain people or places isn't ours to promise — an artist can decline, an archive can stay closed. When that happens, we say so plainly and offer an alternative just as real.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I don't sell a package. I write a chapter of your life, and like any good chapter, it needs a reason to be told afterwards.",
+      name: "Camille Faure",
+      role: "Director, Experience",
+    },
+    detailTone: "sail",
+    detailCaption: "A château's private library, Loire Valley — morning",
+  },
 ];
