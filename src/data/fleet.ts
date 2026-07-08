@@ -38,6 +38,10 @@ export interface FleetAsset {
   rangeNm?: number;
   /** Nota di calendario, mostrata solo quando c'è qualcosa da dire */
   availability?: string;
+  /** L'intelligenza delle prenotazioni passate, in una riga */
+  demand?: string;
+  /** Dal libro di bordo: voci degli ospiti, per iniziali, senza stelline */
+  logbook?: { quote: string; initials: string; when: string }[];
 }
 
 export interface EmptyLeg {
@@ -98,6 +102,19 @@ export const fleet: FleetAsset[] = [
     price: "Da €115.000",
     priceUnit: "a settimana, più APA",
     availability: "Agosto: ultime due settimane",
+    demand: "Più richiesto: luglio e agosto · crociera media 8 giorni",
+    logbook: [
+      {
+        quote: "Positano alle sette del mattino, solo noi e il caffè di un bar che apre alle sei. Ogni giorno poteva essere il migliore.",
+        initials: "F. L.",
+        when: "agosto 2025",
+      },
+      {
+        quote: "L'equipaggio sapeva quando esserci e quando sparire. È un'arte, e loro la praticano.",
+        initials: "M. T.",
+        when: "luglio 2025",
+      },
+    ],
     tone: "sea",
     gallery: [
       { tone: "sea", caption: "All'ancora, Golfo di Marinella" },
@@ -139,6 +156,14 @@ export const fleet: FleetAsset[] = [
     price: "Da €260.000",
     priceUnit: "a settimana, più APA",
     availability: "Agosto completo — settembre aperto",
+    demand: "Più richiesto: luglio · crociera media 10 giorni",
+    logbook: [
+      {
+        quote: "Il beach club a filo d'acqua ha ridefinito le nostre estati: i bambini non volevano più risalire.",
+        initials: "S. A.",
+        when: "luglio 2025",
+      },
+    ],
     tone: "dusk",
     gallery: [
       { tone: "dusk", caption: "Rada di Monaco, ora blu" },
@@ -180,6 +205,14 @@ export const fleet: FleetAsset[] = [
     price: "Da €95.000",
     priceUnit: "a settimana, più APA",
     availability: "Disponibile da fine luglio",
+    demand: "Più richiesto: giugno e settembre · uscita media 4 giorni",
+    logbook: [
+      {
+        quote: "Una macchina del tempo: il mogano, il rombo sommesso, l'odore della pelle. Il Tigullio non è mai stato così vicino.",
+        initials: "G. B.",
+        when: "giugno 2025",
+      },
+    ],
     tone: "riviera",
     gallery: [
       { tone: "riviera", caption: "Portofino, molo Umberto I" },
@@ -305,6 +338,14 @@ export const fleet: FleetAsset[] = [
     base: "Milano Linate Prime",
     price: "Da €16.000",
     priceUnit: "per ora di volo",
+    demand: "Tratte tipiche: Milano–New York, Milano–Singapore",
+    logbook: [
+      {
+        quote: "Camera vera, doccia vera: siamo atterrati a New York riposati come a casa. La linea, dopo, non è più concepibile.",
+        initials: "A. C.",
+        when: "ottobre 2025",
+      },
+    ],
     tone: "alps",
     gallery: [
       { tone: "alps", caption: "Salita da Linate, Monte Rosa" },
@@ -386,6 +427,14 @@ export const fleet: FleetAsset[] = [
     base: "Milano / Monte-Carlo",
     price: "Da €1.900",
     priceUnit: "al giorno, chauffeur incluso",
+    demand: "Più richiesta per: matrimoni, prime, arrivi ufficiali",
+    logbook: [
+      {
+        quote: "Lo chauffeur discreto, puntuale, che conosce ogni angolo di Milano. Il nostro modo preferito di arrivare.",
+        initials: "P. D.",
+        when: "marzo 2026",
+      },
+    ],
     tone: "lacquer",
     gallery: [
       { tone: "lacquer", caption: "Vernice Black Diamond, dettaglio" },
@@ -425,6 +474,7 @@ export const fleet: FleetAsset[] = [
     price: "Da €2.400",
     priceUnit: "al giorno",
     availability: "Weekend di luglio quasi completi",
+    demand: "Più richiesta: giugno–settembre · noleggio medio 3 giorni",
     tone: "cognac",
     gallery: [
       { tone: "cognac", caption: "Rosso Fiorano, luce radente" },
@@ -463,6 +513,14 @@ export const fleet: FleetAsset[] = [
     base: "Londra / Ginevra",
     price: "Da €1.400",
     priceUnit: "al giorno",
+    demand: "Più richiesta: maggio–settembre · noleggio medio 3 giorni",
+    logbook: [
+      {
+        quote: "Il W12 sopra Èze, la pelle Mulliner, la Moyenne Corniche: un giorno che vale un anno.",
+        initials: "S. B.",
+        when: "maggio 2025",
+      },
+    ],
     tone: "night",
     gallery: [
       { tone: "night", caption: "Verde British Racing, sera" },
@@ -502,6 +560,7 @@ export const fleet: FleetAsset[] = [
     price: "Su richiesta",
     priceUnit: "per occasioni selezionate",
     availability: "Tre date rimaste nel 2026",
+    demand: "Esce dal garage sei volte l'anno",
     tone: "marble",
     gallery: [
       { tone: "marble", caption: "Silver Birch, luce di studio" },
