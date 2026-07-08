@@ -702,4 +702,82 @@ export const servicesEn: Service[] = [
     detailTone: "teak",
     detailCaption: "Interview room, London office — final round",
   },
+  {
+    id: "auction",
+    index: "10",
+    label: "Auction",
+    title: "A lot, never public.",
+    description:
+      "Not an online auction. A room, and a catalogue that's never published: private treaty or invitation-only sales, provenance verified, guaranteed anonymity for buyer and seller.",
+    specs: [
+      { term: "Format", detail: "Private treaty or invitation-only auction" },
+      { term: "Categories", detail: "Watches, wine, cars, art, jewellery" },
+      { term: "Catalogue", detail: "Confidential, by invitation" },
+    ],
+    tone: "night",
+    caption: "Private auction room, London — evening, before the hammer",
+    heroLine: "This isn't an online auction. It's a room, and a catalogue that's never published.",
+    metaDescription:
+      "A private auction house for rare lots: private treaty or invitation-only sales, verified provenance, guaranteed anonymity for buyer and seller.",
+    narrative: [
+      "Most auctions are built for spectacle: a paddle number, a room watching, a hammer price in tomorrow's papers. Some sellers, and some buyers, want none of that — an estate being settled quietly, a divorce, a collector simply changing direction — and that's the space we work in. Every lot is sourced through the network, then authenticated and provenance-checked by an independent specialist before anyone decides anything.",
+      "What happens next is either a quiet private-treaty sale to a matched buyer, or a small, invitation-only evening with a handful of vetted bidders — phone or sealed bids, never a public floor. Catalogue entries describe the object, never the owner. Settlement runs through escrow, delivery is insured, and the sale price stays off the record if both parties want it to. None of this is a platform. It's trust, built over years, one lot at a time.",
+    ],
+    process: [
+      {
+        title: "Appraisal",
+        detail: "Independent valuation and provenance verification, before any decision is made.",
+      },
+      {
+        title: "Confidential cataloguing",
+        detail: "A detailed entry, never published, shared only with vetted buyers.",
+      },
+      {
+        title: "Sale",
+        detail: "Private treaty or a small auction evening, with phone or sealed bids.",
+      },
+      {
+        title: "Settlement",
+        detail: "Payment through escrow, insured transport of the lot, discretion on price if both parties want it.",
+      },
+    ],
+    inclusions: [
+      "Independent appraisal and provenance verification for every lot",
+      "A confidential catalogue, shared only by invitation",
+      "Private treaty or a small auction, never a public platform",
+      "Anonymity for buyer and seller, on request",
+      "Escrow settlement and insured transport of the lot",
+      "Priority access to lots before they enter the catalogue",
+    ],
+    faq: [
+      {
+        q: "Why not sell on an online platform?",
+        a: "Because a public platform records everything — price, identity, often even a failed bid. People who come to us usually have reasons to avoid that, not always spoken aloud, and it isn't our place to ask.",
+      },
+      {
+        q: "How do you verify a lot's provenance?",
+        a: "Independent specialists for each category — horologists, oenologists, art historians — with documentation traced back to the stated origin. If a provenance doesn't hold up, the lot doesn't enter the catalogue.",
+      },
+      {
+        q: "Can I sell completely anonymously?",
+        a: "Yes: your name never appears on the entry, and the buyer deals with us, not you, unless you both want to meet.",
+      },
+      {
+        q: "What kind of lots do you handle?",
+        a: "Rare watches, wine verticals, collector cars, significant art, important jewellery. If it doesn't fit those categories, let's talk anyway — the calibre matters more than the label.",
+      },
+      {
+        q: "How long does a sale take?",
+        a: "A private treaty with a buyer already identified can close in a few weeks. A small invitation-only auction usually needs two or three months of preparation, to do it properly.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Christie's and Sotheby's sell the spectacle, and rightly so. We sell the absence of it — the same lot, the same rigour, without a single photograph ending up where it shouldn't.",
+      name: "Julian Ashworth-Reeve",
+      role: "Director, Auction",
+    },
+    detailTone: "marble",
+    detailCaption: "Cataloguing room, London — verifying a lot",
+  },
 ];

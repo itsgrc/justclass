@@ -764,6 +764,84 @@ export const services: Service[] = [
     detailTone: "teak",
     detailCaption: "Sala colloqui, sede di Londra — ultima intervista",
   },
+  {
+    id: "auction",
+    index: "10",
+    label: "Asta",
+    title: "Un lotto, mai pubblico.",
+    description:
+      "Non un'asta online. Una stanza, e un catalogo che non si pubblica: trattativa privata o serata su invito, provenienza verificata, anonimato garantito ad acquirente e venditore.",
+    specs: [
+      { term: "Formato", detail: "Trattativa privata o asta su invito" },
+      { term: "Categorie", detail: "Orologi, vino, auto, arte, gioielli" },
+      { term: "Catalogo", detail: "Confidenziale, su invito" },
+    ],
+    tone: "night",
+    caption: "Sala d'asta privata, Londra — sera, prima del battito",
+    heroLine: "Non è un'asta online. È una stanza, e un catalogo che non si pubblica.",
+    metaDescription:
+      "Casa d'aste riservata per lotti rari: trattativa privata o asta su invito, provenienza verificata, anonimato di acquirente e venditore garantito.",
+    narrative: [
+      "Gran parte delle aste è costruita per lo spettacolo: un numero di paletta, una sala che guarda, un prezzo di battuta sui giornali del giorno dopo. Alcuni venditori, e alcuni acquirenti, non vogliono niente di tutto questo — un'eredità da chiudere in silenzio, un divorzio, un collezionista che semplicemente cambia direzione — ed è in quello spazio che lavoriamo. Ogni lotto viene reperito attraverso la rete, poi autenticato e verificato nella provenienza da uno specialista indipendente, prima che chiunque decida alcunché.",
+      "Ciò che accade dopo è una trattativa privata silenziosa con un acquirente già individuato, oppure una piccola serata su invito con una manciata di offerenti verificati — offerte telefoniche o in busta chiusa, mai un banco pubblico. Le schede di catalogo descrivono l'oggetto, mai il proprietario. Il regolamento passa da un escrow, la consegna è assicurata, e il prezzo di vendita resta fuori dai registri se entrambe le parti lo desiderano. Niente di tutto questo è una piattaforma. È fiducia, costruita in anni, un lotto alla volta.",
+    ],
+    process: [
+      {
+        title: "Perizia",
+        detail: "Valutazione indipendente e verifica di provenienza, prima di qualunque decisione.",
+      },
+      {
+        title: "Catalogazione riservata",
+        detail: "Una scheda dettagliata, mai pubblicata, condivisa solo con acquirenti verificati.",
+      },
+      {
+        title: "Vendita",
+        detail: "Trattativa privata o una piccola serata d'asta, con offerte telefoniche o in busta chiusa.",
+      },
+      {
+        title: "Regolamento",
+        detail: "Pagamento in escrow, trasporto assicurato del lotto, discrezione sul prezzo se richiesta da entrambe le parti.",
+      },
+    ],
+    inclusions: [
+      "Perizia indipendente e verifica di provenienza per ogni lotto",
+      "Catalogo confidenziale, condiviso solo su invito",
+      "Trattativa privata o asta ristretta, mai una piattaforma pubblica",
+      "Anonimato di acquirente e venditore, su richiesta",
+      "Regolamento in escrow e trasporto assicurato del lotto",
+      "Accesso prioritario ai lotti prima che entrino in catalogo",
+    ],
+    faq: [
+      {
+        q: "Perché non vendere su una piattaforma online?",
+        a: "Perché una piattaforma pubblica registra tutto: prezzo, identità, spesso anche un'offerta fallita. Chi si rivolge a noi, di solito, ha ragioni per evitarlo — non sempre dette ad alta voce, e non è compito nostro chiederle.",
+      },
+      {
+        q: "Come verificate la provenienza dei lotti?",
+        a: "Specialisti indipendenti per ogni categoria — orologiai, enologi, storici dell'arte — con documentazione che risale fino all'origine dichiarata. Se una provenienza non regge, il lotto non entra in catalogo.",
+      },
+      {
+        q: "Posso vendere in forma completamente anonima?",
+        a: "Sì: il vostro nome non compare mai nella scheda, e l'acquirente tratta con noi, non con voi, a meno che entrambi non desideriate incontrarvi.",
+      },
+      {
+        q: "Che tipo di lotti trattate?",
+        a: "Orologi rari, verticali di vino, automobili da collezione, opere d'arte, gioielleria d'importanza. Se non rientra in queste categorie, ne parliamo comunque: la qualità conta più dell'etichetta.",
+      },
+      {
+        q: "Quanto tempo richiede una vendita?",
+        a: "Una trattativa privata con un acquirente già individuato può chiudersi in poche settimane. Una serata d'asta ristretta richiede in genere due o tre mesi di preparazione, per fare le cose come si deve.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Christie's e Sotheby's vendono lo spettacolo, ed è giusto così. Noi vendiamo l'assenza dello spettacolo: lo stesso lotto, lo stesso rigore, senza una sola fotografia che finisca dove non dovrebbe.",
+      name: "Julian Ashworth-Reeve",
+      role: "Direttore, Asta",
+    },
+    detailTone: "marble",
+    detailCaption: "Sala di catalogazione, Londra — verifica di un lotto",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);
