@@ -686,6 +686,84 @@ export const services: Service[] = [
     detailTone: "cognac",
     detailCaption: "Sala del consiglio, Ginevra — bilancio annuale",
   },
+  {
+    id: "staff",
+    index: "09",
+    label: "Staff",
+    title: "Selezionati, non prestati.",
+    description:
+      "Selezione riservata di equipaggi, hostess, autisti e personale di casa: verifiche approfondite, un vero periodo di prova, sostituzioni rapide se serve. Non un'agenzia interinale.",
+    specs: [
+      { term: "Profili", detail: "Equipaggi, hostess, autisti, governanti" },
+      { term: "Selezione", detail: "Verifiche, referenze, periodo di prova" },
+      { term: "Copertura", detail: "Europa, sostituzioni entro 72 ore" },
+    ],
+    tone: "salon",
+    caption: "Colloquio finale, sede di Londra — pomeriggio",
+    heroLine: "Non troviamo qualcuno per un turno. Troviamo la persona giusta, per anni.",
+    metaDescription:
+      "Selezione riservata di equipaggi, hostess, autisti e personale di casa: verifiche approfondite, periodo di prova, sostituzioni rapide. Non un'agenzia interinale.",
+    narrative: [
+      "Un'agenzia interinale colloca chi si trova disponibile. Quello che facciamo noi è diverso, e volutamente più lento: verifiche dei precedenti che vengono davvero condotte, referenze chiamate come conversazioni e non spuntate come caselle, un'attenzione al carattere quanto al curriculum — perché chi gestirà la vostra casa deve incastrarsi in come vivete davvero, non in ciò che avete scritto in un brief.",
+      "Il rapporto non finisce all'assunzione. Ogni persona selezionata firma un NDA prima di cominciare; contratti e buste paga rispettano la normativa del paese di residenza, così nulla ricade sulla vostra scrivania; e se un inserimento non funziona, sostituiamo entro 72 ore, senza costi aggiuntivi nel primo semestre. Le posizioni fatte bene richiedono mesi, non giorni — ed è proprio per questo che durano anni, non stagioni.",
+    ],
+    process: [
+      {
+        title: "Profilo",
+        detail: "Non un annuncio — una conversazione su chi siete, come vivete, cosa non va detto due volte.",
+      },
+      {
+        title: "Ricerca",
+        detail: "Una rete di candidati verificati, colloqui multipli, referenze chiamate davvero, non solo lette.",
+      },
+      {
+        title: "Prova",
+        detail: "Un periodo di affiancamento reale e retribuito, prima di qualunque impegno definitivo.",
+      },
+      {
+        title: "Continuità",
+        detail: "Sostituzioni garantite, contratti conformi, un referente per ogni imprevisto.",
+      },
+    ],
+    inclusions: [
+      "Verifica dei precedenti, referenze e periodo di prova retribuito",
+      "Formazione all'etichetta e alla riservatezza per ogni ruolo",
+      "Gestione contrattuale e conformità normativa del rapporto di lavoro",
+      "Sostituzione garantita entro 72 ore in caso di necessità",
+      "Profili internazionali e multilingue, disponibili anche su base stagionale",
+      "NDA firmato da ogni membro del personale selezionato",
+    ],
+    faq: [
+      {
+        q: "In cosa differite da un'agenzia interinale?",
+        a: "Un'agenzia interinale colloca chi è disponibile. Noi selezioniamo chi è giusto: mesi di verifica, una prova retribuita, e un impegno di lungo periodo, non un turno.",
+      },
+      {
+        q: "Cosa succede se la persona selezionata non funziona?",
+        a: "Sostituzione entro 72 ore, senza costi aggiuntivi nel primo semestre. Succede raramente: il periodo di prova esiste apposta per questo.",
+      },
+      {
+        q: "Gestite anche i contratti di lavoro?",
+        a: "Sì, in conformità alle normative del paese di residenza: buste paga, contributi, tutto ciò che altrimenti ricadrebbe su di voi.",
+      },
+      {
+        q: "Il personale sa con chi lavorerà davvero, prima di firmare?",
+        a: "Il minimo indispensabile, finché non firma l'NDA. La riservatezza vale in entrambe le direzioni.",
+      },
+      {
+        q: "Potete trovare personale per un solo evento o una singola crociera?",
+        a: "Sì, anche su base stagionale o per un singolo impegno, con la stessa cura nella selezione.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non riempio turni. Trovo la persona che, tra un anno, non riuscirete più a immaginare fuori casa vostra.",
+      name: "Margaux Delacroix",
+      role: "Direttrice, Staff",
+    },
+    detailTone: "teak",
+    detailCaption: "Sala colloqui, sede di Londra — ultima intervista",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);

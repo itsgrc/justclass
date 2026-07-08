@@ -624,4 +624,82 @@ export const servicesEn: Service[] = [
     detailTone: "cognac",
     detailCaption: "Boardroom, Geneva — annual accounts",
   },
+  {
+    id: "staff",
+    index: "09",
+    label: "Staff",
+    title: "Selected, not sent.",
+    description:
+      "Confidential recruitment of crew, hostesses, chauffeurs and household staff: thorough vetting, a genuine trial period, fast replacement if needed. Not a temp agency.",
+    specs: [
+      { term: "Roles", detail: "Crew, hostesses, chauffeurs, housekeepers" },
+      { term: "Vetting", detail: "Background checks, references, trial period" },
+      { term: "Coverage", detail: "Europe, replacements within 72 hours" },
+    ],
+    tone: "salon",
+    caption: "Final interview, London office — afternoon",
+    heroLine: "We don't find someone for a shift. We find the right person, for years.",
+    metaDescription:
+      "Confidential recruitment of crew, hostesses, chauffeurs and household staff: thorough vetting, a trial period, fast replacements. Not a temp agency.",
+    narrative: [
+      "A temp agency places whoever happens to be free. What we do is different, and deliberately slower: background checks that actually get made, reference calls that are conversations rather than boxes ticked, an attention to temperament as much as CV — because whoever runs your household needs to fit how you actually live, not just what you wrote in a brief.",
+      "The relationship doesn't end at placement. Every person we place signs an NDA before starting; contracts and payroll comply with the employment law of the country of residence, so none of it lands on your desk; and if a placement doesn't work, we replace it within 72 hours, at no extra cost in the first six months. Positions filled properly take months, not days — which is exactly why they tend to last years, not seasons.",
+    ],
+    process: [
+      {
+        title: "Profile",
+        detail: "Not a job posting — a conversation about who you are, how you live, what shouldn't need saying twice.",
+      },
+      {
+        title: "Search",
+        detail: "A network of vetted candidates, multiple interviews, references genuinely called, not just read.",
+      },
+      {
+        title: "Trial",
+        detail: "A real, paid trial period alongside your household, before any long-term commitment.",
+      },
+      {
+        title: "Continuity",
+        detail: "Guaranteed replacements, compliant contracts, one point of contact for anything unexpected.",
+      },
+    ],
+    inclusions: [
+      "Background checks, references and a paid trial period",
+      "Etiquette and discretion training for every role",
+      "Contract management and employment-law compliance",
+      "Guaranteed replacement within 72 hours if needed",
+      "International, multilingual profiles, available seasonally too",
+      "An NDA signed by every member of staff we place",
+    ],
+    faq: [
+      {
+        q: "How are you different from a temp agency?",
+        a: "A temp agency places whoever is available. We select whoever is right: months of vetting, a paid trial, and a commitment to the long term, not a shift.",
+      },
+      {
+        q: "What happens if the person we hired isn't working out?",
+        a: "A replacement within 72 hours, at no extra cost in the first six months. It rarely happens — that's exactly what the trial period is for.",
+      },
+      {
+        q: "Do you handle the employment contracts too?",
+        a: "Yes, in line with the regulations of the country of residence: payslips, contributions, everything that would otherwise land on you.",
+      },
+      {
+        q: "Does the staff know who they'll actually be working for, before signing?",
+        a: "The bare minimum, until the NDA is signed. Confidentiality runs both ways.",
+      },
+      {
+        q: "Can you find staff for a single event or one cruise?",
+        a: "Yes, on a seasonal or one-off basis too, with the same care in selection.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I don't fill shifts. I find the person you won't be able to imagine your household without, a year from now.",
+      name: "Margaux Delacroix",
+      role: "Director, Staff",
+    },
+    detailTone: "teak",
+    detailCaption: "Interview room, London office — final round",
+  },
 ];
