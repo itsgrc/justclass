@@ -4,6 +4,7 @@ import { fadeRise, stagger } from "@/lib/motion";
 import MaskLines from "@/components/ui/MaskLines";
 import HairlineButton from "@/components/ui/HairlineButton";
 import Plate from "@/components/ui/Plate";
+import { IMAGES } from "@/data/images";
 
 export default function Hero() {
   return (
@@ -51,7 +52,14 @@ export default function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.6, delay: 0.5 }}
         >
-          <Plate tone="dusk" caption="Riviera Ligure, 44°N" ratio="4 / 5" />
+          <Plate
+            tone="dusk"
+            caption="Riviera Ligure, 44°N"
+            ratio="4 / 5"
+            src={IMAGES["hero-home"]}
+            alt="Yacht al tramonto sulla Riviera Ligure"
+            priority
+          />
         </motion.div>
       </div>
 

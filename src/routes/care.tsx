@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import PageHeader from "@/components/ui/PageHeader";
 import Plate from "@/components/ui/Plate";
+import { IMAGES } from "@/data/images";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
 import HairlineButton from "@/components/ui/HairlineButton";
@@ -176,7 +177,13 @@ function CarePage() {
                 delay={0.15}
                 className={`lg:col-span-6 ${flip ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}
               >
-                <Plate tone={section.tone} caption={section.caption} ratio="5 / 4" />
+                <Plate
+                  tone={section.tone}
+                  caption={section.caption}
+                  ratio="5 / 4"
+                  src={IMAGES[`care-${section.id}`]}
+                  alt={section.eyebrow}
+                />
               </Reveal>
             </article>
           );

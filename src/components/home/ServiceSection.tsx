@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import type { Service } from "@/data/services";
 import Plate from "@/components/ui/Plate";
 import Reveal from "@/components/ui/Reveal";
+import { IMAGES } from "@/data/images";
 
 interface ServiceSectionProps {
   service: Service;
@@ -67,7 +68,13 @@ export default function ServiceSection({ service, flip }: ServiceSectionProps) {
         }`}
       >
         <Link to="/services/$slug" params={{ slug: service.id }} aria-label={service.label}>
-          <Plate tone={service.tone} caption={service.caption} ratio="5 / 4" />
+          <Plate
+            tone={service.tone}
+            caption={service.caption}
+            ratio="5 / 4"
+            src={IMAGES[`service-${service.id}`]}
+            alt={service.label}
+          />
         </Link>
       </Reveal>
     </article>

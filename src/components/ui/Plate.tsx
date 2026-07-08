@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_LUXE } from "@/lib/motion";
 
@@ -157,11 +158,34 @@ interface PlateProps {
   still?: boolean;
   /** Didascalia chiara, per fondi scuri */
   captionOnDark?: boolean;
+  /**
+   * URL di una fotografia vera, opzionale. Il gradiente resta sempre
+   * disegnato sotto: se l'immagine non carica (o non è impostata),
+   * la lastra tonale fa comunque il suo mestiere — nessuna icona rotta.
+   */
+  src?: string;
+  alt?: string;
+  /** Salta il lazy-loading per le immagini sopra la piega (es. hero) */
+  priority?: boolean;
 }
 
-export function PlateSurface({ tone, still = false }: { tone: PlateTone; still?: boolean }) {
+export function PlateSurface({
+  tone,
+  still = false,
+  src,
+  alt = "",
+  priority = false,
+}: {
+  tone: PlateTone;
+  still?: boolean;
+  src?: string;
+  alt?: string;
+  priority?: boolean;
+}) {
   const reduced = useReducedMotion();
   const animate = !still && !reduced;
+  const [loaded, setLoaded] = useState(false);
+  const [errored, setErrored] = useState(false);
 
   return (
     <>
@@ -175,6 +199,21 @@ export function PlateSurface({ tone, still = false }: { tone: PlateTone; still?:
         transition={{ duration: 2.4, ease: EASE_LUXE }}
       />
       <TextureOverlay texture={TEXTURE_BY_TONE[tone]} />
+      {src && !errored && (
+        <img
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => setErrored(true)}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{
+            opacity: loaded ? 1 : 0,
+            transition: reduced ? "none" : "opacity 1.1s ease-out",
+          }}
+        />
+      )}
       <div className="pointer-events-none absolute inset-0 border border-cream/10" />
     </>
   );
@@ -187,11 +226,14 @@ export default function Plate({
   className,
   still = false,
   captionOnDark = false,
+  src,
+  alt,
+  priority = false,
 }: PlateProps) {
   return (
     <figure className={className}>
       <div className="relative overflow-hidden" style={{ aspectRatio: ratio }}>
-        <PlateSurface tone={tone} still={still} />
+        <PlateSurface tone={tone} still={still} src={src} alt={alt} priority={priority} />
       </div>
       {caption && (
         <figcaption className="mt-4 flex items-baseline gap-4">

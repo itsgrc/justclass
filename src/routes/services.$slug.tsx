@@ -4,6 +4,7 @@ import { emptyLegs, fleetByCategory } from "@/data/fleet";
 import { articles } from "@/data/journal";
 import { formatArticleDate } from "@/data/journal";
 import Plate from "@/components/ui/Plate";
+import { IMAGES } from "@/data/images";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
@@ -57,7 +58,13 @@ function ServicePage() {
             ))}
           </Reveal>
           <Reveal delay={0.15} className="lg:col-span-5 lg:col-start-8">
-            <Plate tone={service.detailTone} caption={service.detailCaption} ratio="4 / 5" />
+            <Plate
+              tone={service.detailTone}
+              caption={service.detailCaption}
+              ratio="4 / 5"
+              src={IMAGES[`service-${service.id}`]}
+              alt={service.label}
+            />
           </Reveal>
         </div>
       </section>
