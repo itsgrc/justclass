@@ -842,6 +842,84 @@ export const services: Service[] = [
     detailTone: "marble",
     detailCaption: "Sala di catalogazione, Londra — verifica di un lotto",
   },
+  {
+    id: "dining",
+    index: "11",
+    label: "Private Dining & Wine",
+    title: "Un tavolo, e nessun altro.",
+    description:
+      "Chef stellati che cucinano nella vostra cucina, verticali di vino rare, un sommelier dedicato: una cena privata ovunque siate, costruita intorno a voi, non su un menu fisso. Un tavolo dove non arriva nessun altro.",
+    specs: [
+      { term: "Chef", detail: "Stellati, in trasferta ovunque siate" },
+      { term: "Cantina", detail: "Verticali rare, sommelier dedicato" },
+      { term: "Copertura", detail: "Yacht, ville, residenze, in due giorni" },
+    ],
+    tone: "cognac",
+    caption: "Cena privata, terrazza sul Lago di Como — crepuscolo",
+    heroLine: "Un tavolo dove non arriva nessun altro.",
+    metaDescription:
+      "Chef stellati a domicilio, verticali di vino rare e sommelier dedicati: una cena privata ovunque siate, costruita intorno a voi, non a un menu fisso.",
+    narrative: [
+      "Uno chef stellato si sposta con la propria brigata, o un secondo di fiducia, per cucinare nella vostra cucina, sul vostro yacht, in una villa che avete solo in prestito per la settimana. Il menu comincia come una conversazione, non come un tasting fisso: cosa vi piace davvero, cosa non potete mangiare, cosa un piatto vi ha ricordato una volta. Gli ingredienti si scelgono il giorno prima del servizio, attraverso la rete personale dello chef, ovunque voi siate.",
+      "La cantina funziona allo stesso modo. Accesso a bottiglie che non compaiono in nessuna carta dei vini, reperite da cantine private, composte in verticali dal nostro sommelier dedicato, che decanta e serve con lo stesso standard della cucina. Il punto, alla fine, è semplice: un tavolo che nessun altro può prenotare, in una sala che non è un ristorante.",
+    ],
+    process: [
+      {
+        title: "Il menu",
+        detail: "Una conversazione con lo chef su gusti, allergie, il ricordo che un piatto deve evocare.",
+      },
+      {
+        title: "La cantina",
+        detail: "Una selezione di etichette e verticali dal nostro sommelier, spesso da cantine private non in commercio.",
+      },
+      {
+        title: "La trasferta",
+        detail: "Chef e brigata si spostano da voi, con attrezzatura e ingredienti, ovunque siate.",
+      },
+      {
+        title: "Il servizio",
+        detail: "Una cena che si svolge come al ristorante, nella vostra sala, senza nessun altro tavolo in vista.",
+      },
+    ],
+    inclusions: [
+      "Chef stellato con brigata dedicata, in trasferta ovunque in Europa",
+      "Menu costruito su misura, mai un tasting fisso",
+      "Sommelier dedicato e accesso a verticali da cantine private",
+      "Attrezzatura da cucina e servizio di sala al completo",
+      "Gestione di allergie e intolleranze senza compromessi sul piatto",
+      "Coordinamento con yacht, ville e residenze per la logistica di bordo",
+    ],
+    faq: [
+      {
+        q: "Possiamo scegliere lo chef?",
+        a: "Sì, tra una rosa di nomi stellati con cui lavoriamo stabilmente, oppure proponiamo noi il profilo più adatto all'occasione.",
+      },
+      {
+        q: "Quanto preavviso serve?",
+        a: "Per uno chef già in Europa, 48 ore bastano quasi sempre. Per una richiesta più articolata — una verticale rara, un evento per dodici — meglio due settimane.",
+      },
+      {
+        q: "Cosa succede se siamo a bordo di uno yacht?",
+        a: "La cambusa viene valutata prima: se gli spazi non bastano, portiamo attrezzatura compatta o adattiamo il menu. Non ricordiamo un caso in cui non si sia trovata una soluzione.",
+      },
+      {
+        q: "Le bottiglie più rare si possono anche acquistare, non solo bere?",
+        a: "Spesso sì, attraverso lo stesso canale del servizio Asta quando si tratta di etichette da collezione: ne parliamo caso per caso.",
+      },
+      {
+        q: "Gestite anche eventi più grandi, non solo cene intime?",
+        a: "Fino a una ventina di ospiti manteniamo lo stesso standard artigianale. Oltre, è terreno del servizio Eventi, e vi mettiamo in contatto con chi lo fa al loro livello.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Un ristorante, per quanto raro, resta un luogo pubblico con un numero di tavolo. Il nostro lavoro è costruirne uno che non esiste da nessun'altra parte — e che nessun altro potrà mai prenotare.",
+      name: "Étienne Roussel",
+      role: "Direttore, Private Dining & Wine",
+    },
+    detailTone: "salon",
+    detailCaption: "Cantina privata, Borgogna — degustazione verticale",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);

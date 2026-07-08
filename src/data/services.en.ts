@@ -780,4 +780,82 @@ export const servicesEn: Service[] = [
     detailTone: "marble",
     detailCaption: "Cataloguing room, London — verifying a lot",
   },
+  {
+    id: "dining",
+    index: "11",
+    label: "Private Dining & Wine",
+    title: "A table, and no one else.",
+    description:
+      "Michelin-starred chefs cooking in your own kitchen, rare wine verticals, a dedicated sommelier: a private dinner wherever you are, built around you, not a fixed tasting menu. A table no one else can reach.",
+    specs: [
+      { term: "Chefs", detail: "Michelin-starred, travelling to you" },
+      { term: "Cellar", detail: "Rare verticals, dedicated sommelier" },
+      { term: "Coverage", detail: "Yacht, villas, residences, within two days" },
+    ],
+    tone: "cognac",
+    caption: "Private dinner, Lake Como terrace — dusk",
+    heroLine: "A table no one else can reach.",
+    metaDescription:
+      "Michelin-starred chefs at your table, rare wine verticals and dedicated sommeliers: a private dinner wherever you are, built around you, not a fixed menu.",
+    narrative: [
+      "A starred chef travels with their own brigade, or a trusted second, to cook in your kitchen, on your yacht, in a villa you're only borrowing for the week. The menu starts as a conversation, not a set tasting menu: what you actually like, what you can't eat, what a dish once meant to you. Ingredients are sourced the day before service, through the chef's own network, wherever you happen to be.",
+      "The wine side works the same way. Access to bottles that never make a restaurant list, sourced from private cellars, curated into verticals by a dedicated sommelier who decants and serves to the same standard as the kitchen. The point, in the end, is simple: a table no one else can book, in a room that isn't a restaurant.",
+    ],
+    process: [
+      {
+        title: "The menu",
+        detail: "A conversation with the chef about taste, allergies, the memory a dish is meant to bring back.",
+      },
+      {
+        title: "The cellar",
+        detail: "A selection of labels and verticals from our sommelier, often from private cellars not on the open market.",
+      },
+      {
+        title: "The journey",
+        detail: "The chef and brigade travel to you, with equipment and ingredients, wherever you are.",
+      },
+      {
+        title: "The service",
+        detail: "A dinner that runs like a restaurant service, in your own room, with no other table in sight.",
+      },
+    ],
+    inclusions: [
+      "A Michelin-starred chef with a dedicated brigade, travelling anywhere in Europe",
+      "A bespoke menu, never a fixed tasting format",
+      "A dedicated sommelier and access to verticals from private cellars",
+      "Full kitchen equipment and dining service",
+      "Allergies and intolerances handled without compromising the plate",
+      "Coordination with yacht, villa and residence logistics on board",
+    ],
+    faq: [
+      {
+        q: "Can we choose the chef?",
+        a: "Yes, from a shortlist of starred names we work with regularly, or we suggest the profile best suited to the occasion.",
+      },
+      {
+        q: "How much notice do you need?",
+        a: "For a chef already in Europe, 48 hours is usually enough. For something more elaborate — a rare vertical, an event for twelve — two weeks is better.",
+      },
+      {
+        q: "What happens if we're aboard a yacht?",
+        a: "The galley gets assessed first: if the space isn't enough, we bring compact equipment or adapt the menu. We can't recall a case where a solution wasn't found.",
+      },
+      {
+        q: "Can we buy the rarest bottles, not just drink them?",
+        a: "Often, yes, through the same channel as our Auction service when it's a collector's label — we discuss it case by case.",
+      },
+      {
+        q: "Do you handle larger events, not just intimate dinners?",
+        a: "Up to about twenty guests, we keep the same craftsmanship. Beyond that, it's Events territory, and we put you in touch with those who do it at their level.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "A restaurant, however rare, is still a public place with a table number. Our job is to build one that exists nowhere else — and that no one else will ever be able to book.",
+      name: "Étienne Roussel",
+      role: "Director, Private Dining & Wine",
+    },
+    detailTone: "salon",
+    detailCaption: "Private cellar, Burgundy — vertical tasting",
+  },
 ];
