@@ -138,6 +138,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/itineraries" className="link-luxe text-sm hover:text-cream">
+                  Itinerari firmati
+                </Link>
+              </li>
+              <li>
                 <Link to="/calendar" className="link-luxe text-sm hover:text-cream">
                   Il calendario
                 </Link>

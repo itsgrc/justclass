@@ -6,6 +6,7 @@ import GalleryStrip from "@/components/ui/GalleryStrip";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
 import HairlineButton from "@/components/ui/HairlineButton";
+import { useSelection } from "@/lib/useSelection";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/fleet/$id")({
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/fleet/$id")({
 function AssetPage() {
   const asset = Route.useLoaderData();
   const related = fleet.filter((a) => a.category === asset.category && a.id !== asset.id).slice(0, 2);
+  const { isSelected, toggle } = useSelection();
 
   return (
     <>
@@ -107,6 +109,12 @@ function AssetPage() {
                   </dd>
                 </div>
               )}
+              {asset.demand && (
+                <div className="flex items-baseline justify-between gap-6 border-b border-ink/10 py-4">
+                  <dt className="eyebrow text-taupe">Dalle prenotazioni</dt>
+                  <dd className="text-right font-display text-lg italic">{asset.demand}</dd>
+                </div>
+              )}
               <div className="flex items-baseline justify-between gap-6 py-5">
                 <dt className="eyebrow text-taupe">Tariffa</dt>
                 <dd className="text-right">
@@ -133,6 +141,16 @@ function AssetPage() {
             <div className="no-print mt-8 flex flex-wrap gap-x-8 gap-y-3">
               <button
                 type="button"
+                onClick={() => toggle(asset.id)}
+                aria-pressed={isSelected(asset.id)}
+                className={`link-luxe eyebrow cursor-pointer ${
+                  isSelected(asset.id) ? "text-bronze" : "text-taupe hover:text-ink"
+                }`}
+              >
+                {isSelected(asset.id) ? "Nella vostra selezione" : "Aggiungete alla selezione"}
+              </button>
+              <button
+                type="button"
                 onClick={() => window.print()}
                 className="link-luxe eyebrow cursor-pointer text-taupe hover:text-ink"
               >
@@ -150,6 +168,34 @@ function AssetPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* Dal libro di bordo: voci vere, iniziali sole — come da policy */}
+      {asset.logbook && asset.logbook.length > 0 && (
+        <section className="container-luxe py-24 lg:py-28">
+          <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
+            <h2 className="font-display text-4xl leading-tight font-light">
+              Dal libro <em className="font-normal">di bordo.</em>
+            </h2>
+            <p className="eyebrow text-taupe">Iniziali sole, come da policy</p>
+          </Reveal>
+          <RuleReveal className="mt-8" />
+          <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-2">
+            {asset.logbook.map((entry, i) => (
+              <Reveal key={entry.initials + entry.when} delay={0.1 * i}>
+                <blockquote>
+                  <p className="max-w-xl font-display text-2xl leading-snug font-light italic">
+                    “{entry.quote}”
+                  </p>
+                  <footer className="mt-6 flex items-baseline gap-4">
+                    <span className="font-display text-lg text-bronze">{entry.initials}</span>
+                    <span className="eyebrow text-taupe">{entry.when}</span>
+                  </footer>
+                </blockquote>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Della stessa collezione */}
       {related.length > 0 && (

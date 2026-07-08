@@ -9,6 +9,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import NotFound from "@/components/layout/NotFound";
+import BackToTop from "@/components/ui/BackToTop";
 import { EASE_LUXE } from "@/lib/motion";
 import { pageHead } from "@/lib/seo";
 
@@ -54,6 +55,7 @@ function RootLayout() {
           <Outlet />
         </motion.div>
       </main>
+      <BackToTop />
       <Footer />
     </div>
   );

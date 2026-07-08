@@ -5,6 +5,7 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const NAV = [
   { label: "Flotta", to: "/fleet" },
+  { label: "Itinerari", to: "/itineraries" },
   { label: "Calendario", to: "/calendar" },
   { label: "Journal", to: "/journal" },
   { label: "La maison", to: "/about" },
@@ -40,7 +41,7 @@ export default function Header() {
             JUSTCLASS
           </Link>
 
-          <nav className="hidden items-center gap-12 lg:flex" aria-label="Principale">
+          <nav className="hidden items-center gap-9 lg:flex" aria-label="Principale">
             {NAV.map((item) => (
               <Link
                 key={item.to}

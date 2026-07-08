@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RequestRouteImport } from './routes/request'
+import { Route as ItinerariesRouteImport } from './routes/itineraries'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as AboutRouteImport } from './routes/about'
@@ -23,6 +24,11 @@ import { Route as FleetIdRouteImport } from './routes/fleet.$id'
 const RequestRoute = RequestRouteImport.update({
   id: '/request',
   path: '/request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItinerariesRoute = ItinerariesRouteImport.update({
+  id: '/itineraries',
+  path: '/itineraries',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -76,6 +82,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/calendar': typeof CalendarRoute
   '/contact': typeof ContactRoute
+  '/itineraries': typeof ItinerariesRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/calendar': typeof CalendarRoute
   '/contact': typeof ContactRoute
+  '/itineraries': typeof ItinerariesRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/calendar': typeof CalendarRoute
   '/contact': typeof ContactRoute
+  '/itineraries': typeof ItinerariesRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
   '/journal/$slug': typeof JournalSlugRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/calendar'
     | '/contact'
+    | '/itineraries'
     | '/request'
     | '/fleet/$id'
     | '/journal/$slug'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/calendar'
     | '/contact'
+    | '/itineraries'
     | '/request'
     | '/fleet/$id'
     | '/journal/$slug'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/calendar'
     | '/contact'
+    | '/itineraries'
     | '/request'
     | '/fleet/$id'
     | '/journal/$slug'
@@ -152,6 +164,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CalendarRoute: typeof CalendarRoute
   ContactRoute: typeof ContactRoute
+  ItinerariesRoute: typeof ItinerariesRoute
   RequestRoute: typeof RequestRoute
   FleetIdRoute: typeof FleetIdRoute
   JournalSlugRoute: typeof JournalSlugRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/request'
       fullPath: '/request'
       preLoaderRoute: typeof RequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/itineraries': {
+      id: '/itineraries'
+      path: '/itineraries'
+      fullPath: '/itineraries'
+      preLoaderRoute: typeof ItinerariesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -240,6 +260,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CalendarRoute: CalendarRoute,
   ContactRoute: ContactRoute,
+  ItinerariesRoute: ItinerariesRoute,
   RequestRoute: RequestRoute,
   FleetIdRoute: FleetIdRoute,
   JournalSlugRoute: JournalSlugRoute,

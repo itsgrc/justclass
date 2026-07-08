@@ -10,6 +10,7 @@ import HairlineButton from "@/components/ui/HairlineButton";
 import { motion } from "framer-motion";
 import { EASE_LUXE } from "@/lib/motion";
 import { useSavedArticles } from "@/lib/useSavedArticles";
+import ReadingProgress from "@/components/ui/ReadingProgress";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/journal/$slug")({
@@ -82,6 +83,7 @@ function ArticlePage() {
 
   return (
     <>
+      <ReadingProgress />
       <header className="container-luxe pt-36 pb-14 lg:pt-44">
         <motion.div
           initial={{ opacity: 0 }}

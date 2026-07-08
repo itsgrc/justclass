@@ -15,12 +15,15 @@ import { pageHead } from "@/lib/seo";
 interface RequestSearch {
   service?: string;
   asset?: string;
+  /** Più asset dalla "vostra selezione" in flotta, separati da virgola */
+  selection?: string;
 }
 
 export const Route = createFileRoute("/request")({
   validateSearch: (search: Record<string, unknown>): RequestSearch => ({
     service: typeof search.service === "string" ? search.service : undefined,
     asset: typeof search.asset === "string" ? search.asset : undefined,
+    selection: typeof search.selection === "string" ? search.selection : undefined,
   }),
   head: () =>
     pageHead(
@@ -39,6 +42,7 @@ interface FormData {
   guests: string;
   budget: string;
   notes: string;
+  gift: boolean;
   forWhom: "me" | "other";
   travelerName: string;
   name: string;
@@ -62,6 +66,7 @@ const EMPTY_FORM: FormData = {
   guests: "2",
   budget: "",
   notes: "",
+  gift: false,
   forWhom: "me",
   travelerName: "",
   name: "",
@@ -137,8 +142,16 @@ function greeting(): string {
 }
 
 function RequestPage() {
-  const { service: serviceParam, asset: assetParam } = Route.useSearch();
+  const { service: serviceParam, asset: assetParam, selection: selectionParam } = Route.useSearch();
   const prefilledAsset = useMemo(() => (assetParam ? getAsset(assetParam) : undefined), [assetParam]);
+  const selectionAssets = useMemo(
+    () =>
+      (selectionParam ?? "")
+        .split(",")
+        .map((id) => getAsset(id.trim()))
+        .filter((a) => a !== undefined),
+    [selectionParam],
+  );
   const draft = useRef(typeof window === "undefined" ? null : readDraft());
 
   const [step, setStep] = useState(() => draft.current?.step ?? 0);
@@ -153,6 +166,13 @@ function RequestPage() {
     if (prefilledAsset) {
       const line = `Asset di interesse: ${prefilledAsset.name} (${prefilledAsset.marque})`;
       if (!base.notes.includes(line)) base.notes = base.notes ? `${base.notes}\n${line}` : line;
+    }
+    for (const a of selectionAssets) {
+      const line = `Dalla selezione: ${a.name} (${a.marque})`;
+      if (!base.notes.includes(line)) base.notes = base.notes ? `${base.notes}\n${line}` : line;
+    }
+    if (selectionAssets.length > 0 && !base.service) {
+      base.service = selectionAssets[0].category;
     }
     return base;
   });
@@ -437,6 +457,20 @@ function RequestPage() {
                     value={form.notes}
                     onChange={(e) => set("notes", e.target.value)}
                   />
+
+                  {/* Un regalo si tratta da regalo: silenzio e carta buona */}
+                  <label className="flex cursor-pointer items-baseline gap-4 text-sm leading-relaxed text-taupe">
+                    <input
+                      type="checkbox"
+                      checked={form.gift}
+                      onChange={(e) => set("gift", e.target.checked)}
+                      className="size-4 translate-y-0.5 cursor-pointer accent-(--color-bronze)"
+                    />
+                    <span>
+                      È un regalo. Lo tratteremo da regalo: comunicazioni solo a
+                      voi, e una presentazione degna di chi lo riceve.
+                    </span>
+                  </label>
                 </div>
 
                 <div className="mt-12 flex flex-wrap items-center gap-8">
@@ -611,6 +645,7 @@ function RequestPage() {
                       ],
                       ["Ospiti", form.guests, 1],
                       ["Budget", BUDGET_LABELS[form.budget] ?? "—", 1],
+                      ...(form.gift ? [["Regalo", "Sì — comunicazioni riservate a chi lo offre", 1] as const] : []),
                       ...(form.notes ? [["Note", form.notes, 1] as const] : []),
                       [
                         "Chi viaggia",
