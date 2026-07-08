@@ -1076,6 +1076,84 @@ export const services: Service[] = [
     detailTone: "tarmac",
     detailCaption: "Briefing operativo, prima di un trasferimento — ore 05:30",
   },
+  {
+    id: "shopping",
+    index: "14",
+    label: "Moda & Shopping",
+    title: "Prima ancora che sia in vetrina.",
+    description:
+      "Personal shopping riservato: anteprime delle collezioni prima della presentazione pubblica, appuntamenti privati fuori orario, ricerca di pezzi introvabili nelle grandi maison di Parigi, Milano e Londra.",
+    specs: [
+      { term: "Accesso", detail: "Anteprime, appuntamenti fuori orario" },
+      { term: "Copertura", detail: "Maison a Parigi, Milano, Londra" },
+      { term: "Curatela", detail: "Personal shopper dedicato, non un commesso" },
+    ],
+    tone: "marble",
+    caption: "Atelier privato, Parigi — prova su misura",
+    heroLine: "Le collezioni, prima che chiunque altro le veda.",
+    metaDescription:
+      "Personal shopping riservato: anteprime delle collezioni, appuntamenti privati fuori orario, ricerca di pezzi introvabili nelle grandi maison di Parigi, Milano e Londra.",
+    narrative: [
+      "Il personal shopping offerto da un negozio vende comunque solo ciò che è già in sala. Il nostro è diverso: relazioni con i direttori delle maison, costruite in anni, che vi fanno entrare in una visione privata prima che una collezione venga presentata al pubblico, in un appuntamento fuori orario, senza fila, senza folla e senza un altro cliente che guarda cosa state provando.",
+      "Trovare un pezzo esaurito, d'archivio o bloccato in una lista d'attesa è dove la relazione dimostra il suo valore — lo stesso vale per coordinare le prove con una sartoria per qualcosa di fatto su misura, e per la riservatezza di cui hanno bisogno i volti riconoscibili: un ingresso separato, una sala privata, personale abituato a lavorare con chi preferisce non essere notato. Per i membri che lo usano con continuità diventa una relazione di guardaroba che dura nel tempo, non una serie di acquisti isolati — una selezione stagionale inviata prima di un viaggio, uno storico di taglie e modifiche conservato nel vostro profilo.",
+    ],
+    process: [
+      {
+        title: "Profilo",
+        detail: "Stile, taglie, occasioni, ciò che non indossereste mai — un archivio che cresce nel tempo.",
+      },
+      {
+        title: "Anteprima",
+        detail: "Accesso alle collezioni prima della presentazione pubblica, con appuntamento privato in atelier.",
+      },
+      {
+        title: "Ricerca",
+        detail: "Pezzi esauriti, d'archivio o in lista d'attesa: la nostra rete arriva dove un banco vendite non arriva.",
+      },
+      {
+        title: "Consegna",
+        detail: "Prove su misura coordinate per voi, consegna diretta ovunque siate.",
+      },
+    ],
+    inclusions: [
+      "Personal shopper dedicato, non un commesso di negozio",
+      "Anteprime delle collezioni prima della presentazione pubblica",
+      "Appuntamenti privati fuori orario, senza altri clienti in sala",
+      "Ricerca di pezzi esauriti, d'archivio o in lista d'attesa",
+      "Coordinamento con le sartorie per prove su misura",
+      "Consegna diretta a casa, in hotel o a bordo",
+    ],
+    faq: [
+      {
+        q: "Che differenza c'è con il personal shopping offerto dal negozio stesso?",
+        a: "Il personal shopper del negozio vende quello che è già in sala. Il nostro ha accesso a ciò che non c'è ancora in sala — e spesso a ciò che in sala non arriverà mai.",
+      },
+      {
+        q: "Potete ottenere un pezzo esaurito o in lista d'attesa?",
+        a: "Spesso sì: attraverso relazioni dirette con le maison, non promesse fatte a chiunque scriva un'email.",
+      },
+      {
+        q: "Gestite anche la riservatezza per volti riconoscibili?",
+        a: "Sempre: ingresso separato, sala privata, personale abituato a lavorare con chi preferisce non essere notato.",
+      },
+      {
+        q: "Serve un impegno minimo o un abbonamento?",
+        a: "No, il servizio è a richiesta. Ma i membri che lo usano con continuità costruiscono un profilo che si affina nel tempo, ed è lì che rende di più.",
+      },
+      {
+        q: "Coprite anche l'abbigliamento maschile, o solo quello femminile?",
+        a: "Entrambi, con la stessa cura: guardaroba maschile, orologeria, accessori, la stessa rete di accessi per ogni categoria.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non vendo capi. Gestisco relazioni con le maison che durano anni, e sono quelle relazioni — non un listino — a farvi entrare prima che la porta si apra al pubblico.",
+      name: "Odile Vasseur",
+      role: "Direttrice, Moda & Shopping",
+    },
+    detailTone: "amber",
+    detailCaption: "Boutique privata, Milano — appuntamento serale",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);

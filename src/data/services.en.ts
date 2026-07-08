@@ -1014,4 +1014,82 @@ export const servicesEn: Service[] = [
     detailTone: "tarmac",
     detailCaption: "Operational briefing, ahead of a transfer — 5:30am",
   },
+  {
+    id: "shopping",
+    index: "14",
+    label: "Fashion & Shopping",
+    title: "Before it's even in the window.",
+    description:
+      "Confidential personal shopping: previews of collections before their public presentation, private out-of-hours appointments, sourcing of hard-to-find pieces from the great houses of Paris, Milan and London.",
+    specs: [
+      { term: "Access", detail: "Previews, out-of-hours appointments" },
+      { term: "Coverage", detail: "Houses in Paris, Milan, London" },
+      { term: "Curation", detail: "A dedicated personal shopper, not a sales assistant" },
+    ],
+    tone: "marble",
+    caption: "Private atelier, Paris — a fitting",
+    heroLine: "The collections, before anyone else sees them.",
+    metaDescription:
+      "Confidential personal shopping: collection previews, private out-of-hours appointments, sourcing of hard-to-find pieces from the great houses of Paris, Milan and London.",
+    narrative: [
+      "A store's own personal shopping desk still only sells you what's on the floor. Ours is different: relationships with the houses' own directors, built over years, that get you into a private viewing before a collection is shown publicly, in an out-of-hours appointment with no queue, no crowd, and no other client watching what you try on.",
+      "Sourcing a piece that's sold out, archived, or stuck on a waiting list is where the relationship earns its keep — the same goes for coordinating fittings with an atelier for something made to measure, and for the discretion recognisable clients need: a separate entrance, a private room, staff who've worked with public figures before and know how to be invisible. For members who use it regularly, it becomes an ongoing wardrobe relationship rather than a series of one-off purchases — a seasonal edit sent ahead of travel, sizing and alteration history kept on file.",
+    ],
+    process: [
+      {
+        title: "Profile",
+        detail: "Style, sizing, occasions, what you'd never wear — a file that grows over time.",
+      },
+      {
+        title: "Preview",
+        detail: "Access to collections before their public presentation, in a private atelier appointment.",
+      },
+      {
+        title: "Sourcing",
+        detail: "Sold-out pieces, archive stock, waiting lists — our network reaches where a shop counter can't.",
+      },
+      {
+        title: "Delivery",
+        detail: "Fittings and tailoring coordinated for you, delivered directly wherever you are.",
+      },
+    ],
+    inclusions: [
+      "A dedicated personal shopper, not a sales assistant",
+      "Collection previews before their public presentation",
+      "Private out-of-hours appointments, with no other clients in the room",
+      "Sourcing of sold-out, archive or waitlisted pieces",
+      "Coordination with ateliers for made-to-measure fittings",
+      "Direct delivery home, to a hotel, or aboard",
+    ],
+    faq: [
+      {
+        q: "How is this different from a store's own personal shopping service?",
+        a: "A store's personal shopper sells what's already on the floor. Ours has access to what isn't there yet — and often to what will never arrive there at all.",
+      },
+      {
+        q: "Can you get a sold-out or waitlisted piece?",
+        a: "Often, yes — through direct relationships with the houses, not promises made to anyone who sends an email.",
+      },
+      {
+        q: "Do you handle discretion for recognisable clients?",
+        a: "Always: a separate entrance, a private room, staff used to working with people who'd rather not be noticed.",
+      },
+      {
+        q: "Is there a minimum commitment or a subscription?",
+        a: "No, the service is on request. But members who use it regularly build a profile that sharpens over time, and that's where it pays off most.",
+      },
+      {
+        q: "Do you cover menswear too, or only women's fashion?",
+        a: "Both, with the same care: menswear, watches, accessories, the same network of access across every category.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I don't sell clothes. I manage relationships with the houses that last years, and it's those relationships — not a price list — that get you in before the door opens to the public.",
+      name: "Odile Vasseur",
+      role: "Director, Fashion & Shopping",
+    },
+    detailTone: "amber",
+    detailCaption: "Private boutique, Milan — an evening appointment",
+  },
 ];
