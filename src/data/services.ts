@@ -1388,6 +1388,84 @@ export const services: Service[] = [
     detailTone: "amber",
     detailCaption: "Lobby di un palace storico, Venezia — ora di pranzo",
   },
+  {
+    id: "cruise",
+    index: "18",
+    label: "Crociere di Lusso",
+    title: "Non è una crociera. È una rotta.",
+    description:
+      "Non crociere: navigazioni. Small ship, spedizioni polari, yacht expedition per non più di qualche decina di ospiti. Non siamo una compagnia di crociere. Siamo una casa galleggiante con una rotta.",
+    specs: [
+      { term: "Formato", detail: "Small ship, expedition, yacht expedition" },
+      { term: "Ospiti", detail: "Non più di 100, spesso meno di 50" },
+      { term: "Rotte", detail: "Artico, Antartide, Mediterraneo, Pacifico" },
+    ],
+    tone: "riviera",
+    caption: "Ponte di poppa, Passaggio di Drake — alba",
+    heroLine: "Non siamo una compagnia di crociere. Siamo una casa galleggiante con una rotta.",
+    metaDescription:
+      "Navigazioni su small ship e yacht expedition, mai più di un centinaio di ospiti: spedizioni polari, Mediterraneo fuori stagione, Pacifico. Non una crociera: una casa galleggiante con una rotta.",
+    narrative: [
+      "Una nave da crociera porta migliaia di persone su un itinerario fisso stampato un anno prima. Ciò che organizziamo noi ne porta poche decine, su small ship a scafo rinforzato o yacht expedition, con una rotta che può cambiare durante la notte per il meteo, per la fauna, o per un'occasione che si presenta. L'equipaggio a bordo è un team di spedizione — naturalisti, storici, piloti del ghiaccio dove la rotta lo richiede — non personale d'intrattenimento che segue un programma.",
+      "Ciò che conta è come si vive, giorno per giorno: una rotta che cambia perché è stato avvistato un branco di orche o si è liberato un ancoraggio migliore, un comandante e un capo spedizione che spiegano la rotta di persona ogni sera, non da un altoparlante registrato; una cucina e una cantina vicine allo standard del nostro servizio Private Dining & Wine più che al buffet di una nave; sbarchi in zodiac nei giorni in cui \"casa galleggiante\" smette di essere un modo di dire. La nave è una casa che si sposta, non un resort che processa migliaia di ospiti insieme.",
+    ],
+    process: [
+      {
+        title: "Ascolto",
+        detail: "Dove volete andare davvero, e cosa significa per voi \"avventura\": ghiaccio, isole remote, coste che quasi nessuno naviga più.",
+      },
+      {
+        title: "Selezione",
+        detail: "La nave giusta tra un numero ristretto di small ship e yacht expedition che conosciamo di persona.",
+      },
+      {
+        title: "Rotta",
+        detail: "Un itinerario di base, con la libertà contrattuale di cambiarlo per il meteo, la fauna, un'occasione che si presenta.",
+      },
+      {
+        title: "A bordo",
+        detail: "Equipaggio ridotto, team di spedizione dedicato, un comandante che spiega la rotta ogni sera, non un annuncio registrato.",
+      },
+    ],
+    inclusions: [
+      "Small ship e yacht expedition, mai più di un centinaio di ospiti",
+      "Team di spedizione: naturalisti, storici, piloti del ghiaccio dove serve",
+      "Itinerario flessibile, aggiornato secondo meteo e fauna",
+      "Sbarchi in zodiac ed escursioni guidate incluse",
+      "Cucina e cantina allo stesso standard del servizio Private Dining & Wine",
+      "Cabine e suite assegnate secondo le vostre preferenze, mai a sorteggio",
+    ],
+    faq: [
+      {
+        q: "In cosa differite da una crociera tradizionale?",
+        a: "Una nave da crociera porta migliaia di persone su un itinerario fisso stampato un anno prima. Le nostre imbarcazioni ne portano poche decine, con una rotta che può cambiare durante la notte per il meteo o per un'occasione che si presenta.",
+      },
+      {
+        q: "Che tipo di navi utilizzate?",
+        a: "Small ship e yacht expedition, spesso a scafo rinforzato per il ghiaccio dove la rotta lo richiede. Le scegliamo con lo stesso criterio con cui scegliamo uno yacht da charter.",
+      },
+      {
+        q: "L'itinerario può davvero cambiare durante il viaggio?",
+        a: "Sì, ed è previsto nel contratto: se una baia si libera, se avvistiamo una colonia di pinguini imperatore, la rotta si adatta. È il motivo per cui non promettiamo un itinerario stampato, ma una direzione.",
+      },
+      {
+        q: "C'è un'età minima o serve una preparazione fisica particolare?",
+        a: "Dipende dalla rotta: le spedizioni polari richiedono una forma fisica di base per gli sbarchi in zodiac, il Mediterraneo fuori stagione no. Ne parliamo caso per caso, prima di prenotare.",
+      },
+      {
+        q: "Quanti ospiti ci sono davvero a bordo?",
+        a: "Raramente più di cento, spesso meno di cinquanta. È il numero che rende possibile chiamare la nave una casa, non un albergo galleggiante.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "Non guido una nave da crociera. Guido una casa che galleggia, con un equipaggio che la conosce ospite per ospite — e una rotta che ascolta il mare, non il calendario stampato a terra.",
+      name: "Comandante Erik Solberg",
+      role: "Direttore, Crociere di Lusso",
+    },
+    detailTone: "alps",
+    detailCaption: "Sbarco in zodiac, Antartide — mattina presto",
+  },
 ];
 
 export const getService = (id: string) => services.find((s) => s.id === id);

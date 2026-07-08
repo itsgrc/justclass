@@ -1326,4 +1326,82 @@ export const servicesEn: Service[] = [
     detailTone: "amber",
     detailCaption: "Lobby of a historic palace, Venice — lunchtime",
   },
+  {
+    id: "cruise",
+    index: "18",
+    label: "Luxury Cruising",
+    title: "Not a cruise. A route.",
+    description:
+      "Not cruises: voyages. Small ship, expedition and yacht expedition, for no more than a few dozen guests. We're not a cruise line. We're a floating home with a route.",
+    specs: [
+      { term: "Format", detail: "Small ship, expedition, yacht expedition" },
+      { term: "Guests", detail: "No more than 100, often under 50" },
+      { term: "Routes", detail: "Arctic, Antarctica, Mediterranean, Pacific" },
+    ],
+    tone: "riviera",
+    caption: "Aft deck, Drake Passage — dawn",
+    heroLine: "We're not a cruise line. We're a floating home with a route.",
+    metaDescription:
+      "Voyages aboard small ships and yacht expeditions, never more than a hundred guests: polar expeditions, the Mediterranean out of season, the Pacific. Not a cruise: a floating home with a route.",
+    narrative: [
+      "A cruise ship carries thousands of people on a fixed itinerary printed a year in advance. What we arrange carries a few dozen, aboard ice-strengthened small ships or yacht expeditions, with a route that can change overnight for the weather, the wildlife, or an opportunity that comes up. The team aboard is an expedition team — naturalists, historians, ice pilots where the route calls for it — not entertainment staff working a schedule.",
+      "What it feels like, day to day, is the point: a route that shifts because a pod of orcas has been spotted or a better anchorage has opened up, a captain and expedition leader who brief you in person each evening rather than over a tannoy, dining closer to our Private Dining & Wine standard than a ship's buffet, zodiac landings on the days when 'a floating home' stops being a figure of speech. The vessel is a home that happens to move, not a resort processing thousands of guests at once.",
+    ],
+    process: [
+      {
+        title: "Listening",
+        detail: "Where you actually want to go, and what 'adventure' means to you — ice, remote islands, coastlines almost no one sails anymore.",
+      },
+      {
+        title: "Selection",
+        detail: "The right vessel among a small number of small ships and yacht expeditions we know in person.",
+      },
+      {
+        title: "Route",
+        detail: "A base itinerary, with the contractual freedom to change it for weather, wildlife, or an opportunity that arises.",
+      },
+      {
+        title: "Aboard",
+        detail: "A small crew, a dedicated expedition team, a captain who explains the route each evening, not a recorded announcement.",
+      },
+    ],
+    inclusions: [
+      "Small ships and yacht expeditions, never more than about a hundred guests",
+      "An expedition team: naturalists, historians, ice pilots where needed",
+      "A flexible itinerary, updated for weather and wildlife",
+      "Zodiac landings and guided excursions included",
+      "Kitchen and cellar to the same standard as our Private Dining & Wine service",
+      "Cabins and suites assigned to your preferences, never by lottery",
+    ],
+    faq: [
+      {
+        q: "How is this different from a traditional cruise?",
+        a: "A cruise ship carries thousands of people on a fixed itinerary printed a year ahead. Our vessels carry a few dozen, on a route that can change overnight for the weather or an opportunity that comes up.",
+      },
+      {
+        q: "What kind of vessels do you use?",
+        a: "Small ships and yacht expeditions, often ice-strengthened where the route calls for it. We choose them by the same standard we use for a charter yacht.",
+      },
+      {
+        q: "Can the itinerary really change mid-voyage?",
+        a: "Yes, and it's written into the contract: if a bay opens up, if we spot a colony of emperor penguins, the route adapts. That's why we promise a direction, not a printed itinerary.",
+      },
+      {
+        q: "Is there a minimum age, or do you need to be in particular shape?",
+        a: "It depends on the route: polar expeditions need a baseline fitness for zodiac landings, the Mediterranean out of season doesn't. We talk it through case by case, before booking.",
+      },
+      {
+        q: "How many guests are actually aboard?",
+        a: "Rarely more than a hundred, often under fifty. That's the number that makes it possible to call the ship a home, not a floating hotel.",
+      },
+    ],
+    expertNote: {
+      quote:
+        "I don't captain a cruise ship. I run a floating home, with a crew that knows every guest by name — and a route that listens to the sea, not to a schedule printed on land.",
+      name: "Captain Erik Solberg",
+      role: "Director, Luxury Cruising",
+    },
+    detailTone: "alps",
+    detailCaption: "Zodiac landing, Antarctica — early morning",
+  },
 ];
