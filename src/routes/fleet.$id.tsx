@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { categoryLabels, fleet, getAsset } from "@/data/fleet";
+import { getAsset, getAssetForLocale, getCategoryLabelsForLocale, getFleetForLocale } from "@/data/fleet";
 import Plate from "@/components/ui/Plate";
 import PageHeader from "@/components/ui/PageHeader";
 import GalleryStrip from "@/components/ui/GalleryStrip";
@@ -8,6 +8,60 @@ import RuleReveal from "@/components/ui/RuleReveal";
 import HairlineButton from "@/components/ui/HairlineButton";
 import { useSelection } from "@/lib/useSelection";
 import { pageHead } from "@/lib/seo";
+import { useLanguage } from "@/i18n/LanguageContext";
+
+const STRINGS = {
+  it: {
+    fleetCrumb: "Flotta",
+    year: "Anno",
+    seats: "Posti",
+    guests: "Ospiti",
+    base: "Base",
+    fromCatalog: "Dal catalogo",
+    spec: "Scheda",
+    calendar: "Calendario",
+    fromBookings: "Dalle prenotazioni",
+    rate: "Tariffa",
+    rateNote: "Tariffa indicativa di partenza. Ogni proposta è personale, riservata e senza impegno.",
+    request: (name: string) => `Richiedete ${name}`,
+    inSelection: "Nella vostra selezione",
+    addToSelection: "Aggiungete alla selezione",
+    print: "Stampate la scheda",
+    forward: "Inviatela al vostro assistente",
+    refit: (year: number) => `refit ${year}`,
+    logbookTitle1: "Dal libro",
+    logbookTitle2: "di bordo.",
+    logbookNote: "Iniziali sole, come da policy",
+    sameCollectionTitle1: "Della stessa",
+    sameCollectionTitle2: "collezione.",
+    viewAll: (label: string) => `${label}, tutti`,
+  },
+  en: {
+    fleetCrumb: "Fleet",
+    year: "Year",
+    seats: "Seats",
+    guests: "Guests",
+    base: "Base",
+    fromCatalog: "From the Catalogue",
+    spec: "Specification",
+    calendar: "Calendar",
+    fromBookings: "From Past Bookings",
+    rate: "Rate",
+    rateNote: "Indicative starting rate. Every proposal is personal, confidential and without obligation.",
+    request: (name: string) => `Request ${name}`,
+    inSelection: "In Your Selection",
+    addToSelection: "Add to Selection",
+    print: "Print the Sheet",
+    forward: "Forward to Your Assistant",
+    refit: (year: number) => `refit ${year}`,
+    logbookTitle1: "From the",
+    logbookTitle2: "logbook.",
+    logbookNote: "Initials only, by policy",
+    sameCollectionTitle1: "From the same",
+    sameCollectionTitle2: "collection.",
+    viewAll: (label: string) => `All ${label}`,
+  },
+} as const;
 
 export const Route = createFileRoute("/fleet/$id")({
   loader: ({ params }) => {
@@ -25,14 +79,19 @@ export const Route = createFileRoute("/fleet/$id")({
 });
 
 function AssetPage() {
-  const asset = Route.useLoaderData();
+  const loaderAsset = Route.useLoaderData();
+  const { locale } = useLanguage();
+  const s = STRINGS[locale];
+  const categoryLabels = getCategoryLabelsForLocale(locale);
+  const asset = getAssetForLocale(locale, loaderAsset.id) ?? loaderAsset;
+  const fleet = getFleetForLocale(locale);
   const related = fleet.filter((a) => a.category === asset.category && a.id !== asset.id).slice(0, 2);
   const { isSelected, toggle } = useSelection();
 
   return (
     <>
       <PageHeader
-        crumbs={[{ label: "Flotta", to: "/fleet" }, { label: asset.name }]}
+        crumbs={[{ label: s.fleetCrumb, to: "/fleet" }, { label: asset.name }]}
         eyebrow={`${categoryLabels[asset.category]} — ${asset.marque}`}
         titleLines={[asset.name]}
         standfirst={asset.summary}
@@ -40,10 +99,10 @@ function AssetPage() {
         {/* Riga di catalogo: i quattro dati che decidono una prima chiamata */}
         <div className="mt-14 grid grid-cols-2 gap-y-8 border-t border-ink/10 pt-8 sm:grid-cols-4">
           <div>
-            <p className="eyebrow text-taupe">Anno</p>
+            <p className="eyebrow text-taupe">{s.year}</p>
             <p className="mt-2 font-display text-2xl">
               {asset.year}
-              {asset.refit && <span className="text-base italic"> · refit {asset.refit}</span>}
+              {asset.refit && <span className="text-base italic"> · {s.refit(asset.refit)}</span>}
             </p>
           </div>
           <div>
@@ -51,11 +110,11 @@ function AssetPage() {
             <p className="mt-2 font-display text-2xl">{asset.keyFigure.value}</p>
           </div>
           <div>
-            <p className="eyebrow text-taupe">{asset.category === "auto" ? "Posti" : "Ospiti"}</p>
+            <p className="eyebrow text-taupe">{asset.category === "auto" ? s.seats : s.guests}</p>
             <p className="mt-2 font-display text-2xl">{asset.guests}</p>
           </div>
           <div>
-            <p className="eyebrow text-taupe">Base</p>
+            <p className="eyebrow text-taupe">{s.base}</p>
             <p className="mt-2 font-display text-2xl">{asset.base}</p>
           </div>
         </div>
@@ -70,7 +129,7 @@ function AssetPage() {
       <section className="bg-parchment">
         <div className="container-luxe grid gap-16 py-24 lg:grid-cols-12 lg:py-32">
           <Reveal className="lg:col-span-6">
-            <p className="eyebrow text-bronze">Dal catalogo</p>
+            <p className="eyebrow text-bronze">{s.fromCatalog}</p>
             {asset.description.map((para, i) => (
               <p
                 key={i}
@@ -90,7 +149,7 @@ function AssetPage() {
           </Reveal>
 
           <Reveal delay={0.15} className="lg:col-span-5 lg:col-start-8">
-            <p className="eyebrow text-bronze">Scheda</p>
+            <p className="eyebrow text-bronze">{s.spec}</p>
             <dl className="mt-8">
               {asset.specs.map((spec) => (
                 <div
@@ -103,7 +162,7 @@ function AssetPage() {
               ))}
               {asset.availability && (
                 <div className="flex items-baseline justify-between gap-6 border-b border-ink/10 py-4">
-                  <dt className="eyebrow text-taupe">Calendario</dt>
+                  <dt className="eyebrow text-taupe">{s.calendar}</dt>
                   <dd className="text-right font-display text-lg text-bronze italic">
                     {asset.availability}
                   </dd>
@@ -111,29 +170,26 @@ function AssetPage() {
               )}
               {asset.demand && (
                 <div className="flex items-baseline justify-between gap-6 border-b border-ink/10 py-4">
-                  <dt className="eyebrow text-taupe">Dalle prenotazioni</dt>
+                  <dt className="eyebrow text-taupe">{s.fromBookings}</dt>
                   <dd className="text-right font-display text-lg italic">{asset.demand}</dd>
                 </div>
               )}
               <div className="flex items-baseline justify-between gap-6 py-5">
-                <dt className="eyebrow text-taupe">Tariffa</dt>
+                <dt className="eyebrow text-taupe">{s.rate}</dt>
                 <dd className="text-right">
                   <span className="font-display text-2xl">{asset.price}</span>
                   <span className="block text-xs text-taupe">{asset.priceUnit}</span>
                 </dd>
               </div>
             </dl>
-            <p className="mt-4 text-xs leading-relaxed text-taupe/80">
-              Tariffa indicativa di partenza. Ogni proposta è personale,
-              riservata e senza impegno.
-            </p>
+            <p className="mt-4 text-xs leading-relaxed text-taupe/80">{s.rateNote}</p>
             <div className="mt-8">
               <HairlineButton
                 to="/request"
                 search={{ service: asset.category, asset: asset.id }}
                 className="w-full sm:w-auto"
               >
-                Richiedete {asset.name}
+                {s.request(asset.name)}
               </HairlineButton>
             </div>
 
@@ -147,14 +203,14 @@ function AssetPage() {
                   isSelected(asset.id) ? "text-bronze" : "text-taupe hover:text-ink"
                 }`}
               >
-                {isSelected(asset.id) ? "Nella vostra selezione" : "Aggiungete alla selezione"}
+                {isSelected(asset.id) ? s.inSelection : s.addToSelection}
               </button>
               <button
                 type="button"
                 onClick={() => window.print()}
                 className="link-luxe eyebrow cursor-pointer text-taupe hover:text-ink"
               >
-                Stampate la scheda
+                {s.print}
               </button>
               <a
                 href={`mailto:?subject=${encodeURIComponent(`${asset.name} — ${asset.marque}`)}&body=${encodeURIComponent(
@@ -162,7 +218,7 @@ function AssetPage() {
                 )}`}
                 className="link-luxe eyebrow text-taupe hover:text-ink"
               >
-                Inviatela al vostro assistente
+                {s.forward}
               </a>
             </div>
           </Reveal>
@@ -174,9 +230,9 @@ function AssetPage() {
         <section className="container-luxe py-24 lg:py-28">
           <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
             <h2 className="font-display text-4xl leading-tight font-light">
-              Dal libro <em className="font-normal">di bordo.</em>
+              {s.logbookTitle1} <em className="font-normal">{s.logbookTitle2}</em>
             </h2>
-            <p className="eyebrow text-taupe">Iniziali sole, come da policy</p>
+            <p className="eyebrow text-taupe">{s.logbookNote}</p>
           </Reveal>
           <RuleReveal className="mt-8" />
           <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-2">
@@ -202,14 +258,14 @@ function AssetPage() {
         <section className="container-luxe py-24 lg:py-32">
           <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
             <h2 className="font-display text-4xl leading-tight font-light">
-              Della stessa <em className="font-normal">collezione.</em>
+              {s.sameCollectionTitle1} <em className="font-normal">{s.sameCollectionTitle2}</em>
             </h2>
             <Link
               to="/fleet"
               search={{ category: asset.category }}
               className="link-luxe eyebrow text-bronze"
             >
-              {categoryLabels[asset.category]}, tutti
+              {s.viewAll(categoryLabels[asset.category])}
             </Link>
           </Reveal>
           <RuleReveal className="mt-8" />

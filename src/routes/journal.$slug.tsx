@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { articles, formatArticleDate, getArticle } from "@/data/journal";
+import { formatArticleDate, getArticle, getArticleForLocale, getArticlesForLocale } from "@/data/journal";
 import type { ArticleBlock } from "@/data/journal";
 import Plate from "@/components/ui/Plate";
 import Breadcrumb from "@/components/ui/Breadcrumb";
@@ -12,6 +12,34 @@ import { EASE_LUXE } from "@/lib/motion";
 import { useSavedArticles } from "@/lib/useSavedArticles";
 import ReadingProgress from "@/components/ui/ReadingProgress";
 import { pageHead } from "@/lib/seo";
+import { useLanguage } from "@/i18n/LanguageContext";
+
+const STRINGS = {
+  it: {
+    journalCrumb: "Journal",
+    minutesRead: (n: number) => `${n} minuti di lettura`,
+    saved: "Conservato",
+    save: "Conservate per dopo",
+    fromStoryEyebrow: "Dal racconto al viaggio",
+    fromStoryLine: "Le pagine si leggono. Le rotte si vivono.",
+    composeYours: "Componete la vostra",
+    readAfterLine1: "Da leggere",
+    readAfterLine2: "dopo.",
+    viewAll: "Tutto il journal",
+  },
+  en: {
+    journalCrumb: "Journal",
+    minutesRead: (n: number) => `${n} min read`,
+    saved: "Saved",
+    save: "Save for Later",
+    fromStoryEyebrow: "From the Story to the Journey",
+    fromStoryLine: "The pages are read. The routes are lived.",
+    composeYours: "Compose Yours",
+    readAfterLine1: "Worth reading",
+    readAfterLine2: "next.",
+    viewAll: "The Full Journal",
+  },
+} as const;
 
 export const Route = createFileRoute("/journal/$slug")({
   loader: ({ params }) => {
@@ -29,7 +57,7 @@ export const Route = createFileRoute("/journal/$slug")({
   component: ArticlePage,
 });
 
-/* Ogni filone editoriale porta al servizio che lo rende possibile. */
+/* Ogni filone editoriale porta al servizio che lo rende possibile — chiave sempre in italiano, indipendente dalla lingua visualizzata. */
 const SERVICE_BY_CATEGORY: Record<string, string> = {
   Rotte: "yacht",
   Famiglia: "yacht",
@@ -76,8 +104,11 @@ function Block({ block }: { block: ArticleBlock }) {
 }
 
 function ArticlePage() {
-  const article = Route.useLoaderData();
-  const others = articles.filter((a) => a.slug !== article.slug).slice(0, 2);
+  const loaderArticle = Route.useLoaderData();
+  const { locale } = useLanguage();
+  const s = STRINGS[locale];
+  const article = getArticleForLocale(locale, loaderArticle.slug) ?? loaderArticle;
+  const others = getArticlesForLocale(locale).filter((a) => a.slug !== article.slug).slice(0, 2);
   const { isSaved, toggle } = useSavedArticles();
   const saved = isSaved(article.slug);
 
@@ -90,7 +121,7 @@ function ArticlePage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.9, ease: EASE_LUXE }}
         >
-          <Breadcrumb items={[{ label: "Journal", to: "/journal" }, { label: article.category }]} />
+          <Breadcrumb items={[{ label: s.journalCrumb, to: "/journal" }, { label: article.category }]} />
         </motion.div>
 
         <div className="mx-auto mt-16 max-w-3xl text-center">
@@ -100,7 +131,7 @@ function ArticlePage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, ease: EASE_LUXE, delay: 0.1 }}
           >
-            {article.category} — {formatArticleDate(article.date)}
+            {article.category} — {formatArticleDate(article.date, locale)}
           </motion.p>
           <h1 className="mt-8 font-display text-[clamp(2.5rem,5.5vw,4.5rem)] leading-[1.05] font-light">
             <MaskLines lines={[article.title]} delay={0.15} />
@@ -119,7 +150,7 @@ function ArticlePage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, ease: EASE_LUXE, delay: 0.65 }}
           >
-            {article.author} · {article.readingMinutes} minuti di lettura
+            {article.author} · {s.minutesRead(article.readingMinutes)}
             <span className="mx-4 text-taupe/40" aria-hidden>
               —
             </span>
@@ -129,7 +160,7 @@ function ArticlePage() {
               aria-pressed={saved}
               className={`link-luxe eyebrow cursor-pointer ${saved ? "text-bronze" : "text-taupe hover:text-ink"}`}
             >
-              {saved ? "Conservato" : "Conservate per dopo"}
+              {saved ? s.saved : s.save}
             </button>
           </motion.p>
         </div>
@@ -155,13 +186,11 @@ function ArticlePage() {
 
         {/* Dal racconto alla richiesta: il servizio giusto per questa storia */}
         <Reveal className="mx-auto mt-16 max-w-2xl text-center">
-          <p className="eyebrow text-taupe">Dal racconto al viaggio</p>
-          <p className="mt-5 font-display text-2xl leading-snug font-light italic">
-            Le pagine si leggono. Le rotte si vivono.
-          </p>
+          <p className="eyebrow text-taupe">{s.fromStoryEyebrow}</p>
+          <p className="mt-5 font-display text-2xl leading-snug font-light italic">{s.fromStoryLine}</p>
           <div className="mt-8">
-            <HairlineButton to="/request" search={{ service: SERVICE_BY_CATEGORY[article.category] }}>
-              Componete la vostra
+            <HairlineButton to="/request" search={{ service: SERVICE_BY_CATEGORY[loaderArticle.category] }}>
+              {s.composeYours}
             </HairlineButton>
           </div>
         </Reveal>
@@ -172,10 +201,10 @@ function ArticlePage() {
         <div className="container-luxe py-24 lg:py-28">
           <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
             <h2 className="font-display text-3xl font-light">
-              Da leggere <em className="font-normal">dopo.</em>
+              {s.readAfterLine1} <em className="font-normal">{s.readAfterLine2}</em>
             </h2>
             <Link to="/journal" className="link-luxe eyebrow text-bronze">
-              Tutto il journal
+              {s.viewAll}
             </Link>
           </Reveal>
           <div className="mt-10">
@@ -187,7 +216,7 @@ function ArticlePage() {
                   className="group grid gap-2 border-t border-ink/15 py-8 sm:grid-cols-12 sm:items-baseline"
                 >
                   <span className="eyebrow text-taupe sm:col-span-3">
-                    {other.category} — {formatArticleDate(other.date)}
+                    {other.category} — {formatArticleDate(other.date, locale)}
                   </span>
                   <span className="font-display text-2xl font-normal transition-colors duration-500 group-hover:text-bronze sm:col-span-9">
                     {other.title}

@@ -1,29 +1,47 @@
 import { Link } from "@tanstack/react-router";
-import { getAsset } from "@/data/fleet";
-import { categoryLabels } from "@/data/fleet";
+import { getAssetForLocale, getCategoryLabelsForLocale } from "@/data/fleet";
 import Plate from "@/components/ui/Plate";
 import Reveal from "@/components/ui/Reveal";
 import RuleReveal from "@/components/ui/RuleReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 /* Tre pezzi scelti, uno per disciplina: l'assaggio della collezione. */
 const PICKS = ["la-sirena", "g650er", "812-gts"] as const;
 
+const STRINGS = {
+  it: {
+    eyebrow: "La collezione",
+    titleLine1: "Dalla flotta,",
+    titleLine2: "tre presentazioni.",
+    viewAll: "Tutta la flotta",
+  },
+  en: {
+    eyebrow: "The Collection",
+    titleLine1: "From the fleet,",
+    titleLine2: "three introductions.",
+    viewAll: "The Full Fleet",
+  },
+} as const;
+
 export default function FleetTeaser() {
-  const picks = PICKS.map(getAsset).filter((a) => a !== undefined);
+  const { locale } = useLanguage();
+  const s = STRINGS[locale];
+  const categoryLabels = getCategoryLabelsForLocale(locale);
+  const picks = PICKS.map((id) => getAssetForLocale(locale, id)).filter((a) => a !== undefined);
 
   return (
     <section className="container-luxe py-28 lg:py-36">
       <Reveal className="flex flex-wrap items-baseline justify-between gap-6">
         <div>
-          <p className="eyebrow text-bronze">La collezione</p>
+          <p className="eyebrow text-bronze">{s.eyebrow}</p>
           <h2 className="mt-8 font-display text-5xl leading-[1.05] font-light sm:text-6xl">
-            Dalla flotta,
+            {s.titleLine1}
             <br />
-            <em className="font-normal">tre presentazioni.</em>
+            <em className="font-normal">{s.titleLine2}</em>
           </h2>
         </div>
         <Link to="/fleet" className="link-luxe eyebrow text-bronze">
-          Tutta la flotta
+          {s.viewAll}
         </Link>
       </Reveal>
 

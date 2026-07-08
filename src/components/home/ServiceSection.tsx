@@ -3,17 +3,21 @@ import type { Service } from "@/data/services";
 import Plate from "@/components/ui/Plate";
 import Reveal from "@/components/ui/Reveal";
 import { IMAGES } from "@/data/images";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 interface ServiceSectionProps {
   service: Service;
   flip: boolean;
 }
 
+const DISCOVER = { it: "Scoprite il servizio", en: "Discover the service" } as const;
+
 /*
  * Riga editoriale a due colonne, alternata destra/sinistra.
  * Indice numerato, titolo serif, scheda tecnica a filetti — niente card.
  */
 export default function ServiceSection({ service, flip }: ServiceSectionProps) {
+  const { locale } = useLanguage();
   return (
     <article
       id={service.id}
@@ -57,7 +61,7 @@ export default function ServiceSection({ service, flip }: ServiceSectionProps) {
           preload="intent"
           className="link-luxe eyebrow mt-12 inline-block text-bronze"
         >
-          Scoprite il servizio
+          {DISCOVER[locale]}
         </Link>
       </Reveal>
 
