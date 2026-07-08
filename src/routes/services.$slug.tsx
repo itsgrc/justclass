@@ -20,6 +20,8 @@ const STRINGS = {
     alwaysIncluded: "Sempre incluso",
     whatIsnt1: "Ciò che non",
     whatIsnt2: "va chiesto.",
+    partnerNote:
+      "Per questo servizio collaboriamo con partner selezionati. La vostra richiesta viene inoltrata al professionista più adatto al vostro caso.",
     emptyLegsTitle1: "Empty legs,",
     emptyLegsTitle2: "in vendita ora.",
     emptyLegsNote: "Riposizionamenti — tariffe fuori listino",
@@ -48,6 +50,8 @@ const STRINGS = {
     alwaysIncluded: "Always Included",
     whatIsnt1: "What you'll",
     whatIsnt2: "never have to ask.",
+    partnerNote:
+      "For this service we work with selected partners. Your request is forwarded to whichever professional best fits your case.",
     emptyLegsTitle1: "Empty legs,",
     emptyLegsTitle2: "for sale now.",
     emptyLegsNote: "Repositioning flights — off-list rates",
@@ -168,6 +172,7 @@ function ServicePage() {
               </Reveal>
             ))}
           </div>
+          <p className="mt-14 max-w-2xl text-xs leading-relaxed text-taupe/70">{s.partnerNote}</p>
         </div>
       </section>
 

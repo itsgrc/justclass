@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { getAsset, getAssetForLocale, getCategoryLabelsForLocale, getFleetForLocale } from "@/data/fleet";
+import { getProvidersForService } from "@/data/providers";
 import Plate from "@/components/ui/Plate";
 import PageHeader from "@/components/ui/PageHeader";
 import GalleryStrip from "@/components/ui/GalleryStrip";
@@ -35,6 +36,7 @@ const STRINGS = {
     sameCollectionTitle1: "Della stessa",
     sameCollectionTitle2: "collezione.",
     viewAll: (label: string) => `${label}, tutti`,
+    partnerBadge: "Disponibile tramite i nostri partner",
   },
   en: {
     fleetCrumb: "Fleet",
@@ -60,6 +62,7 @@ const STRINGS = {
     sameCollectionTitle1: "From the same",
     sameCollectionTitle2: "collection.",
     viewAll: (label: string) => `All ${label}`,
+    partnerBadge: "Available through our partners",
   },
 } as const;
 
@@ -87,6 +90,7 @@ function AssetPage() {
   const fleet = getFleetForLocale(locale);
   const related = fleet.filter((a) => a.category === asset.category && a.id !== asset.id).slice(0, 2);
   const { isSelected, toggle } = useSelection();
+  const hasPartner = getProvidersForService(locale, asset.category).length > 0;
 
   return (
     <>
@@ -285,6 +289,15 @@ function AssetPage() {
               </Reveal>
             ))}
           </div>
+        </section>
+      )}
+
+      {/* Il servizio è coperto da un accordo di referral — nessun nome, solo la garanzia */}
+      {hasPartner && (
+        <section className="container-luxe pb-24 lg:pb-32">
+          <span className="eyebrow inline-block border border-bronze/40 px-5 py-2 text-bronze">
+            {s.partnerBadge}
+          </span>
         </section>
       )}
     </>
