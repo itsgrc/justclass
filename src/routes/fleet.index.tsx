@@ -190,7 +190,7 @@ function FilterLink({
       to="/fleet"
       search={search}
       aria-current={active ? "true" : undefined}
-      className={`eyebrow border-b pb-2 transition-colors duration-500 ${
+      className={`eyebrow -my-3.5 border-b px-1 py-3.5 transition-colors duration-500 ${
         active
           ? "border-bronze text-bronze"
           : "border-transparent text-taupe hover:border-ink/30 hover:text-ink"
@@ -228,9 +228,11 @@ function CompareSheet({
     };
     document.addEventListener("keydown", onKey);
     document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, [onClose]);
 
@@ -249,29 +251,26 @@ function CompareSheet({
       role="dialog"
       aria-modal="true"
       aria-label={s.compareDialogLabel}
-      className="fixed inset-0 z-[90] overflow-y-auto bg-espresso/97 text-cream"
+      className="fixed inset-0 z-[90] overflow-y-auto overscroll-contain bg-espresso/97 text-cream"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: EASE_LUXE }}
     >
-      <div className="container-luxe flex h-20 items-center justify-between">
+      <div className="container-luxe flex min-h-20 flex-wrap items-center justify-between gap-x-6 gap-y-2 py-4">
         <span className="eyebrow text-sand">{s.compareTitle(assets.length)}</span>
         <button
           ref={closeRef}
           type="button"
           onClick={onClose}
-          className="link-luxe eyebrow cursor-pointer text-champagne"
+          className="link-luxe eyebrow -my-3.5 shrink-0 cursor-pointer px-1 py-3.5 text-champagne"
         >
           {s.close}
         </button>
       </div>
 
       <div className="container-luxe pb-20">
-        <div
-          className="grid gap-x-10 gap-y-8"
-          style={{ gridTemplateColumns: `repeat(${assets.length}, minmax(0, 1fr))` }}
-        >
+        <div className={`grid grid-cols-1 gap-x-10 gap-y-16 ${assets.length >= 3 ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
           {assets.map((asset) => (
             <div key={asset.id}>
               <div className="relative overflow-hidden" style={{ aspectRatio: "16 / 10" }}>
@@ -298,7 +297,7 @@ function CompareSheet({
                 <button
                   type="button"
                   onClick={() => onRemove(asset.id)}
-                  className="link-luxe eyebrow cursor-pointer text-sand/70 hover:text-cream"
+                  className="link-luxe eyebrow -my-3.5 cursor-pointer py-3.5 text-sand/70 hover:text-cream"
                 >
                   {s.remove}
                 </button>
@@ -376,7 +375,7 @@ function FleetPage() {
                   <button
                     type="button"
                     onClick={() => toggleSelection(a.id)}
-                    className="link-luxe eyebrow cursor-pointer text-taupe/70 hover:text-ink"
+                    className="link-luxe eyebrow -my-3.5 cursor-pointer py-3.5 text-taupe/70 hover:text-ink"
                     aria-label={s.removeAria(a.name)}
                   >
                     {s.remove}
@@ -462,12 +461,12 @@ function FleetPage() {
                 </Link>
 
                 {/* Gesti da catalogo: piegare l'angolo, mettere a confronto */}
-                <div className="mt-4 flex flex-wrap gap-x-8 gap-y-2">
+                <div className="mt-4 flex flex-wrap gap-x-8 gap-y-4">
                   <button
                     type="button"
                     onClick={() => toggleSelection(asset.id)}
                     aria-pressed={isSelected(asset.id)}
-                    className={`link-luxe eyebrow cursor-pointer ${
+                    className={`link-luxe eyebrow -my-3.5 cursor-pointer py-3.5 ${
                       isSelected(asset.id) ? "text-bronze" : "text-taupe/80 hover:text-ink"
                     }`}
                   >
@@ -478,7 +477,7 @@ function FleetPage() {
                     onClick={() => toggleCompare(asset.id)}
                     aria-pressed={comparing.includes(asset.id)}
                     disabled={!comparing.includes(asset.id) && comparing.length >= 3}
-                    className={`link-luxe eyebrow cursor-pointer disabled:cursor-default disabled:opacity-40 ${
+                    className={`link-luxe eyebrow -my-3.5 cursor-pointer py-3.5 disabled:cursor-default disabled:opacity-40 ${
                       comparing.includes(asset.id) ? "text-bronze" : "text-taupe/80 hover:text-ink"
                     }`}
                   >
@@ -522,14 +521,14 @@ function FleetPage() {
                 <button
                   type="button"
                   onClick={() => setCompareOpen(true)}
-                  className="eyebrow cursor-pointer border border-champagne/50 px-8 py-3 text-champagne transition-colors duration-500 hover:bg-champagne hover:text-espresso"
+                  className="eyebrow cursor-pointer border border-champagne/50 px-8 py-3.5 text-champagne transition-colors duration-500 hover:bg-champagne hover:text-espresso"
                 >
                   {s.open}
                 </button>
                 <button
                   type="button"
                   onClick={() => setComparing([])}
-                  className="link-luxe eyebrow cursor-pointer text-sand/70 hover:text-cream"
+                  className="link-luxe eyebrow -my-3.5 cursor-pointer py-3.5 text-sand/70 hover:text-cream"
                 >
                   {s.clear}
                 </button>

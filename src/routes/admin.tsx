@@ -376,7 +376,7 @@ function AdminPage() {
                         <select
                           value={r.status ?? "inoltrata"}
                           onChange={(e) => handleStatusChange(r.ref, e.target.value)}
-                          className="field-input py-1 text-sm"
+                          className="field-input py-3 text-sm"
                         >
                           {STATUS_VALUES.map((value) => (
                             <option key={value} value={value}>

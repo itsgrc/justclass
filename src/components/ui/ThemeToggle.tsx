@@ -13,7 +13,7 @@ function currentTheme(): Theme {
  * legge di notte. Il tema è applicato pre-paint da index.html; qui si
  * cambia e si ricorda.
  */
-export default function ThemeToggle() {
+export default function ThemeToggle({ onDark = false }: { onDark?: boolean }) {
   const [theme, setTheme] = useState<Theme>(currentTheme);
   const { t } = useLanguage();
 
@@ -36,7 +36,9 @@ export default function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="link-luxe eyebrow cursor-pointer text-taupe transition-colors duration-500 hover:text-ink"
+      className={`link-luxe eyebrow -my-3.5 cursor-pointer py-3.5 transition-colors duration-500 ${
+        onDark ? "text-sand hover:text-cream" : "text-taupe hover:text-ink"
+      }`}
       aria-label={theme === "sera" ? "Passate alla modalità giorno" : "Passate alla modalità sera"}
     >
       {theme === "sera" ? t.common.day : t.common.night}

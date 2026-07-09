@@ -100,7 +100,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              className="link-luxe eyebrow cursor-pointer text-ink lg:hidden"
+              className="link-luxe eyebrow -my-3.5 cursor-pointer px-1 py-3.5 text-ink lg:hidden"
               aria-haspopup="dialog"
               aria-expanded={menuOpen}
             >

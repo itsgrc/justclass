@@ -947,12 +947,12 @@ function RequestPage() {
                       className="grid grid-cols-[6rem_1fr_auto] items-baseline gap-4 border-b border-ink/10 py-4 sm:grid-cols-[8rem_1fr_auto]"
                     >
                       <dt className="eyebrow text-taupe">{term}</dt>
-                      <dd className="text-sm leading-relaxed whitespace-pre-line">{value}</dd>
-                      <dd>
+                      <dd className="min-w-0 text-sm leading-relaxed break-words whitespace-pre-line">{value}</dd>
+                      <dd className="shrink-0">
                         <button
                           type="button"
                           onClick={() => goTo(editStep)}
-                          className="link-luxe eyebrow cursor-pointer text-bronze"
+                          className="link-luxe eyebrow -my-3.5 cursor-pointer py-3.5 text-bronze"
                           aria-label={s.editAria(term)}
                         >
                           {s.editLabel}

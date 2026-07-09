@@ -43,9 +43,11 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
 
     document.addEventListener("keydown", onKey);
     document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, [open, onClose]);
 
@@ -56,22 +58,22 @@ export default function MobileMenu({ open, onClose }: MobileMenuProps) {
           role="dialog"
           aria-modal="true"
           aria-label="Menu di navigazione"
-          className="fixed inset-0 z-[80] overflow-y-auto bg-espresso text-cream"
+          className="fixed inset-0 z-[80] overflow-y-auto overscroll-contain bg-espresso text-cream"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: EASE_LUXE }}
         >
-          <div className="container-luxe flex h-20 items-center justify-between">
+          <div className="container-luxe flex min-h-20 flex-wrap items-center justify-between gap-x-4 gap-y-2 py-4">
             <span className="font-sans text-sm tracking-luxe text-cream">JUSTCLASS</span>
-            <div className="flex items-center gap-8">
-              <LanguageToggle />
-              <ThemeToggle />
+            <div className="flex items-center gap-4 sm:gap-6">
+              <LanguageToggle onDark />
+              <ThemeToggle onDark />
               <button
                 ref={closeRef}
                 type="button"
                 onClick={onClose}
-                className="link-luxe eyebrow cursor-pointer text-champagne"
+                className="link-luxe eyebrow -my-3.5 cursor-pointer px-1 py-3.5 text-champagne"
               >
                 {t.nav.close}
               </button>

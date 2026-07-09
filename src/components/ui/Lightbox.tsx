@@ -4,6 +4,10 @@ import type { AssetPlate } from "@/data/fleet";
 import { PlateSurface } from "@/components/ui/Plate";
 import { EASE_LUXE } from "@/lib/motion";
 
+/* Soglia di trascinamento oltre la quale lo swipe cambia immagine
+   invece di tornare al centro — in px, indipendente dalla velocità. */
+const SWIPE_THRESHOLD = 60;
+
 interface LightboxProps {
   plates: AssetPlate[];
   index: number | null;
@@ -42,13 +46,20 @@ export default function Lightbox({ plates, index, onClose, onNavigate, label }: 
 
     document.addEventListener("keydown", onKey);
     document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
     };
   }, [open, onClose, prev, next]);
 
   const plate = index !== null ? plates[index] : null;
+
+  const handleDragEnd = (_e: unknown, info: { offset: { x: number } }) => {
+    if (info.offset.x <= -SWIPE_THRESHOLD) next();
+    else if (info.offset.x >= SWIPE_THRESHOLD) prev();
+  };
 
   return (
     <AnimatePresence>
@@ -57,7 +68,7 @@ export default function Lightbox({ plates, index, onClose, onNavigate, label }: 
           role="dialog"
           aria-modal="true"
           aria-label={`Galleria — ${label}`}
-          className="fixed inset-0 z-[90] flex flex-col bg-espresso/97"
+          className="fixed inset-0 z-[90] flex flex-col overscroll-contain bg-espresso/97"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -70,7 +81,7 @@ export default function Lightbox({ plates, index, onClose, onNavigate, label }: 
               ref={closeRef}
               type="button"
               onClick={onClose}
-              className="link-luxe eyebrow cursor-pointer text-champagne"
+              className="link-luxe eyebrow -my-3.5 cursor-pointer px-1 py-3.5 text-champagne"
             >
               Chiudi
             </button>
@@ -91,10 +102,14 @@ export default function Lightbox({ plates, index, onClose, onNavigate, label }: 
 
             <motion.figure
               key={index}
-              className="min-w-0 flex-1"
+              className="min-w-0 flex-1 touch-pan-y"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, ease: EASE_LUXE }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.6}
+              onDragEnd={handleDragEnd}
             >
               <div
                 className="relative mx-auto max-h-[62vh] overflow-hidden"
@@ -124,10 +139,20 @@ export default function Lightbox({ plates, index, onClose, onNavigate, label }: 
             className="container-luxe flex h-20 shrink-0 items-center justify-center gap-10 sm:hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <button type="button" onClick={prev} aria-label="Precedente" className="link-luxe eyebrow cursor-pointer text-champagne">
+            <button
+              type="button"
+              onClick={prev}
+              aria-label="Precedente"
+              className="link-luxe eyebrow -my-3.5 cursor-pointer px-2 py-3.5 text-champagne"
+            >
               ← Prec.
             </button>
-            <button type="button" onClick={next} aria-label="Successiva" className="link-luxe eyebrow cursor-pointer text-champagne">
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Successiva"
+              className="link-luxe eyebrow -my-3.5 cursor-pointer px-2 py-3.5 text-champagne"
+            >
               Succ. →
             </button>
           </div>

@@ -5,8 +5,11 @@ import { useLanguage } from "@/i18n/LanguageContext";
  * stessa grammatica visiva del ThemeToggle. La lingua corrente è in
  * bronzo, l'altra in taupe con hover.
  */
-export default function LanguageToggle() {
+export default function LanguageToggle({ onDark = false }: { onDark?: boolean }) {
   const { locale, setLocale } = useLanguage();
+
+  const activeClass = onDark ? "text-champagne" : "text-bronze";
+  const inactiveClass = onDark ? "text-sand hover:text-cream" : "text-taupe hover:text-ink";
 
   return (
     <div className="eyebrow flex items-center gap-3" role="group" aria-label="Lingua / Language">
@@ -14,19 +17,19 @@ export default function LanguageToggle() {
         type="button"
         onClick={() => setLocale("it")}
         aria-current={locale === "it" || undefined}
-        className={`cursor-pointer transition-colors duration-500 ${
-          locale === "it" ? "text-bronze" : "text-taupe hover:text-ink"
+        className={`-my-3.5 cursor-pointer px-1 py-3.5 transition-colors duration-500 ${
+          locale === "it" ? activeClass : inactiveClass
         }`}
       >
         IT
       </button>
-      <span className="rule h-3 w-px" aria-hidden />
+      <span className={`${onDark ? "rule-dark" : "rule"} h-3 w-px`} aria-hidden />
       <button
         type="button"
         onClick={() => setLocale("en")}
         aria-current={locale === "en" || undefined}
-        className={`cursor-pointer transition-colors duration-500 ${
-          locale === "en" ? "text-bronze" : "text-taupe hover:text-ink"
+        className={`-my-3.5 cursor-pointer px-1 py-3.5 transition-colors duration-500 ${
+          locale === "en" ? activeClass : inactiveClass
         }`}
       >
         EN

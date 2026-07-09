@@ -15,6 +15,16 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes("node_modules/react-dom") || id.includes("node_modules/react/")) return "vendor-react";
+          if (id.includes("node_modules/framer-motion")) return "vendor-motion";
+        },
+      },
+    },
+  },
   // In produzione su Vercel /api è montata dalla piattaforma; in locale
   // (dev e preview) puntiamo allo shim di scripts/dev-api-server.mjs.
   server: {

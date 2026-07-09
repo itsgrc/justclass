@@ -144,7 +144,7 @@ function AboutPage() {
               <Reveal key={entry.year} delay={0.08 * i}>
                 <div className="grid grid-cols-[5rem_1fr] gap-8 border-t border-ink/10 py-8 sm:grid-cols-[7rem_1fr]">
                   <p className="font-display text-2xl text-bronze italic">{entry.year}</p>
-                  <div>
+                  <div className="min-w-0 break-words">
                     <h3 className="font-display text-2xl font-normal">{entry.title}</h3>
                     <p className="mt-3 max-w-lg text-sm leading-relaxed text-taupe">
                       {entry.detail}
