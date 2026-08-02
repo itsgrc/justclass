@@ -52,7 +52,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
+        className={`fixed inset-x-0 top-9 z-50 transition-all duration-700 ${
           scrolled
             ? "border-b border-ink/10 bg-ivory/85 backdrop-blur-md"
             : "border-b border-transparent bg-transparent"

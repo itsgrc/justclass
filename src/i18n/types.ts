@@ -70,4 +70,9 @@ export interface Dictionary {
     day: string;
     night: string;
   };
+  notice: {
+    badge: string;
+    message: string;
+    linkLabel: string;
+  };
 }

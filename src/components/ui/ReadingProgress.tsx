@@ -11,7 +11,7 @@ export default function ReadingProgress() {
   return (
     <motion.div
       aria-hidden
-      className="fixed inset-x-0 top-0 z-[60] h-px origin-left bg-bronze"
+      className="fixed inset-x-0 top-9 z-[60] h-px origin-left bg-bronze"
       style={{ scaleX: scrollYProgress }}
     />
   );

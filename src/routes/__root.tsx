@@ -8,6 +8,7 @@ import {
 import { motion, useReducedMotion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import SiteNotice from "@/components/layout/SiteNotice";
 import NotFound from "@/components/layout/NotFound";
 import BackToTop from "@/components/ui/BackToTop";
 import { EASE_LUXE } from "@/lib/motion";
@@ -46,6 +47,7 @@ function RootLayout() {
       <a href="#contenuto" className="skip-link eyebrow">
         {t.common.skipToContent}
       </a>
+      <SiteNotice />
       <Header />
       <main id="contenuto" ref={mainRef} tabIndex={-1} className="flex-1 focus:outline-none">
         <motion.div

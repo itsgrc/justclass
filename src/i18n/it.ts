@@ -65,4 +65,9 @@ export const it: Dictionary = {
     day: "Giorno",
     night: "Sera",
   },
+  notice: {
+    badge: "Progetto dimostrativo",
+    message: "Sito in costruzione, contenuti di fantasia — nessuna transazione reale.",
+    linkLabel: "Informativa",
+  },
 };

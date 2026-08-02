@@ -202,12 +202,12 @@ export default function Footer() {
             <a href="mailto:private@justclass.com" className="link-luxe hover:text-cream">
               private@justclass.com
             </a>
-            <a href="/" className="link-luxe hover:text-cream">
+            <Link to="/legal" hash="dati" className="link-luxe hover:text-cream">
               {t.footer.privacy}
-            </a>
-            <a href="/" className="link-luxe hover:text-cream">
+            </Link>
+            <Link to="/legal" hash="cookie" className="link-luxe hover:text-cream">
               {t.footer.cookies}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

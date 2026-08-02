@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RequestRouteImport } from './routes/request'
+import { Route as LegalRouteImport } from './routes/legal'
 import { Route as ItinerariesRouteImport } from './routes/itineraries'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareRouteImport } from './routes/care'
@@ -27,6 +28,11 @@ import { Route as FleetIdRouteImport } from './routes/fleet.$id'
 const RequestRoute = RequestRouteImport.update({
   id: '/request',
   path: '/request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LegalRoute = LegalRouteImport.update({
+  id: '/legal',
+  path: '/legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ItinerariesRoute = ItinerariesRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/itineraries': typeof ItinerariesRoute
+  '/legal': typeof LegalRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
   '/guides/myba': typeof GuidesMybaRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/itineraries': typeof ItinerariesRoute
+  '/legal': typeof LegalRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
   '/guides/myba': typeof GuidesMybaRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/itineraries': typeof ItinerariesRoute
+  '/legal': typeof LegalRoute
   '/request': typeof RequestRoute
   '/fleet/$id': typeof FleetIdRoute
   '/guides/myba': typeof GuidesMybaRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/care'
     | '/contact'
     | '/itineraries'
+    | '/legal'
     | '/request'
     | '/fleet/$id'
     | '/guides/myba'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/care'
     | '/contact'
     | '/itineraries'
+    | '/legal'
     | '/request'
     | '/fleet/$id'
     | '/guides/myba'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/care'
     | '/contact'
     | '/itineraries'
+    | '/legal'
     | '/request'
     | '/fleet/$id'
     | '/guides/myba'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   CareRoute: typeof CareRoute
   ContactRoute: typeof ContactRoute
   ItinerariesRoute: typeof ItinerariesRoute
+  LegalRoute: typeof LegalRoute
   RequestRoute: typeof RequestRoute
   FleetIdRoute: typeof FleetIdRoute
   GuidesMybaRoute: typeof GuidesMybaRoute
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/request'
       fullPath: '/request'
       preLoaderRoute: typeof RequestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/legal': {
+      id: '/legal'
+      path: '/legal'
+      fullPath: '/legal'
+      preLoaderRoute: typeof LegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/itineraries': {
@@ -323,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   CareRoute: CareRoute,
   ContactRoute: ContactRoute,
   ItinerariesRoute: ItinerariesRoute,
+  LegalRoute: LegalRoute,
   RequestRoute: RequestRoute,
   FleetIdRoute: FleetIdRoute,
   GuidesMybaRoute: GuidesMybaRoute,
