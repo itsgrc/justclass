@@ -8,6 +8,7 @@ import { createServer } from "node:http";
 
 const ROUTES = {
   "/api/request": () => import("../api/request.ts"),
+  "/api/newsletter": () => import("../api/newsletter.ts"),
   "/api/admin/requests": () => import("../api/admin/requests.ts"),
 };
 

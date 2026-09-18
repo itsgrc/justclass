@@ -45,6 +45,7 @@ export const it: Dictionary = {
     newsletterCta: "Iscrivetevi",
     newsletterSending: "Un istante",
     newsletterError: "Controllate l'indirizzo: qualcosa non torna.",
+    newsletterServerError: "Non siamo riusciti a registrare l'iscrizione. Riprovate, o scriveteci a private@justclass.com.",
     newsletterDoneTitle: "Benvenuti.",
     newsletterDoneDetail: "La prima lettera arriva con calma — una al mese, nessuna eccezione.",
     rights: "Tutti i diritti riservati",

@@ -51,6 +51,7 @@ export interface Dictionary {
     newsletterCta: string;
     newsletterSending: string;
     newsletterError: string;
+    newsletterServerError: string;
     newsletterDoneTitle: string;
     newsletterDoneDetail: string;
     rights: string;

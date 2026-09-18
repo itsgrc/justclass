@@ -7,7 +7,7 @@ import { getOfficesForLocale } from "@/data/maison";
 import { EASE_LUXE } from "@/lib/motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-type NewsletterState = "idle" | "sending" | "done" | "error";
+type NewsletterState = "idle" | "sending" | "done" | "error" | "server-error";
 
 function Newsletter() {
   const { t } = useLanguage();
@@ -21,9 +21,17 @@ function Newsletter() {
       return;
     }
     setState("sending");
-    // Endpoint reale da collegare: per ora il gesto è simulato.
-    await new Promise((r) => setTimeout(r, 900));
-    setState("done");
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = (await res.json()) as { success: boolean };
+      setState(data.success ? "done" : "server-error");
+    } catch {
+      setState("server-error");
+    }
   };
 
   if (state === "done") {
@@ -54,11 +62,11 @@ function Newsletter() {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              if (state === "error") setState("idle");
+              if (state === "error" || state === "server-error") setState("idle");
             }}
             placeholder={t.footer.newsletterPlaceholder}
-            aria-invalid={state === "error" || undefined}
-            aria-describedby={state === "error" ? "newsletter-error" : undefined}
+            aria-invalid={state === "error" || state === "server-error" || undefined}
+            aria-describedby={state === "error" || state === "server-error" ? "newsletter-error" : undefined}
             className="w-full border-0 border-b border-cream/25 bg-transparent py-2.5 text-sm font-light text-cream placeholder:text-sand/50 focus:border-champagne focus:outline-none"
           />
         </div>
@@ -70,9 +78,9 @@ function Newsletter() {
           {state === "sending" ? t.footer.newsletterSending : t.footer.newsletterCta}
         </button>
       </div>
-      {state === "error" && (
+      {(state === "error" || state === "server-error") && (
         <p id="newsletter-error" className="mt-3 text-xs text-champagne/90">
-          {t.footer.newsletterError}
+          {state === "error" ? t.footer.newsletterError : t.footer.newsletterServerError}
         </p>
       )}
     </form>
