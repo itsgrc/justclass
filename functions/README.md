@@ -67,3 +67,12 @@ Oppure, dalla dashboard Cloudflare (Workers & Pages → Create → Pages →
 Connect to Git): repository `itsgrc/justclass`, branch da pubblicare,
 build command `npm run build`, output directory `dist`. Cloudflare
 individua automaticamente `functions/` e la pubblica come API.
+
+## /api/newsletter
+
+Stesso pattern di `/api/request`: `functions/api/newsletter.ts` valida
+l'indirizzo, lo registra su `REQUESTS_KV` (prefisso `newsletter:`, se il
+binding è legato) e avvisa il desk via Resend se configurato. Senza KV né
+`RESEND_API_KEY` risponde comunque `{ "success": true }` — utile per
+collaudare il form prima di avere le credenziali. Versione Vercel/Node in
+`api/newsletter.ts`.

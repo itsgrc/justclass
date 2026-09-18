@@ -62,3 +62,11 @@ l'intero flusso del form senza una casella email vera.
 Un successo con `"warning": "email-not-sent"` significa: la richiesta
 è stata registrata ma l'invio SMTP è fallito (credenziali sbagliate,
 host irraggiungibile) — controllare i log del server.
+
+## /api/newsletter
+
+Stesso formato (`handler(req, res)`), per l'iscrizione dal footer: valida
+l'indirizzo, lo registra in `data/newsletter.jsonl` e avvisa il desk via
+SMTP se configurato. Risposta: `{ "success": true }` oppure
+`{ "success": false, "error": "..." }`. Versione Cloudflare Pages in
+`functions/api/newsletter.ts`.
